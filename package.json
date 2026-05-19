@@ -1,0 +1,46 @@
+{
+  "name": "ffx-esports",
+  "version": "1.0.0",
+  "private": true,
+  "description": "FFX ESPORTS premium battle royale tournament SaaS platform",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,socket,web,admin -c cyan,magenta,blue,yellow \"npm run dev -w @ffx/api\" \"npm run dev -w @ffx/socket-server\" \"npm run dev -w @ffx/web\" \"npm run dev -w @ffx/admin\"",
+    "build": "npm run build -w @ffx/types && npm run build -w @ffx/utils && npm run build -w @ffx/ui && npm run build -w @ffx/api && npm run build -w @ffx/socket-server && npm run build -w @ffx/web && npm run build -w @ffx/admin",
+    "typecheck": "npm run typecheck -w @ffx/types && npm run typecheck -w @ffx/utils && npm run typecheck -w @ffx/ui && npm run typecheck -w @ffx/api && npm run typecheck -w @ffx/socket-server && npm run typecheck -w @ffx/web && npm run typecheck -w @ffx/admin",
+    "lint": "npm run lint --workspaces --if-present",
+    "seed": "npm run seed -w @ffx/api",
+    "prisma:generate": "npm run prisma:generate -w @ffx/api",
+    "prisma:migrate": "npm run prisma:migrate -w @ffx/api"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "prettier": "^3.4.2",
+    "typescript": "^5.7.2"
+  },
+  "overrides": {
+    "@types/express": "4.17.25",
+    "@types/express-serve-static-core": "4.19.8",
+    "postcss": "8.5.15",
+    "ws": "8.20.1",
+    "next": {
+      "postcss": "8.5.15"
+    },
+    "engine.io": {
+      "ws": "8.20.1"
+    },
+    "engine.io-client": {
+      "ws": "8.20.1"
+    },
+    "socket.io-adapter": {
+      "ws": "8.20.1"
+    }
+  },
+  "engines": {
+    "node": ">=20.11.0",
+    "npm": ">=10.0.0"
+  }
+}
