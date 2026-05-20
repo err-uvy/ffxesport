@@ -82,7 +82,7 @@ router.post(
         placement: z.coerce.number().int().min(1).max(100)
       })
       .parse(req.body);
-    const files = req.files as Record<string, Express.Multer.File[]>;
+    const files = req.files as Record<string, any[]>;
     const screenshot = files?.screenshot?.[0];
     const proof = files?.proof?.[0];
     if (!screenshot) throw new ApiError(422, "Result screenshot is required");

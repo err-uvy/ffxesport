@@ -99,7 +99,6 @@ function referralCode(username: string) {
     .toString("hex")
     .toUpperCase()}`;
 }
-
 const registerSchema = z.object({
   email: emailSchema,
   username: z.string().min(3).max(24).transform(cleanText),
@@ -116,50 +115,68 @@ router.get("/csrf", (req, res) => {
 router.post(
   "/register",
   asyncHandler(async (req, res) => {
-    const input = registerSchema.parse(req.body);
+    const input = registerSchema.parse(req.body) as any;
     const existing = await prisma.user.findFirst({
       where: { OR: [{ email: input.email }, { username: input.username }] }
     });
     if (existing) throw new ApiError(409, "Email or username already registered");
 
-    const referrer = input.referrerCode
-      ? await prisma.user.findUnique({ where: { referralCode: input.referrerCode } })
-      : null;
-
+  const referrer = input.referrerCode
+  ? await prisma.user.findFirst({
+      where: {
+        referralCode: input.referrerCode as string
+      }
+    })
+  : null;
     const passwordHash = await hashPassword(input.password);
     const code = generateOtp();
-
     const user = await prisma.user.create({
-      data: {
-        email: input.email,
-        username: input.username,
-        passwordHash,
-        phone: input.phone,
-        referralCode: referralCode(input.username),
-        referredById: referrer?.id,
-        wallet: { create: {} },
-        roles: {
-          create: {
-            role: {
-              connectOrCreate: {
-                where: { name: "USER" },
-                create: { name: "USER", description: "Player account" }
-              }
+  data: {
+    email: input.email as string,
+    username: input.username as string,
+    passwordHash,
+    phone: (input.phone as string) || null,
+    referralCode: referralCode(input.username as string),
+    referredById: referrer?.id,
+
+    wallet: {
+      create: {}
+    },
+
+    roles: {
+      create: {
+        role: {
+          connectOrCreate: {
+            where: {
+              name: "USER"
+            },
+            create: {
+              name: "USER",
+              description: "Player account"
             }
           }
-        },
-        otpCodes: {
-          create: {
-            email: input.email,
-            codeHash: sha256(code),
-            purpose: "EMAIL_VERIFY",
-            expiresAt: new Date(Date.now() + 10 * 60 * 1000)
-          }
         }
-      },
-      include: { roles: { include: { role: true } } }
-    });
+      }
+    },
 
+    otpCodes: {
+      create: {
+        email: input.email as string,
+        codeHash: sha256(code),
+        purpose: "EMAIL_VERIFY",
+        expiresAt: new Date(Date.now() + 10 * 60 * 1000)
+      }
+    }
+  },
+
+  include: {
+    roles: {
+      include: {
+        role: true
+      }
+    }
+  }
+});
     if (referrer) {
       await prisma.referral.create({
         data: {
@@ -177,13 +194,15 @@ router.post(
       html: `<p>Your FFX ESPORTS OTP is <strong>${code}</strong>. It expires in 10 minutes.</p>`
     });
 
-    const roles = user.roles.map((entry) => entry.role.name);
+    const roles = (user.roles ?? []).map(
+  (entry: any) => entry.role.name as RoleName
+);
     const tokens = await issueTokens({
       user,
       roles,
       ip: req.ip,
       userAgent: req.header("user-agent"),
-      fingerprint: input.deviceFingerprint
+      fingerprint: input.deviceFingerprint as string
     });
     setAuthCookies(res, tokens.accessToken, tokens.refreshToken);
     await audit(req, { action: "REGISTER", resource: "User", resourceId: user.id });
@@ -214,13 +233,15 @@ router.post(
     const valid = await verifyPassword(input.password, user.passwordHash);
     if (!valid) throw new ApiError(401, "Invalid credentials");
 
-    const roles = user.roles.map((entry) => entry.role.name);
+    const roles = (user.roles ?? []).map(
+  (entry: any) => entry.role.name as RoleName
+);
     const tokens = await issueTokens({
       user,
       roles,
       ip: req.ip,
       userAgent: req.header("user-agent"),
-      fingerprint: input.deviceFingerprint
+      fingerprint: input.deviceFingerprint as string
     });
     setAuthCookies(res, tokens.accessToken, tokens.refreshToken);
     await audit(req, { action: "LOGIN", resource: "User", resourceId: user.id });

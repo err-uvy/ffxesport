@@ -8,8 +8,6 @@
     "types": ["node"],
     "strict": false,
     "skipLibCheck": true,
-    "noImplicitAny": false,
-    "strictNullChecks": false,
     "esModuleInterop": true
   },
   "include": ["src", "prisma/seed.ts"]
