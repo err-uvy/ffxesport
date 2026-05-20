@@ -105,27 +105,58 @@ router.post(
     const slug = `${slugify(input.title)}-${Date.now().toString(36)}`;
     const tournament = await prisma.tournament.create({
       data: {
-        ...input,
-        slug,
-        code: buildTournamentCode(),
-        createdById: req.user!.id,
-        prizeDistributions: {
-          create: calculatePrizeDistribution(input.prizePool, Math.min(3, input.maxSlots)).map((entry) => ({
-            rank: entry.rank,
-            amount: entry.amount
-          }))
-        },
-        matches: {
-          create: {
-            round: 1,
-            mapName: defaultMap(input.game),
-            startsAt: input.startsAt,
-            roomUnlockAt: input.roomReleaseAt,
-            status: "ROOM_LOCKED",
-            instructions: "Room ID and password unlock before match start. Join early and submit proof after match."
-          }
-        }
-      },
+  title: input.title!,
+  game: input.game!,
+  mode: input.mode!,
+  description: input.description,
+  bannerUrl: input.bannerUrl,
+  rules: input.rules,
+
+  entryFee: input.entryFee!,
+  prizePool: input.prizePool!,
+  maxSlots: input.maxSlots!,
+  minTeamSize: input.minTeamSize!,
+  maxTeamSize: input.maxTeamSize!,
+
+  inviteOnly: input.inviteOnly,
+  inviteCode: input.inviteCode,
+
+  status: input.status,
+
+  registrationStartsAt: input.registrationStartsAt,
+  registrationEndsAt: input.registrationEndsAt,
+
+  startsAt: input.startsAt,
+  endsAt: input.endsAt,
+
+  roomReleaseAt: input.roomReleaseAt,
+
+  slug,
+  code: buildTournamentCode(),
+  createdById: req.user!.id,
+
+  prizeDistributions: {
+    create: calculatePrizeDistribution(
+      input.prizePool,
+      Math.min(3, input.maxSlots)
+    ).map((entry) => ({
+      rank: entry.rank,
+      amount: entry.amount
+    }))
+  },
+
+  matches: {
+    create: {
+      round: 1,
+      mapName: defaultMap(input.game),
+      startsAt: input.startsAt,
+      roomUnlockAt: input.roomReleaseAt,
+      status: "ROOM_LOCKED",
+      instructions:
+        "Room ID and password unlock before match start. Join early and submit proof after match."
+    }
+  }
+},
       include: { prizeDistributions: true, matches: true }
     });
     await invalidateCache("tournaments:*");

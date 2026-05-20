@@ -4,7 +4,11 @@
     "outDir": "dist",
     "rootDir": ".",
     "module": "CommonJS",
-    "types": ["node"]
+    "moduleResolution": "Node",
+    "types": ["node"],
+    "strict": false,
+    "skipLibCheck": true,
+    "noImplicitAny": false
   },
   "include": ["src", "prisma/seed.ts"]
 }

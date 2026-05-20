@@ -137,7 +137,15 @@ router.post(
           status: "PENDING",
           amount: input.amount,
           reference: `WDR-${randomToken(8).toUpperCase()}`,
-          metadata: { payoutAccount: maskPayout(input.payoutAccount) }
+
+          metadata: {
+  payoutAccount: maskPayout({
+    holderName: input.payoutAccount.holderName || "",
+    upi: input.payoutAccount.upi,
+    bankAccount: input.payoutAccount.bankAccount,
+    ifsc: input.payoutAccount.ifsc
+  })
+}
         }
       });
       return tx.withdrawalRequest.create({

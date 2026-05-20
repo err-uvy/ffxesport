@@ -128,8 +128,17 @@ router.post(
 
     const profile = await prisma.gameProfile.upsert({
       where: { userId_game: { userId: req.user!.id, game: input.game } },
-      create: { ...input, userId: req.user!.id },
-      update: input
+create: {
+  game: input.game!,
+  uid: input.uid!,
+  handle: input.handle!,
+  kdRatio: input.kdRatio,
+  user: {
+    connect: {
+      id: req.user!.id
+    }
+  }
+},      update: input
     });
     res.status(201).json({ data: profile });
   })
