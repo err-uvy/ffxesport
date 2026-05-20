@@ -94,7 +94,7 @@ router.post(
         provider: "CASHFREE",
         amount: input.amount,
         reference,
-        externalOrderId: order.order_id,
+        externalOrderId: (order as any).order_id,
         metadata: JSON.parse(JSON.stringify(order))
       }
     });

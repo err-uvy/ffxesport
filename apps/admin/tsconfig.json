@@ -3,20 +3,22 @@
   "compilerOptions": {
     "jsx": "preserve",
     "module": "ESNext",
+    "moduleResolution": "Node",
     "noEmit": true,
     "incremental": true,
+    "allowJs": true,
+    "isolatedModules": true,
+    "strict": false,
+    "skipLibCheck": true,
+    "noImplicitAny": false,
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": [
-        "./*"
-      ]
-    },
-    "allowJs": true,
-    "isolatedModules": true
+      "@/*": ["./*"]
+    }
   },
   "include": [
     "next-env.d.ts",
@@ -24,7 +26,5 @@
     "**/*.tsx",
     ".next/types/**/*.ts"
   ],
-  "exclude": [
-    "node_modules"
-  ]
+  "exclude": ["node_modules"]
 }
