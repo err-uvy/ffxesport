@@ -51,7 +51,7 @@ export default function AdminUsersPage() {
     <div>
       <PageHeader eyebrow="RBAC" title="Users">
         <div className="flex gap-2">
-          <Input placeholder="Search" value={search} onChange={(event) => setSearch(event.target.value)} />
+          <Input placeholder="Search" value={search} onChange={(event: any) => setSearch(event.target.value)} />
           <Button onClick={loadUsers}>Search</Button>
         </div>
       </PageHeader>
@@ -68,12 +68,12 @@ export default function AdminUsersPage() {
                   ))}
                 </div>
               </div>
-              <select className="h-11 rounded-lg border border-white/10 bg-[#020817] px-3 text-sm" value={user.status} onChange={(event) => updateStatus(user.id, event.target.value)}>
+              <select className="h-11 rounded-lg border border-white/10 bg-[#020817] px-3 text-sm" value={user.status} onChange={(event: any) => updateStatus(user.id, event.target.value)}>
                 {["ACTIVE", "PENDING_VERIFICATION", "SUSPENDED", "BANNED"].map((status) => (
                   <option key={status}>{status}</option>
                 ))}
               </select>
-              <select className="h-11 rounded-lg border border-white/10 bg-[#020817] px-3 text-sm" onChange={(event) => event.target.value && grantRole(user.id, event.target.value)} defaultValue="">
+              <select className="h-11 rounded-lg border border-white/10 bg-[#020817] px-3 text-sm" onChange={(event: any) => event.target.value && grantRole(user.id, event.target.value)} defaultValue="">
                 <option value="">Grant role</option>
                 {["ADMIN", "MODERATOR", "SUPPORT", "USER"].map((role) => (
                   <option key={role}>{role}</option>

@@ -50,13 +50,23 @@ export default function SupportPage() {
         <Card className="p-5">
           <h2 className="text-xl font-black">Create ticket</h2>
           <div className="mt-4 space-y-3">
-            <Input placeholder="Subject" value={subject} onChange={(event) => setSubject(event.target.value)} />
-            <select className="h-11 w-full rounded-lg border border-white/10 bg-[#020817] px-3 text-sm" value={category} onChange={(event) => setCategory(event.target.value)}>
+            <Input
+  placeholder="Subject"
+  value={subject}
+  onChange={(event: any) =>
+    setSubject(event.target.value)
+  }
+/>
+            <select className="h-11 w-full rounded-lg border border-white/10 bg-[#020817] px-3 text-sm" value={category} onChange={(event: any) =>
+  setCategory(event.target.value)
+}>
               {["Tournament", "Wallet", "Match", "Account", "Fraud"].map((item) => (
                 <option key={item}>{item}</option>
               ))}
             </select>
-            <Textarea placeholder="Message" value={body} onChange={(event) => setBody(event.target.value)} />
+            <Textarea placeholder="Message" value={body} onChange={(event: any) =>
+  setBody(event.target.value)
+} />
             <Button className="w-full" onClick={createTicket}>Submit</Button>
           </div>
         </Card>

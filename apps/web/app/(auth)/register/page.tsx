@@ -37,7 +37,13 @@ export default function RegisterPage() {
 
   async function onSubmit(values: FormValues) {
     try {
-      await registerUser(values);
+      await registerUser({
+        email: values.email!,
+        username: values.username!,
+        password: values.password!,
+        phone: values.phone,
+        referrerCode: values.referrerCode
+      });
       toast.success("Account created. Verify OTP to unlock full trust.");
       router.replace("/verify-otp");
     } catch (error) {

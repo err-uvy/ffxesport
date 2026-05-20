@@ -12,7 +12,6 @@ const config: Config = {
           black: "#7C3AED",
           blue: "#00E5FF",
           pink: "#FF0080",
-          blue: "#22D3EE",
           muted: "#94A3B8"
         }
       },

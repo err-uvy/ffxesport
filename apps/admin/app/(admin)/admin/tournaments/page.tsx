@@ -85,21 +85,21 @@ export default function AdminTournamentsPage() {
       <PageHeader eyebrow="Tournament ops" title="Tournaments" />
       <Card className="mb-6 p-5">
         <div className="grid gap-3 lg:grid-cols-[1fr_.55fr_.55fr_.45fr_.45fr_.45fr_.7fr_auto]">
-          <Input placeholder="Tournament title" value={title} onChange={(event) => setTitle(event.target.value)} />
-          <select className="h-11 rounded-lg border border-white/10 bg-[#020817] px-3 text-sm" value={game} onChange={(event) => setGame(event.target.value)}>
+          <Input placeholder="Tournament title" value={title} onChange={(event: any) => setTitle(event.target.value)} />
+          <select className="h-11 rounded-lg border border-white/10 bg-[#020817] px-3 text-sm" value={game} onChange={(event: any) => setGame(event.target.value)}>
             {["FREE_FIRE", "BGMI", "CODM", "VALORANT", "BATTLE_ROYALE"].map((item) => (
               <option key={item}>{item}</option>
             ))}
           </select>
-          <select className="h-11 rounded-lg border border-white/10 bg-[#020817] px-3 text-sm" value={mode} onChange={(event) => setMode(event.target.value)}>
+          <select className="h-11 rounded-lg border border-white/10 bg-[#020817] px-3 text-sm" value={mode} onChange={(event: any) => setMode(event.target.value)}>
             {["SOLO", "DUO", "SQUAD", "CLASH_SQUAD", "BATTLE_ROYALE"].map((item) => (
               <option key={item}>{item}</option>
             ))}
           </select>
-          <Input type="number" value={entryFee} onChange={(event) => setEntryFee(Number(event.target.value))} />
-          <Input type="number" value={prizePool} onChange={(event) => setPrizePool(Number(event.target.value))} />
-          <Input type="number" value={maxSlots} onChange={(event) => setMaxSlots(Number(event.target.value))} />
-          <Input type="datetime-local" value={startsAt} onChange={(event) => setStartsAt(event.target.value)} />
+          <Input type="number" value={entryFee} onChange={(event: any) => setEntryFee(Number(event.target.value))} />
+          <Input type="number" value={prizePool} onChange={(event: any) => setPrizePool(Number(event.target.value))} />
+          <Input type="number" value={maxSlots} onChange={(event: any) => setMaxSlots(Number(event.target.value))} />
+          <Input type="datetime-local" value={startsAt} onChange={(event: any) => setStartsAt(event.target.value)} />
           <Button onClick={createTournament}>Create</Button>
         </div>
       </Card>

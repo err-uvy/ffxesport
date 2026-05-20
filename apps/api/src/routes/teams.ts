@@ -74,14 +74,16 @@ router.post(
       })
       .parse(req.body);
 
+const data = input as any;
+
     const inviteCode = crypto.randomUUID().slice(0, 8).toUpperCase();
 
     const team = await prisma.team.create({
       data: {
-        name: input.name!,
-        game: input.game!,
-        tag: input.tag,
-        logoUrl: input.logoUrl,
+        name: data.name as string,
+game: data.game as Game,
+tag: data.tag as string,
+logoUrl: data.logoUrl as string,
         inviteCode,
 
         captain: {
@@ -122,7 +124,7 @@ router.post(
         usernameOrEmail: z.string().min(3).transform(cleanText)
       })
       .parse(req.body);
-
+    const data = input as any;
     const team = await prisma.team.findUnique({
       where: {
         id: req.params.id
@@ -137,10 +139,11 @@ router.post(
       where: {
         OR: [
           {
-            username: input.usernameOrEmail
+
+            username: data.usernameOrEmail as string
           },
           {
-            email: input.usernameOrEmail.toLowerCase()
+            email: (data.usernameOrEmail as string).toLowerCase()
           }
         ]
       }
@@ -194,7 +197,7 @@ router.post(
         accept: z.boolean()
       })
       .parse(req.body);
-
+    const data = input as any;
     const member = await prisma.teamMember.findUnique({
       where: {
         id: req.params.memberId
@@ -219,7 +222,7 @@ router.post(
       },
 
       data: {
-        status: input.accept ? "ACTIVE" : "DECLINED"
+        status: data.accept ? "ACTIVE" : "DECLINED"
       }
     });
 

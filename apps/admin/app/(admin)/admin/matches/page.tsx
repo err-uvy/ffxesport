@@ -71,8 +71,20 @@ export default function AdminMatchesPage() {
       <PageHeader eyebrow="Room control" title="Matches" />
       <Card className="mb-6 p-5">
         <div className="grid gap-3 md:grid-cols-[1fr_1fr]">
-          <Input placeholder="Room ID" value={roomId} onChange={(event) => setRoomId(event.target.value)} />
-          <Input placeholder="Room password" value={roomPassword} onChange={(event) => setRoomPassword(event.target.value)} />
+          <Input
+  placeholder="Room ID"
+  value={roomId}
+  onChange={(event: any) =>
+    setRoomId(event.target.value)
+  }
+/>
+          <Input
+  placeholder="Room password"
+  value={roomPassword}
+  onChange={(event: any) =>
+    setRoomPassword(event.target.value)
+  }
+/>
         </div>
       </Card>
       <div className="grid gap-4">

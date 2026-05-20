@@ -31,7 +31,7 @@ export default function LoginPage() {
 
   async function onSubmit(values: FormValues) {
     try {
-      await login(values.email, values.password, values.rememberMe);
+      await login(values.email!, values.password!, values.rememberMe ?? true);
       toast.success("Welcome back to FFX ESPORTS");
       router.replace("/dashboard");
     } catch (error) {

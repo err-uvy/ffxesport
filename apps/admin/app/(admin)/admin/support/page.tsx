@@ -42,7 +42,8 @@ export default function AdminSupportPage() {
     <div>
       <PageHeader eyebrow="Support desk" title="Tickets" />
       <Card className="mb-6 p-5">
-        <Textarea placeholder="Admin reply" value={reply} onChange={(event) => setReply(event.target.value)} />
+        <Textarea placeholder="Admin reply" value={reply}
+  onChange={(event: any) => setReply(event.target.value)} />
       </Card>
       <div className="space-y-4">
         {tickets.map((ticket) => (

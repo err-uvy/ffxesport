@@ -2,6 +2,11 @@
   "extends": "../../packages/configs/tsconfig.base.json",
   "compilerOptions": {
     "jsx": "preserve",
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ES2022"
+    ],
     "module": "ESNext",
     "noEmit": true,
     "incremental": true,

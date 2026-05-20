@@ -60,9 +60,9 @@ export default function TeamsPage() {
       <PageHeader eyebrow="Squads" title="Teams" />
       <Card className="mb-6 p-5">
         <div className="grid gap-3 md:grid-cols-[1fr_.5fr_.5fr_auto]">
-          <Input placeholder="Team name" value={name} onChange={(event) => setName(event.target.value)} />
-          <Input placeholder="TAG" value={tag} onChange={(event) => setTag(event.target.value)} />
-          <select className="h-11 rounded-lg border border-white/10 bg-[#020817] px-3 text-sm" value={game} onChange={(event) => setGame(event.target.value)}>
+          <Input placeholder="Team name" value={name} onChange={(event: any) => setName(event.target.value)} />
+          <Input placeholder="TAG" value={tag} onChange={(event: any) => setTag(event.target.value)} />
+          <select className="h-11 rounded-lg border border-white/10 bg-[#020817] px-3 text-sm" value={game} onChange={(event: any) => setGame(event.target.value)}>
             {["FREE_FIRE", "BGMI", "CODM", "VALORANT"].map((item) => (
               <option key={item} value={item}>{item.replace("_", " ")}</option>
             ))}
@@ -90,7 +90,7 @@ export default function TeamsPage() {
                 ))}
               </div>
               <div className="mt-4 flex gap-2">
-                <Input placeholder="username or email" value={invite} onChange={(event) => setInvite(event.target.value)} />
+                <Input placeholder="username or email" value={invite} onChange={(event: any) => setInvite(event.target.value)} />
                 <Button variant="secondary" onClick={() => inviteUser(team.id)}>Invite</Button>
               </div>
             </Card>

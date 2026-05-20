@@ -91,7 +91,7 @@ export default function WalletPage() {
         <Card className="p-5">
           <h2 className="text-xl font-black">Deposit</h2>
           <div className="mt-4 space-y-4">
-            <Input type="number" min={10} value={amount} onChange={(event) => setAmount(Number(event.target.value))} />
+            <Input type="number" min={10} value={amount} onChange={(event: any) => setAmount(Number(event.target.value))} />
             <div className="grid grid-cols-2 gap-2">
               {(["RAZORPAY", "CASHFREE"] as const).map((item) => (
                 <Button key={item} variant={provider === item ? "primary" : "secondary"} onClick={() => setProvider(item)}>
@@ -105,8 +105,8 @@ export default function WalletPage() {
           </div>
           <h2 className="mt-7 text-xl font-black">Withdraw</h2>
           <div className="mt-4 space-y-4">
-            <Input type="number" min={100} value={withdrawAmount} onChange={(event) => setWithdrawAmount(Number(event.target.value))} />
-            <Input placeholder="upi@bank" value={upi} onChange={(event) => setUpi(event.target.value)} />
+            <Input type="number" min={100} value={withdrawAmount} onChange={(event: any) => setWithdrawAmount(Number(event.target.value))} />
+            <Input placeholder="upi@bank" value={upi} onChange={(event: any) => setUpi(event.target.value)} />
             <Button variant="secondary" className="w-full" onClick={withdraw}>
               Request withdrawal
             </Button>
