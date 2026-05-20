@@ -5,24 +5,39 @@ export const idSchema = z.string().min(8);
 
 export const paginationSchema = z.object({
   page: z.coerce.number().int().min(1).default(1),
+
   pageSize: z.coerce.number().int().min(1).max(100).default(20)
 });
 
-export function cleanText(value: string) {
+export function cleanText(value: string): string {
   return sanitizeHtml(value.trim(), {
     allowedTags: [],
     allowedAttributes: {}
-  });
+  }).replace(/\s+/g, " ");
 }
 
-export function cleanRichText(value: string) {
+export function cleanRichText(value: string): string {
   return sanitizeHtml(value.trim(), {
-    allowedTags: ["b", "strong", "i", "em", "ul", "ol", "li", "p", "br"],
+    allowedTags: [
+      "b",
+      "strong",
+      "i",
+      "em",
+      "ul",
+      "ol",
+      "li",
+      "p",
+      "br"
+    ],
+
     allowedAttributes: {}
-  });
+  }).replace(/\s+/g, " ");
 }
 
-export const emailSchema = z.string().email().transform((value) => value.toLowerCase());
+export const emailSchema = z
+  .string()
+  .email()
+  .transform((value): string => value.toLowerCase());
 
 export const passwordSchema = z
   .string()
