@@ -9,14 +9,13 @@ import { emitRealtime } from "../lib/realtime";
 import { prisma } from "../lib/prisma";
 import { cleanRichText, cleanText, paginationSchema } from "../lib/validation";
 import { requireRoles } from "../middleware/auth";
-
 const router = Router();
 
 const createTournamentSchema = z.object({
   title: z.string().min(3).max(120).transform(cleanText),
   game: z.nativeEnum(Game),
   mode: z.nativeEnum(TournamentMode),
-  description: z.string().min(10).max(3000).transform(cleanText),
+  description: z.string().min(10).max(3000).transform(cleanRichText),
   bannerUrl: z.string().url().optional(),
   rules: z.string().min(10).max(5000).transform(cleanRichText),
   entryFee: z.coerce.number().min(0).default(0),
@@ -25,7 +24,7 @@ const createTournamentSchema = z.object({
   minTeamSize: z.coerce.number().int().min(1).max(5).default(1),
   maxTeamSize: z.coerce.number().int().min(1).max(5).default(1),
   inviteOnly: z.boolean().default(false),
-  inviteCode: z.string().optional(),
+  inviteCode: z.string().trim().optional(),
   status: z.nativeEnum(TournamentStatus).default("REGISTRATION_OPEN"),
   registrationStartsAt: z.coerce.date(),
   registrationEndsAt: z.coerce.date(),
@@ -33,6 +32,7 @@ const createTournamentSchema = z.object({
   endsAt: z.coerce.date().optional(),
   roomReleaseAt: z.coerce.date().optional()
 });
+type CreateTournamentInput = z.infer<typeof createTournamentSchema>;
 
 router.get(
   "/",
@@ -98,7 +98,8 @@ router.post(
   "/",
   requireRoles("SUPER_ADMIN", "ADMIN"),
   asyncHandler(async (req, res) => {
-    const input = createTournamentSchema.parse(req.body);
+    const input: CreateTournamentInput =
+  createTournamentSchema.parse(req.body);
     if (input.registrationEndsAt >= input.startsAt) {
       throw new ApiError(422, "Registration must end before tournament start");
     }
@@ -170,7 +171,8 @@ router.patch(
   "/:id",
   requireRoles("SUPER_ADMIN", "ADMIN"),
   asyncHandler(async (req, res) => {
-    const input = createTournamentSchema.partial().parse(req.body);
+    const input: Partial<CreateTournamentInput> =
+  createTournamentSchema.partial().parse(req.body);
     const tournament = await prisma.tournament.update({
       where: { id: req.params.id },
       data: input
@@ -185,7 +187,7 @@ router.patch(
 router.post(
   "/:id/join",
   asyncHandler(async (req, res) => {
-    const input = z.object({ teamId: z.string().optional(), inviteCode: z.string().optional() }).parse(req.body);
+    const input = z.object({ teamId: z.string().optional(), inviteCode: z.string().trim().optional() }).parse(req.body);
     const tournament = await prisma.tournament.findUnique({ where: { id: req.params.id } });
     if (!tournament) throw new ApiError(404, "Tournament not found");
     if (!["REGISTRATION_OPEN", "SCHEDULED"].includes(tournament.status)) {
