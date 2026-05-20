@@ -40,7 +40,7 @@ export async function requireAuth(req: Request, _res: Response, next: NextFuncti
 export function requireRoles(...roles: RoleName[]) {
   return (req: Request, _res: Response, next: NextFunction) => {
     if (!req.user) return next(new ApiError(401, "Authentication required"));
-    if (!req.user.roles.some((role) => roles.includes(role))) {
+    if (!req.user.roles.some((role) => roles.includes(role as any))) {
       return next(new ApiError(403, "Forbidden"));
     }
     return next();

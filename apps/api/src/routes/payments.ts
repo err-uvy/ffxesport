@@ -11,7 +11,7 @@ const router = Router();
 router.post(
   "/razorpay/webhook",
   asyncHandler(async (req, res) => {
-    const raw = getRawBody(req.body, req.rawBody);
+    const raw = getRawBody(req.body, req.rawBody as any);
     const signature = req.header("x-razorpay-signature");
     const verified = verifyHmac(raw, signature, env.RAZORPAY_WEBHOOK_SECRET);
     const payload = JSON.parse(raw.toString("utf8"));
@@ -42,7 +42,7 @@ router.post(
 router.post(
   "/cashfree/webhook",
   asyncHandler(async (req, res) => {
-    const raw = getRawBody(req.body, req.rawBody);
+    const raw = getRawBody(req.body, req.rawBody as any);
     const signature = req.header("x-webhook-signature");
     const timestamp = req.header("x-webhook-timestamp") ?? "";
     const verified = verifyCashfreeSignature(timestamp, raw, signature);
