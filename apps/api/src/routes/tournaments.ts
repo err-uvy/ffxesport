@@ -104,19 +104,19 @@ router.post(
     }
     const slug = `${slugify(input.title)}-${Date.now().toString(36)}`;
     const tournament = await prisma.tournament.create({
-      data: {
-  title: input.title!,
-  game: input.game!,
-  mode: input.mode!,
+data: {
+  title: input.title,
+  game: input.game,
+  mode: input.mode,
   description: input.description,
   bannerUrl: input.bannerUrl,
   rules: input.rules,
 
-  entryFee: input.entryFee!,
-  prizePool: input.prizePool!,
-  maxSlots: input.maxSlots!,
-  minTeamSize: input.minTeamSize!,
-  maxTeamSize: input.maxTeamSize!,
+  entryFee: input.entryFee,
+  prizePool: input.prizePool,
+  maxSlots: input.maxSlots,
+  minTeamSize: input.minTeamSize,
+  maxTeamSize: input.maxTeamSize,
 
   inviteOnly: input.inviteOnly,
   inviteCode: input.inviteCode,
