@@ -53,10 +53,10 @@ export default function TournamentDetailPage() {
       <PageHeader eyebrow={tournament.game.replace("_", " ")} title={tournament.title}>
         <Button onClick={join}>Join tournament</Button>
       </PageHeader>
-      <section className="overflow-hidden rounded-xl border border-cyan-300/15 bg-[linear-gradient(135deg,rgba(0,229,255,.22),rgba(124,58,237,.16),rgba(255,0,128,.18)),url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center p-6 shadow-neon sm:p-10">
+      <section className="overflow-hidden rounded-xl border border-white/5 bg-[linear-gradient(135deg,rgba(0,229,255,.22),rgba(124,58,237,.16),rgba(255,0,128,.18)),url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80')] bg-cover bg-center p-6 shadow-neon sm:p-10">
         <div className="max-w-3xl">
           <div className="flex flex-wrap gap-2">
-            <Badge tone="cyan">{tournament.mode.replace("_", " ")}</Badge>
+            <Badge tone="blue">{tournament.mode.replace("_", " ")}</Badge>
             <Badge tone="green">{tournament.status.replace("_", " ")}</Badge>
           </div>
           <p className="mt-5 text-lg leading-8 text-slate-100">{tournament.description}</p>
@@ -72,9 +72,9 @@ export default function TournamentDetailPage() {
           <h2 className="text-xl font-black">Prize Distribution</h2>
           <div className="mt-4 space-y-3">
             {tournament.prizeDistributions.map((prize) => (
-              <div key={prize.rank} className="flex items-center justify-between rounded-lg border border-white/10 bg-white/[0.05] p-3">
+              <div key={prize.rank} className="flex items-center justify-between rounded-lg border border-white/10 bg-[#0F172A] p-3">
                 <span className="font-bold">Rank {prize.rank}</span>
-                <span className="text-cyan-100">{formatMoney(prize.amount)}</span>
+                <span className="text-blue-100">{formatMoney(prize.amount)}</span>
               </div>
             ))}
           </div>
@@ -84,7 +84,7 @@ export default function TournamentDetailPage() {
           <Progress value={slots} className="mt-4" />
           <div className="mt-4 grid gap-2 sm:grid-cols-2">
             {tournament.participants.map((participant) => (
-              <div key={participant.id} className="rounded-lg border border-white/10 bg-white/[0.05] p-3 text-sm">
+              <div key={participant.id} className="rounded-lg border border-white/10 bg-[#0F172A] p-3 text-sm">
                 Slot {participant.slotNumber}: {participant.team?.tag ?? participant.user?.username ?? "Registered"}
               </div>
             ))}
@@ -102,7 +102,7 @@ export default function TournamentDetailPage() {
 function Stat({ icon: Icon, label, value }: { icon: typeof Trophy; label: string; value: string }) {
   return (
     <div className="rounded-lg border border-white/15 bg-black/25 p-4">
-      <Icon className="mb-3 text-cyan-100" size={20} />
+      <Icon className="mb-3 text-blue-100" size={20} />
       <div className="text-xs uppercase tracking-[0.18em] text-slate-400">{label}</div>
       <div className="mt-1 text-lg font-black text-white">{value}</div>
     </div>

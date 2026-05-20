@@ -13,7 +13,7 @@
 html,
 body {
   min-height: 100%;
-  background: #070b14;
+  background: #020817;
   color: #ffffff;
 }
 
@@ -65,7 +65,7 @@ select {
 }
 
 ::-webkit-scrollbar-track {
-  background: #070b14;
+  background: #020817;
 }
 
 ::-webkit-scrollbar-thumb {

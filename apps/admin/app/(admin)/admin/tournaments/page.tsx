@@ -86,12 +86,12 @@ export default function AdminTournamentsPage() {
       <Card className="mb-6 p-5">
         <div className="grid gap-3 lg:grid-cols-[1fr_.55fr_.55fr_.45fr_.45fr_.45fr_.7fr_auto]">
           <Input placeholder="Tournament title" value={title} onChange={(event) => setTitle(event.target.value)} />
-          <select className="h-11 rounded-lg border border-white/10 bg-[#070B14] px-3 text-sm" value={game} onChange={(event) => setGame(event.target.value)}>
+          <select className="h-11 rounded-lg border border-white/10 bg-[#020817] px-3 text-sm" value={game} onChange={(event) => setGame(event.target.value)}>
             {["FREE_FIRE", "BGMI", "CODM", "VALORANT", "BATTLE_ROYALE"].map((item) => (
               <option key={item}>{item}</option>
             ))}
           </select>
-          <select className="h-11 rounded-lg border border-white/10 bg-[#070B14] px-3 text-sm" value={mode} onChange={(event) => setMode(event.target.value)}>
+          <select className="h-11 rounded-lg border border-white/10 bg-[#020817] px-3 text-sm" value={mode} onChange={(event) => setMode(event.target.value)}>
             {["SOLO", "DUO", "SQUAD", "CLASH_SQUAD", "BATTLE_ROYALE"].map((item) => (
               <option key={item}>{item}</option>
             ))}
@@ -109,7 +109,7 @@ export default function AdminTournamentsPage() {
             <div className="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-center">
               <div>
                 <div className="mb-2 flex flex-wrap gap-2">
-                  <Badge tone="cyan">{tournament.game.replace("_", " ")}</Badge>
+                  <Badge tone="blue">{tournament.game.replace("_", " ")}</Badge>
                   <Badge tone="pink">{tournament.mode.replace("_", " ")}</Badge>
                   <Badge tone="green">{tournament.status.replace("_", " ")}</Badge>
                 </div>
@@ -132,7 +132,7 @@ export default function AdminTournamentsPage() {
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg border border-white/10 bg-white/[0.05] p-3">
+    <div className="rounded-lg border border-white/10 bg-[#0F172A] p-3">
       <div className="text-xs text-slate-400">{label}</div>
       <div className="font-black">{value}</div>
     </div>

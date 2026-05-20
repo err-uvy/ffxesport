@@ -12,18 +12,18 @@ const config: Config = {
     extend: {
       colors: {
         ffx: {
-          bg: "#070B14",
+          bg: "#020817",
           panel: "#111827",
-          purple: "#7C3AED",
+          black: "#7C3AED",
           blue: "#00E5FF",
           pink: "#FF0080",
-          cyan: "#22D3EE",
+          blue: "#22D3EE",
           muted: "#94A3B8"
         }
       },
       boxShadow: {
         neon: "0 0 32px rgba(34,211,238,.25), 0 0 64px rgba(255,0,128,.12)",
-        purple: "0 0 36px rgba(124,58,237,.24)"
+        black: "0 0 36px rgba(124,58,237,.24)"
       },
       animation: {
         "pulse-glow": "pulseGlow 3s ease-in-out infinite",

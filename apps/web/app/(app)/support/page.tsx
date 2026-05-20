@@ -51,7 +51,7 @@ export default function SupportPage() {
           <h2 className="text-xl font-black">Create ticket</h2>
           <div className="mt-4 space-y-3">
             <Input placeholder="Subject" value={subject} onChange={(event) => setSubject(event.target.value)} />
-            <select className="h-11 w-full rounded-lg border border-white/10 bg-[#070B14] px-3 text-sm" value={category} onChange={(event) => setCategory(event.target.value)}>
+            <select className="h-11 w-full rounded-lg border border-white/10 bg-[#020817] px-3 text-sm" value={category} onChange={(event) => setCategory(event.target.value)}>
               {["Tournament", "Wallet", "Match", "Account", "Fraud"].map((item) => (
                 <option key={item}>{item}</option>
               ))}
@@ -69,11 +69,11 @@ export default function SupportPage() {
                     <h2 className="text-lg font-black">{ticket.subject}</h2>
                     <p className="text-sm text-slate-400">{ticket.category}</p>
                   </div>
-                  <Badge tone={ticket.status === "RESOLVED" ? "green" : "cyan"}>{ticket.status}</Badge>
+                  <Badge tone={ticket.status === "RESOLVED" ? "green" : "blue"}>{ticket.status}</Badge>
                 </div>
                 <div className="mt-4 space-y-2">
                   {ticket.replies.filter((reply) => !reply.internal).map((reply) => (
-                    <div key={reply.id} className="rounded-lg border border-white/10 bg-white/[0.05] p-3 text-sm text-slate-300">
+                    <div key={reply.id} className="rounded-lg border border-white/10 bg-[#0F172A] p-3 text-sm text-slate-300">
                       {reply.body}
                     </div>
                   ))}

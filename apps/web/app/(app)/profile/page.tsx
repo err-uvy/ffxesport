@@ -83,7 +83,7 @@ export default function ProfilePage() {
             <div>
               <h2 className="text-2xl font-black">{profile?.user.username}</h2>
               <p className="text-sm text-slate-400">{profile?.user.email}</p>
-              <label className="mt-3 inline-flex cursor-pointer items-center gap-2 rounded-lg border border-cyan-300/25 px-3 py-2 text-sm font-bold text-cyan-100">
+              <label className="mt-3 inline-flex cursor-pointer items-center gap-2 rounded-lg border border-blue-300/25 px-3 py-2 text-sm font-bold text-blue-100">
                 <Camera size={16} />
                 Avatar
                 <input type="file" accept="image/*" className="hidden" onChange={uploadAvatar} />
@@ -103,7 +103,7 @@ export default function ProfilePage() {
         <Card className="p-5">
           <h2 className="text-xl font-black">Gaming Profiles</h2>
           <div className="mt-4 grid gap-3 sm:grid-cols-3">
-            <select className="h-11 rounded-lg border border-white/10 bg-[#070B14] px-3 text-sm" value={game} onChange={(event) => setGame(event.target.value)}>
+            <select className="h-11 rounded-lg border border-white/10 bg-[#020817] px-3 text-sm" value={game} onChange={(event) => setGame(event.target.value)}>
               {["FREE_FIRE", "BGMI", "CODM", "VALORANT"].map((item) => (
                 <option key={item} value={item}>{item.replace("_", " ")}</option>
               ))}
@@ -116,19 +116,19 @@ export default function ProfilePage() {
           </Button>
           <div className="mt-5 grid gap-3 md:grid-cols-2">
             {(profile?.user.gameProfiles ?? []).map((item) => (
-              <div key={item.id} className="rounded-lg border border-white/10 bg-white/[0.05] p-4">
+              <div key={item.id} className="rounded-lg border border-white/10 bg-[#0F172A] p-4">
                 <div className="flex items-center justify-between">
                   <div className="font-black">{item.game.replace("_", " ")}</div>
                   {item.verified && <Badge tone="green">Verified</Badge>}
                 </div>
                 <div className="mt-2 text-sm text-slate-300">{item.handle ?? "No handle"} / {item.uid}</div>
-                <div className="mt-1 text-sm text-cyan-100">KD {item.kdRatio}</div>
+                <div className="mt-1 text-sm text-blue-100">KD {item.kdRatio}</div>
               </div>
             ))}
           </div>
           <div className="mt-5 flex flex-wrap gap-2">
             {(profile?.achievements ?? []).map((item) => (
-              <Badge key={item} tone="purple">{item}</Badge>
+              <Badge key={item} tone="black">{item}</Badge>
             ))}
           </div>
         </Card>
@@ -139,8 +139,8 @@ export default function ProfilePage() {
 
 function Stat({ icon: Icon, value, label }: { icon: typeof Trophy; value: string; label: string }) {
   return (
-    <div className="rounded-lg border border-white/10 bg-white/[0.05] p-3">
-      <Icon className="text-cyan-100" size={18} />
+    <div className="rounded-lg border border-white/10 bg-[#0F172A] p-3">
+      <Icon className="text-blue-100" size={18} />
       <div className="mt-2 text-2xl font-black">{value}</div>
       <div className="text-xs text-slate-400">{label}</div>
     </div>

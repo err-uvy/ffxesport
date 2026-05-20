@@ -64,16 +64,16 @@ export default function AdminUsersPage() {
                 <div className="text-sm text-slate-400">{user.email}</div>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {user.roles.map((entry) => (
-                    <Badge key={entry.role.name} tone={entry.role.name === "USER" ? "cyan" : "pink"}>{entry.role.name}</Badge>
+                    <Badge key={entry.role.name} tone={entry.role.name === "USER" ? "blue" : "pink"}>{entry.role.name}</Badge>
                   ))}
                 </div>
               </div>
-              <select className="h-11 rounded-lg border border-white/10 bg-[#070B14] px-3 text-sm" value={user.status} onChange={(event) => updateStatus(user.id, event.target.value)}>
+              <select className="h-11 rounded-lg border border-white/10 bg-[#020817] px-3 text-sm" value={user.status} onChange={(event) => updateStatus(user.id, event.target.value)}>
                 {["ACTIVE", "PENDING_VERIFICATION", "SUSPENDED", "BANNED"].map((status) => (
                   <option key={status}>{status}</option>
                 ))}
               </select>
-              <select className="h-11 rounded-lg border border-white/10 bg-[#070B14] px-3 text-sm" onChange={(event) => event.target.value && grantRole(user.id, event.target.value)} defaultValue="">
+              <select className="h-11 rounded-lg border border-white/10 bg-[#020817] px-3 text-sm" onChange={(event) => event.target.value && grantRole(user.id, event.target.value)} defaultValue="">
                 <option value="">Grant role</option>
                 {["ADMIN", "MODERATOR", "SUPPORT", "USER"].map((role) => (
                   <option key={role}>{role}</option>

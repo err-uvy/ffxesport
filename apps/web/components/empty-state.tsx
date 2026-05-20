@@ -4,7 +4,7 @@ import { Card } from "@ffx/ui";
 export function EmptyState({ icon: Icon, title, body }: { icon: LucideIcon; title: string; body: string }) {
   return (
     <Card className="flex min-h-48 flex-col items-center justify-center p-8 text-center">
-      <div className="mb-4 rounded-lg border border-cyan-300/20 bg-cyan-300/10 p-3 text-cyan-100">
+      <div className="mb-4 rounded-lg border border-blue-300/20 bg-blue-300/10 p-3 text-blue-100">
         <Icon size={24} />
       </div>
       <h3 className="text-lg font-black text-white">{title}</h3>

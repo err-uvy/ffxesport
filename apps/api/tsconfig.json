@@ -4,7 +4,7 @@
     "outDir": "dist",
     "rootDir": ".",
     "module": "CommonJS",
-    "types": ["node", "express"]
+    "types": ["node"]
   },
   "include": ["src", "prisma/seed.ts"]
 }

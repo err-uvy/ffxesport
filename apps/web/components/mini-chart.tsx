@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 export function MiniChart({ values }: { values: number[] }) {
   const max = Math.max(...values, 1);
   return (
-    <div className="flex h-40 items-end gap-2 rounded-lg border border-white/10 bg-[#070B14]/55 p-4">
+    <div className="flex h-40 items-end gap-2 rounded-lg border border-white/10 bg-[#020817]/55 p-4">
       {values.map((value, index) => (
         <motion.div
           key={`${value}-${index}`}

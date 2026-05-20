@@ -12,12 +12,12 @@ const particles = Array.from({ length: 34 }, (_, index) => ({
 
 export function ParticleField() {
   return (
-    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-[#070B14] gaming-grid">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(0,229,255,.16),transparent_28%),radial-gradient(circle_at_82%_12%,rgba(255,0,128,.12),transparent_26%),linear-gradient(180deg,rgba(7,11,20,.2),#070B14_82%)]" />
+    <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-[#020817] gaming-grid">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_18%,rgba(0,229,255,.16),transparent_28%),radial-gradient(circle_at_82%_12%,rgba(255,0,128,.12),transparent_26%),linear-gradient(180deg,rgba(7,11,20,.2),#020817_82%)]" />
       {particles.map((particle) => (
         <motion.span
           key={particle.id}
-          className="absolute rounded-full bg-cyan-200 shadow-[0_0_14px_rgba(34,211,238,.75)]"
+          className="absolute rounded-full bg-blue-200 shadow-[0_0_14px_rgba(34,211,238,.75)]"
           style={{
             left: particle.left,
             top: particle.top,

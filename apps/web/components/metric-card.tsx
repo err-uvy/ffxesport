@@ -8,9 +8,9 @@ export function MetricCard({ icon: Icon, label, value, detail }: { icon: LucideI
         <div>
           <div className="text-sm font-semibold text-slate-400">{label}</div>
           <div className="mt-2 text-3xl font-black text-white">{value}</div>
-          <div className="mt-2 text-xs text-cyan-100">{detail}</div>
+          <div className="mt-2 text-xs text-blue-100">{detail}</div>
         </div>
-        <div className="rounded-lg border border-cyan-300/20 bg-cyan-300/10 p-3 text-cyan-100">
+        <div className="rounded-lg border border-blue-300/20 bg-blue-300/10 p-3 text-blue-100">
           <Icon size={22} />
         </div>
       </div>

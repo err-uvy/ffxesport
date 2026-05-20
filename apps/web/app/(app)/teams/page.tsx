@@ -62,7 +62,7 @@ export default function TeamsPage() {
         <div className="grid gap-3 md:grid-cols-[1fr_.5fr_.5fr_auto]">
           <Input placeholder="Team name" value={name} onChange={(event) => setName(event.target.value)} />
           <Input placeholder="TAG" value={tag} onChange={(event) => setTag(event.target.value)} />
-          <select className="h-11 rounded-lg border border-white/10 bg-[#070B14] px-3 text-sm" value={game} onChange={(event) => setGame(event.target.value)}>
+          <select className="h-11 rounded-lg border border-white/10 bg-[#020817] px-3 text-sm" value={game} onChange={(event) => setGame(event.target.value)}>
             {["FREE_FIRE", "BGMI", "CODM", "VALORANT"].map((item) => (
               <option key={item} value={item}>{item.replace("_", " ")}</option>
             ))}
@@ -79,13 +79,13 @@ export default function TeamsPage() {
                   <h2 className="text-xl font-black">{team.name}</h2>
                   <p className="text-sm text-slate-400">{team.tag} / {team.game.replace("_", " ")}</p>
                 </div>
-                <Badge tone="cyan">{team.inviteCode}</Badge>
+                <Badge tone="blue">{team.inviteCode}</Badge>
               </div>
               <div className="mt-4 space-y-2">
                 {team.members.map((member) => (
-                  <div key={member.id} className="flex items-center justify-between rounded-lg border border-white/10 bg-white/[0.05] p-3 text-sm">
+                  <div key={member.id} className="flex items-center justify-between rounded-lg border border-white/10 bg-[#0F172A] p-3 text-sm">
                     <span>{member.user.username}</span>
-                    <span className="text-cyan-100">{member.role} / {member.status}</span>
+                    <span className="text-blue-100">{member.role} / {member.status}</span>
                   </div>
                 ))}
               </div>

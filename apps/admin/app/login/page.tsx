@@ -37,10 +37,10 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#070B14] admin-grid px-4">
+    <main className="flex min-h-screen items-center justify-center bg-[#020817] admin-grid px-4">
       <Card className="w-full max-w-md p-8 shadow-neon">
         <div className="mb-7">
-          <div className="text-sm font-bold uppercase tracking-[0.24em] text-cyan-200">FFX ESPORTS</div>
+          <div className="text-sm font-bold uppercase tracking-[0.24em] text-blue-200">FFX ESPORTS</div>
           <h1 className="mt-2 text-3xl font-black">Admin Login</h1>
           <p className="mt-2 text-sm text-slate-400">RBAC protected control tower.</p>
         </div>

@@ -52,10 +52,10 @@ export default function LoginPage() {
         </label>
         <div className="flex items-center justify-between text-sm">
           <label className="flex items-center gap-2 text-slate-300">
-            <input type="checkbox" className="h-4 w-4 accent-cyan-300" {...form.register("rememberMe")} />
+            <input type="checkbox" className="h-4 w-4 accent-blue-300" {...form.register("rememberMe")} />
             Remember me
           </label>
-          <Link href="/forgot-password" className="font-semibold text-cyan-200 hover:text-white">
+          <Link href="/forgot-password" className="font-semibold text-blue-200 hover:text-white">
             Forgot password
           </Link>
         </div>
@@ -65,18 +65,18 @@ export default function LoginPage() {
         </Button>
       </form>
       <div className="mt-5 grid gap-3 sm:grid-cols-2">
-        <a className="flex h-11 items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/[0.06] text-sm font-semibold transition hover:border-cyan-300/40" href={`${apiUrl}/auth/google`}>
+        <a className="flex h-11 items-center justify-center gap-2 rounded-lg border border-white/10 bg-[#0F172A] text-sm font-semibold transition hover:border-blue-300/40" href={`${apiUrl}/auth/google`}>
           <Mail size={17} />
           Google
         </a>
-        <a className="flex h-11 items-center justify-center gap-2 rounded-lg border border-white/10 bg-white/[0.06] text-sm font-semibold transition hover:border-pink-400/40" href={`${apiUrl}/auth/discord`}>
+        <a className="flex h-11 items-center justify-center gap-2 rounded-lg border border-white/10 bg-[#0F172A] text-sm font-semibold transition hover:border-pink-400/40" href={`${apiUrl}/auth/discord`}>
           <Disc3 size={17} />
           Discord
         </a>
       </div>
       <p className="mt-6 text-center text-sm text-slate-400">
         New to FFX?{" "}
-        <Link href="/register" className="font-bold text-cyan-200 hover:text-white">
+        <Link href="/register" className="font-bold text-blue-200 hover:text-white">
           Create account
         </Link>
       </p>

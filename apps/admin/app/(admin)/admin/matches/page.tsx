@@ -80,7 +80,7 @@ export default function AdminMatchesPage() {
           <Card key={match.id} className="p-5">
             <div className="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-center">
               <div>
-                <Badge tone={match.status === "LIVE" ? "green" : "cyan"}>{match.status.replace("_", " ")}</Badge>
+                <Badge tone={match.status === "LIVE" ? "green" : "blue"}>{match.status.replace("_", " ")}</Badge>
                 <h2 className="mt-2 text-xl font-black">{match.tournamentTitle}</h2>
                 <p className="mt-1 text-sm text-slate-400">{match.mapName} / {new Date(match.startsAt).toLocaleString()}</p>
               </div>
@@ -99,7 +99,7 @@ export default function AdminMatchesPage() {
                 <p className="mt-1 text-sm text-slate-400">
                   {result.submittedBy.username} / kills {result.kills} / placement {result.placement} / score {result.score}
                 </p>
-                <a className="mt-2 inline-block text-sm font-bold text-cyan-200" href={result.screenshotUrl} target="_blank" rel="noreferrer">
+                <a className="mt-2 inline-block text-sm font-bold text-blue-200" href={result.screenshotUrl} target="_blank" rel="noreferrer">
                   Open screenshot
                 </a>
               </div>

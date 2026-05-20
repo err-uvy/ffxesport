@@ -50,7 +50,7 @@ export default function AdminDashboardPage() {
 
 function Health({ label, value }: { label: string; value: string | number }) {
   return (
-    <div className="rounded-lg border border-white/10 bg-white/[0.05] p-4">
+    <div className="rounded-lg border border-white/10 bg-[#0F172A] p-4">
       <div className="text-sm text-slate-400">{label}</div>
       <div className="mt-2 font-black text-white">{value}</div>
     </div>

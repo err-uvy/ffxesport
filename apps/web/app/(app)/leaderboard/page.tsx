@@ -49,14 +49,14 @@ export default function LeaderboardPage() {
           <div className="divide-y divide-white/10">
             {rows.map((row, index) => (
               <div key={row.id ?? row.uid ?? `${view}-${index}`} className="grid grid-cols-[auto_1fr_auto] items-center gap-4 p-4">
-                <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-cyan-300/20 bg-cyan-300/10 font-black text-cyan-100">
+                <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-blue-300/20 bg-blue-300/10 font-black text-blue-100">
                   {index + 1}
                 </div>
                 <div>
                   <div className="font-black">{row.user?.username ?? row.name ?? row.handle ?? "Player"}</div>
                   <div className="text-sm text-slate-400">{row.tag ?? row.uid ?? `Score ${row.score ?? row._sum?.score ?? 0}`}</div>
                 </div>
-                <Badge tone={index === 0 ? "pink" : "cyan"}>
+                <Badge tone={index === 0 ? "pink" : "blue"}>
                   {row.earnings ? formatMoney(row.earnings) : `${row.kills ?? row._sum?.kills ?? row.score ?? 0} pts`}
                 </Badge>
               </div>

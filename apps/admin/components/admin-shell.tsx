@@ -49,17 +49,17 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
 
   if (checking) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-[#070B14] admin-grid">
-        <div className="h-12 w-12 animate-spin rounded-full border-2 border-cyan-300 border-t-transparent" />
+      <div className="flex min-h-screen items-center justify-center bg-[#020817] admin-grid">
+        <div className="h-12 w-12 animate-spin rounded-full border-2 border-blue-300 border-t-transparent" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#070B14] admin-grid">
+    <div className="min-h-screen bg-[#020817] admin-grid">
       <aside
         className={cn(
-          "fixed inset-y-0 left-0 z-40 w-72 border-r border-cyan-300/10 bg-[#080D18]/92 p-4 backdrop-blur-xl transition-transform lg:translate-x-0",
+          "fixed inset-y-0 left-0 z-40 w-72 border-r border-white/50 bg-[#081120] p-4 backdrop-blur-xl transition-transform lg:translate-x-0",
           open ? "translate-x-0" : "-translate-x-full"
         )}
       >
@@ -70,7 +70,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
             </span>
             <span>
               <span className="block text-lg font-black">FFX ADMIN</span>
-              <span className="text-xs uppercase tracking-[0.22em] text-cyan-200">Control Tower</span>
+              <span className="text-xs uppercase tracking-[0.22em] text-blue-200">Control Tower</span>
             </span>
           </Link>
           <button className="lg:hidden" onClick={() => setOpen(false)} aria-label="Close menu">
@@ -88,7 +88,7 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
                 onClick={() => setOpen(false)}
                 className={cn(
                   "flex h-11 items-center gap-3 rounded-lg px-3 text-sm font-semibold transition",
-                  active ? "border border-cyan-300/30 bg-cyan-300/12 text-white shadow-neon" : "text-slate-400 hover:bg-white/8 hover:text-white"
+                  active ? "border border-blue-300/30 bg-blue-300/12 text-white shadow-neon" : "text-slate-400 hover:bg-white/8 hover:text-white"
                 )}
               >
                 <Icon size={18} />
@@ -97,9 +97,9 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
             );
           })}
         </nav>
-        <div className="absolute bottom-4 left-4 right-4 rounded-lg border border-white/10 bg-white/[0.06] p-3">
+        <div className="absolute bottom-4 left-4 right-4 rounded-lg border border-white/10 bg-[#0F172A] p-3">
           <div className="flex items-center gap-2 text-sm font-bold">
-            <Shield size={16} className="text-cyan-100" />
+            <Shield size={16} className="text-blue-100" />
             {user?.username}
           </div>
           <div className="truncate text-xs text-slate-400">{user?.email}</div>
@@ -110,13 +110,13 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
         </div>
       </aside>
       <div className="lg:pl-72">
-        <header className="sticky top-0 z-30 border-b border-cyan-300/10 bg-[#070B14]/78 px-4 py-3 backdrop-blur-xl sm:px-6">
+        <header className="sticky top-0 z-30 border-b border-white/50 bg-[#020817]/78 px-4 py-3 backdrop-blur-xl sm:px-6">
           <div className="flex items-center justify-between">
             <button className="rounded-lg border border-white/10 p-2 lg:hidden" onClick={() => setOpen(true)} aria-label="Open menu">
               <Menu size={20} />
             </button>
             <div>
-              <div className="text-xs font-bold uppercase tracking-[0.22em] text-cyan-200">Admin RBAC</div>
+              <div className="text-xs font-bold uppercase tracking-[0.22em] text-blue-200">Admin RBAC</div>
               <div className="text-sm text-slate-400">Tournament, wallet, moderation, support, and audit controls.</div>
             </div>
           </div>

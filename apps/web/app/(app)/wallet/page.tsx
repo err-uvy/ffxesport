@@ -116,7 +116,7 @@ export default function WalletPage() {
           <h2 className="text-xl font-black">Transaction History</h2>
           <div className="mt-4 space-y-3">
             {(data?.transactions ?? []).map((txn) => (
-              <div key={txn.id} className="flex items-center justify-between rounded-lg border border-white/10 bg-white/[0.05] p-3">
+              <div key={txn.id} className="flex items-center justify-between rounded-lg border border-white/10 bg-[#0F172A] p-3">
                 <div>
                   <div className="font-bold">{txn.type.replace("_", " ")}</div>
                   <div className="text-xs text-slate-400">{new Date(txn.createdAt).toLocaleString()}</div>

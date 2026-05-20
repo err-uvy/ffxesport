@@ -7,12 +7,12 @@ const config: Config = {
     extend: {
       colors: {
         ffx: {
-          bg: "#070B14",
+          bg: "#020817",
           panel: "#111827",
-          purple: "#7C3AED",
+          black: "#7C3AED",
           blue: "#00E5FF",
           pink: "#FF0080",
-          cyan: "#22D3EE",
+          blue: "#22D3EE",
           muted: "#94A3B8"
         }
       },

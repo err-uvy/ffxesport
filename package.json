@@ -8,7 +8,7 @@
     "packages/*"
   ],
   "scripts": {
-    "dev": "concurrently -n api,socket,web,admin -c cyan,magenta,blue,yellow \"npm run dev -w @ffx/api\" \"npm run dev -w @ffx/socket-server\" \"npm run dev -w @ffx/web\" \"npm run dev -w @ffx/admin\"",
+    "dev": "concurrently -n api,socket,web,admin -c blue,magenta,blue,yellow \"npm run dev -w @ffx/api\" \"npm run dev -w @ffx/socket-server\" \"npm run dev -w @ffx/web\" \"npm run dev -w @ffx/admin\"",
     "build": "npm run build -w @ffx/types && npm run build -w @ffx/utils && npm run build -w @ffx/ui && npm run build -w @ffx/api && npm run build -w @ffx/socket-server && npm run build -w @ffx/web && npm run build -w @ffx/admin",
     "typecheck": "npm run typecheck -w @ffx/types && npm run typecheck -w @ffx/utils && npm run typecheck -w @ffx/ui && npm run typecheck -w @ffx/api && npm run typecheck -w @ffx/socket-server && npm run typecheck -w @ffx/web && npm run typecheck -w @ffx/admin",
     "lint": "npm run lint --workspaces --if-present",

@@ -52,11 +52,11 @@ export default function AdminSupportPage() {
                 <h2 className="text-xl font-black">{ticket.subject}</h2>
                 <p className="text-sm text-slate-400">{ticket.user.username} / {ticket.user.email}</p>
               </div>
-              <Badge tone={ticket.status === "RESOLVED" ? "green" : "cyan"}>{ticket.status}</Badge>
+              <Badge tone={ticket.status === "RESOLVED" ? "green" : "blue"}>{ticket.status}</Badge>
             </div>
             <div className="mt-4 space-y-2">
               {ticket.replies.map((item) => (
-                <div key={item.id} className="rounded-lg border border-white/10 bg-white/[0.05] p-3 text-sm text-slate-300">
+                <div key={item.id} className="rounded-lg border border-white/10 bg-[#0F172A] p-3 text-sm text-slate-300">
                   {item.body}
                 </div>
               ))}

@@ -60,7 +60,7 @@ export default function VerifyOtpPage() {
       </Button>
       <p className="mt-6 text-center text-sm text-slate-400">
         Continue to{" "}
-        <Link href="/dashboard" className="font-bold text-cyan-200 hover:text-white">
+        <Link href="/dashboard" className="font-bold text-blue-200 hover:text-white">
           dashboard
         </Link>
       </p>

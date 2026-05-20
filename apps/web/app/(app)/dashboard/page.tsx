@@ -58,7 +58,7 @@ export default function DashboardPage() {
               <h2 className="text-xl font-black text-white">Earnings Pulse</h2>
               <p className="text-sm text-slate-400">Wallet activity trend</p>
             </div>
-            <span className="rounded-md border border-cyan-300/20 bg-cyan-300/10 px-2 py-1 text-xs font-bold text-cyan-100">Live</span>
+            <span className="rounded-md border border-blue-300/20 bg-blue-300/10 px-2 py-1 text-xs font-bold text-blue-100">Live</span>
           </div>
           <MiniChart values={[12, 28, 18, 42, 30, 58, 46, 72, 64, 90, 78, 105]} />
         </Card>
