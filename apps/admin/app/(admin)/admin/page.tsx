@@ -20,11 +20,11 @@ import {
 
 import {
   Card
-} from "@ffx/ui";
+} from "@/ui";
 
 import {
   formatMoney
-} from "@ffx/utils";
+} from "@/utils";
 
 import {
   MetricCard

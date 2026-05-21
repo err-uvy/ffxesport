@@ -10,7 +10,7 @@ import {
 import {
   Button,
   Card
-} from "@ffx/ui";
+} from "@/ui";
 
 export default function ForbiddenPage() {
 

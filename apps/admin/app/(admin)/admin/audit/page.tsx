@@ -14,7 +14,7 @@ import {
 import {
   Badge,
   Card
-} from "@ffx/ui";
+} from "@/ui";
 
 import { PageHeader } from "@/components/page-header";
 

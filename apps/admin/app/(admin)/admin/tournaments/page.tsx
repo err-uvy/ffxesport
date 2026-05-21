@@ -12,9 +12,9 @@ import {
   Button,
   Card,
   Input
-} from "@ffx/ui";
+} from "@/ui";
 
-import { formatMoney } from "@ffx/utils";
+import { formatMoney } from "@/utils";
 
 import {
   CalendarDays,

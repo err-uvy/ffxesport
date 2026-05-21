@@ -12,7 +12,7 @@ import {
   Button,
   Card,
   Textarea
-} from "@ffx/ui";
+} from "@/ui";
 
 import {
   Headset,

@@ -21,7 +21,7 @@ import {
   Button,
   Card,
   Input
-} from "@ffx/ui";
+} from "@/ui";
 
 import {
   PageHeader
