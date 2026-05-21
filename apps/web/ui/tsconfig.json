@@ -1,0 +1,10 @@
+{
+  "extends": "../configs/tsconfig.base.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "declaration": true,
+    "jsx": "react-jsx",
+    "module": "CommonJS"
+  },
+  "include": ["src"]
+}
