@@ -17,8 +17,11 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
-    }
+  "@/*": ["./*"],
+  "@/ui": ["./ui/src"],
+  "@/utils": ["./utils/src"],
+  "@/types": ["./types"]
+}
   },
   "include": [
     "next-env.d.ts",
