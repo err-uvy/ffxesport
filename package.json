@@ -45,5 +45,8 @@
   "engines": {
     "node": ">=20.11.0",
     "npm": ">=10.0.0"
+  },
+  "dependencies": {
+    "@fontsource/orbitron": "^5.2.8"
   }
 }

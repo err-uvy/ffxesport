@@ -1,8 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+
+import {
+  usePathname,
+  useRouter
+} from "next/navigation";
+
+import {
+  useEffect,
+  useState
+} from "react";
 
 import {
   BarChart3,
@@ -18,7 +26,13 @@ import {
   X
 } from "lucide-react";
 
-import { Button, cn } from "@ffx/ui";
+import {
+  Button,
+  cn
+} from "@ffx/ui";
+
+import { ParticleField } from "@/components/particle-field";
+
 import { api } from "@/lib/api";
 
 const adminRoles = [
@@ -81,6 +95,7 @@ export function AdminShell({
 }: {
   children: React.ReactNode;
 }) {
+
   const router = useRouter();
 
   const pathname = usePathname();
@@ -91,16 +106,20 @@ export function AdminShell({
   const [checking, setChecking] =
     useState(true);
 
-  const [user, setUser] = useState<{
-    username: string;
-    email: string;
-    roles: string[];
-  } | null>(null);
+  const [user, setUser] =
+    useState<{
+      username: string;
+      email: string;
+      roles: string[];
+    } | null>(null);
 
   useEffect(() => {
+
     api
       .get("/auth/me")
+
       .then((response) => {
+
         const current =
           response.data.data;
 
@@ -110,16 +129,10 @@ export function AdminShell({
               adminRoles.includes(role)
           )
         ) {
-          if (
-  !current.roles?.some(
-    (role: string) =>
-      adminRoles.includes(role)
-  )
-) {
-  globalThis.location.href = `${userApp}/dashboard`;
 
-  return;
-}
+          globalThis.location.href =
+            `${userApp}/dashboard`;
+
           return;
         }
 
@@ -127,154 +140,453 @@ export function AdminShell({
 
         setChecking(false);
       })
+
       .catch(() =>
         router.replace("/login")
       );
+
   }, [router]);
 
   async function logout() {
+
     await api.post("/auth/logout");
 
     router.replace("/login");
   }
 
   if (checking) {
+
     return (
-      <div className="admin-grid flex min-h-screen items-center justify-center bg-[#020817]">
-        <div className="h-12 w-12 animate-spin rounded-full border-2 border-blue-300 border-t-transparent" />
+
+      <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-[#030712]">
+
+        <ParticleField />
+
+        <div className="relative z-10 flex flex-col items-center">
+
+          <div
+            className="
+            h-14
+            w-14
+            animate-spin
+
+            rounded-full
+
+            border-2
+            border-cyan-400/30
+            border-t-cyan-300
+
+            shadow-[0_0_30px_rgba(34,211,238,.25)]
+          "
+          />
+
+          <div className="mt-4 text-sm font-bold uppercase tracking-[0.3em] text-cyan-200">
+            Loading Control Tower
+          </div>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="admin-grid min-h-screen bg-[#020817]">
+
+    <div className="relative min-h-screen overflow-hidden bg-[#030712] text-white">
+
+      <ParticleField />
+
+      {/* =======================================================
+          SIDEBAR
+      ======================================================= */}
+
       <aside
+
         className={cn(
-          "fixed inset-y-0 left-0 z-40 w-72 border-r border-white/50 bg-[#081120] p-4 backdrop-blur-xl transition-transform lg:translate-x-0",
+
+          `
+          fixed
+          inset-y-0
+          left-0
+          z-50
+
+          w-64
+
+          border-r
+          border-white/10
+
+          bg-[#081120]/80
+
+          backdrop-blur-2xl
+
+          transition-transform
+          duration-300
+
+          lg:translate-x-0
+          `,
 
           open
             ? "translate-x-0"
             : "-translate-x-full"
         )}
       >
-        <div className="mb-7 flex items-center justify-between">
-          <Link
-            href="/admin"
-            className="flex items-center gap-3"
-          >
-            <span className="flex h-11 w-11 items-center justify-center rounded-lg bg-[linear-gradient(135deg,#00E5FF,#7C3AED,#FF0080)] font-black">
-              AD
-            </span>
 
-            <span>
-              <span className="block text-lg font-black">
-                FFX ADMIN
-              </span>
+        {/* glow */}
 
-              <span className="text-xs uppercase tracking-[0.22em] text-blue-200">
-                Control Tower
-              </span>
-            </span>
-          </Link>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(34,211,238,.10),transparent_35%),radial-gradient(circle_at_bottom_right,rgba(124,58,237,.12),transparent_40%)]" />
 
-          <button
-            className="lg:hidden"
-            onClick={() =>
-              setOpen(false)
-            }
-            aria-label="Close menu"
-          >
-            <X size={22} />
-          </button>
-        </div>
+        <div className="relative z-10 flex h-full flex-col p-4">
 
-        <nav className="space-y-1">
-          {nav.map((item) => {
-            const Icon = item.icon;
+          {/* =======================================================
+              LOGO
+          ======================================================= */}
 
-            const active =
-              pathname === item.href;
+          <div className="mb-8 flex items-center justify-between">
 
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                onClick={() =>
-                  setOpen(false)
-                }
-                className={cn(
-                  "flex h-11 items-center gap-3 rounded-lg px-3 text-sm font-semibold transition",
+            <Link
+              href="/admin"
+              className="flex items-center gap-4"
+            >
 
-                  active
-                    ? "border border-blue-300/30 bg-blue-300/12 text-white shadow-neon"
-                    : "text-slate-400 hover:bg-white/8 hover:text-white"
-                )}
+              <div
+                className="
+                flex
+                h-12
+                w-12
+                items-center
+                justify-center
+
+                rounded-2xl
+
+                bg-[linear-gradient(135deg,#06B6D4,#2563EB,#7C3AED)]
+
+                text-lg
+                font-black
+
+                shadow-[0_0_30px_rgba(34,211,238,.25)]
+              "
               >
-                <Icon size={18} />
-
-                {item.label}
-              </Link>
-            );
-          })}
-        </nav>
-
-        <div className="absolute bottom-4 left-4 right-4 rounded-lg border border-white/10 bg-[#0F172A] p-3">
-          <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-blue-500/20">
-              <Shield size={20} />
-            </div>
-
-            <div className="min-w-0 flex-1">
-              <div className="truncate text-sm font-bold text-white">
-                {user?.username}
+                FX
               </div>
 
-              <div className="truncate text-xs text-slate-400">
-                {user?.email}
+              <div>
+
+                <div className="text-lg font-black tracking-wide text-white">
+                  FFX ADMIN
+                </div>
+
+                <div className="text-[11px] font-bold uppercase tracking-[0.28em] text-cyan-200">
+                  Control Tower
+                </div>
               </div>
-            </div>
+            </Link>
+
+            <button
+              className="
+                rounded-xl
+                border
+                border-white/10
+                bg-white/[0.04]
+                p-2
+
+                transition
+                hover:bg-white/[0.08]
+
+                lg:hidden
+              "
+              onClick={() =>
+                setOpen(false)
+              }
+            >
+              <X size={20} />
+            </button>
           </div>
 
-          <Button
-            variant="secondary"
-            className="mt-3 w-full"
-            onClick={logout}
-          >
-            <LogOut
-              size={16}
-              className="mr-2"
-            />
+          {/* =======================================================
+              NAVIGATION
+          ======================================================= */}
 
-            Logout
-          </Button>
+          <nav className="space-y-2">
+
+            {nav.map((item) => {
+
+              const Icon = item.icon;
+
+              const active =
+                pathname === item.href;
+
+              return (
+
+                <Link
+
+                  key={item.href}
+
+                  href={item.href}
+
+                  onClick={() =>
+                    setOpen(false)
+                  }
+
+                  className={cn(
+
+                    `
+                    group
+
+                    relative
+
+                    flex
+                    h-12
+                    items-center
+                    gap-3
+
+                    overflow-hidden
+
+                    rounded-2xl
+
+                    px-4
+
+                    text-sm
+                    font-bold
+
+                    transition-all
+                    duration-300
+                    `,
+
+                    active
+                      ? `
+                        border
+                        border-cyan-400/20
+
+                        bg-[linear-gradient(135deg,rgba(34,211,238,.16),rgba(59,130,246,.12),rgba(124,58,237,.16))]
+
+                        text-white
+
+                        shadow-[0_0_30px_rgba(34,211,238,.12)]
+                      `
+                      : `
+                        text-slate-400
+
+                        hover:border
+                        hover:border-white/10
+
+                        hover:bg-white/[0.04]
+
+                        hover:text-white
+                      `
+                  )}
+                >
+
+                  {active && (
+                    <div
+                      className="
+                      absolute
+                      inset-y-2
+                      left-0
+
+                      w-1
+
+                      rounded-full
+
+                      bg-cyan-300
+                    "
+                    />
+                  )}
+
+                  <Icon
+                    size={18}
+                    className={cn(
+                      active
+                        ? "text-cyan-200"
+                        : "text-slate-500 group-hover:text-cyan-200"
+                    )}
+                  />
+
+                  <span>
+                    {item.label}
+                  </span>
+                </Link>
+              );
+            })}
+          </nav>
+
+          {/* =======================================================
+              USER CARD
+          ======================================================= */}
+
+          <div
+            className="
+            relative
+            mt-auto
+
+            overflow-hidden
+
+            rounded-[28px]
+
+            border
+            border-white/10
+
+            bg-white/[0.04]
+
+            p-4
+
+            backdrop-blur-xl
+          "
+          >
+
+            <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(34,211,238,.08),transparent,rgba(124,58,237,.08))]" />
+
+            <div className="relative z-10">
+
+              <div className="flex items-center gap-3">
+
+                <div
+                  className="
+                  flex
+                  h-12
+                  w-12
+                  items-center
+                  justify-center
+
+                  rounded-2xl
+
+                  bg-[linear-gradient(135deg,#06B6D4,#2563EB)]
+
+                  shadow-[0_0_20px_rgba(34,211,238,.22)]
+                "
+                >
+                  <Shield size={20} />
+                </div>
+
+                <div className="min-w-0 flex-1">
+
+                  <div className="truncate text-sm font-black text-white">
+                    {user?.username}
+                  </div>
+
+                  <div className="truncate text-xs text-slate-400">
+                    {user?.email}
+                  </div>
+                </div>
+              </div>
+
+              <Button
+                variant="secondary"
+                className="mt-4 w-full"
+                onClick={logout}
+              >
+
+                <LogOut
+                  size={16}
+                />
+
+                Logout
+              </Button>
+            </div>
+          </div>
         </div>
       </aside>
 
+      {/* =======================================================
+          MAIN
+      ======================================================= */}
+
       <div className="lg:pl-72">
-        <header className="sticky top-0 z-30 border-b border-white/10 bg-[#020817]/80 backdrop-blur-xl">
-          <div className="flex h-16 items-center justify-between px-4 lg:px-6">
-            <button
-              className="rounded-lg border border-white/10 p-2 lg:hidden"
-              onClick={() =>
-                setOpen(true)
-              }
+
+        {/* =======================================================
+            TOPBAR
+        ======================================================= */}
+
+        <header
+          className="
+          sticky
+          top-0
+          z-40
+
+          border-b
+          border-white/10
+
+          bg-[#030712]/70
+
+          backdrop-blur-2xl
+        "
+        >
+
+          <div className="flex h-20 items-center justify-between px-4 lg:px-8">
+
+            <div className="flex items-center gap-4">
+
+              <button
+
+                className="
+                rounded-2xl
+
+                border
+                border-white/10
+
+                bg-white/[0.04]
+
+                p-3
+
+                transition
+                hover:bg-white/[0.08]
+
+                lg:hidden
+              "
+
+                onClick={() =>
+                  setOpen(true)
+                }
+              >
+                <Menu size={20} />
+              </button>
+
+              <div>
+
+                <div className="text-xs font-black uppercase tracking-[0.32em] text-cyan-200">
+                  FFX ESPORTS
+                </div>
+
+                <div className="mt-1 text-lg font-black text-white">
+                  Admin Command Center
+                </div>
+              </div>
+            </div>
+
+            <div
+              className="
+              hidden
+              items-center
+              gap-3
+
+              rounded-2xl
+
+              border
+              border-white/10
+
+              bg-white/[0.04]
+
+              px-4
+              py-2
+
+              text-sm
+              text-slate-300
+
+              backdrop-blur-xl
+
+              md:flex
+            "
             >
-              <Menu size={20} />
-            </button>
 
-            <div>
-              <div className="text-sm font-bold uppercase tracking-[0.3em] text-blue-200">
-                FFX eSports
-              </div>
+              <div className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_15px_rgba(16,185,129,.9)]" />
 
-              <div className="text-xs text-slate-400">
-                Admin Control Panel
-              </div>
+              System Operational
             </div>
           </div>
         </header>
 
-        <main className="p-4 lg:p-6">
+        {/* =======================================================
+            PAGE CONTENT
+        ======================================================= */}
+
+        <main className="relative z-10 p-4 lg:p-8">
           {children}
         </main>
       </div>
