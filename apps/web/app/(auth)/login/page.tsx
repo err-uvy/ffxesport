@@ -25,7 +25,7 @@ import { z } from "zod";
 import {
   Button,
   Input
-} from "@ffx/ui";
+} from "@/ui";
 
 import {
   apiMessage

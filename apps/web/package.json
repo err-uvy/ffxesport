@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "@ffx/types": "1.0.0",
-    "@ffx/ui": "1.0.0",
-    "@ffx/utils": "1.0.0",
+    "@/ui": "1.0.0",
+    "@/utils": "1.0.0",
     "@hookform/resolvers": "^3.10.0",
     "axios": "^1.7.9",
     "framer-motion": "^11.15.0",

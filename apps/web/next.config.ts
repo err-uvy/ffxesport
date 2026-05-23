@@ -4,7 +4,7 @@ import path from "node:path";
 const nextConfig: NextConfig = {
   output: "standalone",
   outputFileTracingRoot: path.resolve(process.cwd(), "../.."),
-  transpilePackages: ["@ffx/ui", "@ffx/types", "@ffx/utils"],
+  transpilePackages: ["@/ui", "@ffx/types", "@/utils"],
   images: {
     remotePatterns: [
       { protocol: "https", hostname: "images.unsplash.com" },

@@ -20,7 +20,7 @@ import {
   Card,
   Input,
   Textarea
-} from "@ffx/ui";
+} from "@/ui";
 
 import { PageHeader } from "@/components/page-header";
 import { api, apiMessage } from "@/lib/api";

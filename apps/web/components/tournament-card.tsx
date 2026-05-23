@@ -12,9 +12,9 @@ import {
   Button,
   Card,
   Progress
-} from "@ffx/ui";
+} from "@/ui";
 
-import { formatMoney } from "@ffx/utils";
+import { formatMoney } from "@/utils";
 
 export type Tournament = {
   id: string;

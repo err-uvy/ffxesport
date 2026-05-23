@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { Card } from "@ffx/ui";
+import { Card } from "@/ui";
 
 export function EmptyState({
   icon: Icon,

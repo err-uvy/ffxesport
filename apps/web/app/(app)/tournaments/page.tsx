@@ -20,7 +20,7 @@ import { toast } from "sonner";
 import {
   Button,
   Skeleton
-} from "@ffx/ui";
+} from "@/ui";
 
 import { EmptyState } from "@/components/empty-state";
 

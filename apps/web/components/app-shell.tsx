@@ -37,7 +37,7 @@ import {
 import {
   Button,
   cn
-} from "@ffx/ui";
+} from "@/ui";
 
 import {
   ParticleField

@@ -21,11 +21,11 @@ import {
   Card,
   Progress,
   Skeleton
-} from "@ffx/ui";
+} from "@/ui";
 
 import { toast } from "sonner";
 
-import { formatMoney } from "@ffx/utils";
+import { formatMoney } from "@/utils";
 
 import { PageHeader } from "@/components/page-header";
 

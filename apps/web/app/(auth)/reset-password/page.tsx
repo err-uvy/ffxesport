@@ -37,7 +37,7 @@ import {
 import {
   Button,
   Input
-} from "@ffx/ui";
+} from "@/ui";
 
 import {
   api,

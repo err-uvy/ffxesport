@@ -18,7 +18,7 @@ import {
   Button,
   Card,
   Input
-} from "@ffx/ui";
+} from "@/ui";
 
 import { EmptyState } from "@/components/empty-state";
 import { api, apiMessage } from "@/lib/api";

@@ -13,7 +13,7 @@ import {
 import {
   Button,
   Card,
-} from "@ffx/ui";
+} from "@/ui";
 
 import { EmptyState } from "@/components/empty-state";
 import { api } from "@/lib/api";

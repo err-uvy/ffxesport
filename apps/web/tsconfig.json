@@ -16,10 +16,11 @@
       }
     ],
     "paths": {
-      "@/*": [
-        "./*"
-      ]
-    },
+  "@/*": ["./*"],
+  "@/ui": ["./ui/src"],
+  "@/utils": ["./utils/src"],
+  "@/types": ["./types"]
+},
     "allowJs": true,
     "isolatedModules": true
   },
