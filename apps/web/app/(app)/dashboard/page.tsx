@@ -9,7 +9,7 @@ import {
 } from "lucide-react";
 
 import { Card, Skeleton } from "@/ui";
-import { formatMoney } from "@ffx/utils";
+import { formatMoney } from "@/utils";
 
 import { MetricCard } from "@/components/metric-card";
 import { MiniChart } from "@/components/mini-chart";

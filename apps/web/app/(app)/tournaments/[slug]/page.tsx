@@ -25,7 +25,7 @@ import {
 
 import { toast } from "sonner";
 
-import { formatMoney } from "@ffx/utils";
+import { formatMoney } from "@/utils";
 
 import { PageHeader } from "@/components/page-header";
 

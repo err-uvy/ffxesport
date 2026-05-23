@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Crown } from "lucide-react";
 
 import { Button, Card } from "@/ui";
-import { formatMoney } from "@ffx/utils";
+import { formatMoney } from "@/utils";
 
 import { EmptyState } from "@/components/empty-state";
 import { api } from "@/lib/api";

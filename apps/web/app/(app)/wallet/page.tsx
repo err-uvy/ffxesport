@@ -25,7 +25,7 @@ import {
   Input
 } from "@/ui";
 
-import { formatMoney } from "@ffx/utils";
+import { formatMoney } from "@/utils";
 
 import { MetricCard } from "@/components/metric-card";
 
