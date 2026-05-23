@@ -1,7 +1,7 @@
 import multer from "multer";
 import { Router } from "express";
 import { z } from "zod";
-import { scoreBattleRoyale } from "@ffx/utils";
+import { scoreBattleRoyale } from "@/utils";
 import { audit } from "../lib/audit";
 import { ApiError, asyncHandler } from "../lib/errors";
 import { prisma } from "../lib/prisma";

@@ -1,5 +1,5 @@
 import type { NextFunction, Request, Response } from "express";
-import { fingerprintRiskScore } from "@ffx/utils";
+import { fingerprintRiskScore } from "@/utils";
 import { prisma } from "../lib/prisma";
 
 export async function trackDevice(req: Request, _res: Response, next: NextFunction) {
