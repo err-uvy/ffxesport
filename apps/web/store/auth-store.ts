@@ -1,7 +1,7 @@
 "use client";
 
 import { create } from "zustand";
-import type { SafeUser } from "@ffx/types";
+import type { SafeUser } from "@/types";
 import { api } from "@/lib/api";
 import { getDeviceFingerprint } from "@/lib/device";
 
