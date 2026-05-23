@@ -24,7 +24,7 @@ import {
 
 import {
   formatMoney
-} from "@/utils";
+} from "@ffx/utils";
 
 import {
   MetricCard

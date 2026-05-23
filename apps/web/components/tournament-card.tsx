@@ -14,7 +14,7 @@ import {
   Progress
 } from "@/ui";
 
-import { formatMoney } from "@/utils";
+import { formatMoney } from "@ffx/utils";
 
 export type Tournament = {
   id: string;
