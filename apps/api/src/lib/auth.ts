@@ -131,16 +131,11 @@ export function setAuthCookies(
   refreshToken: string
 ) {
 
-  // IMPORTANT:
-  // localhost frontend + render backend
-  // needs lax + secure false
-
-  const cookieBase = {
+  const cookieOptions = {
     httpOnly: true,
-    secure: false,
-    sameSite: "lax" as const,
-    path: "/",
-    domain: undefined
+    secure: true,
+    sameSite: "none" as const,
+    path: "/"
   };
 
   // ACCESS TOKEN
@@ -148,11 +143,8 @@ export function setAuthCookies(
     "ffx_access",
     accessToken,
     {
-      ...cookieBase,
-      maxAge:
-        15 *
-        60 *
-        1000
+      ...cookieOptions,
+      maxAge: 15 * 60 * 1000
     }
   );
 
@@ -161,7 +153,7 @@ export function setAuthCookies(
     "ffx_refresh",
     refreshToken,
     {
-      ...cookieBase,
+      ...cookieOptions,
       maxAge:
         env.REFRESH_TOKEN_TTL_DAYS *
         24 *
@@ -176,10 +168,9 @@ export function setAuthCookies(
     "ffx_csrf",
     crypto.randomUUID(),
     {
-      secure: false,
-      sameSite: "lax",
+      secure: true,
+      sameSite: "none",
       path: "/",
-      domain: undefined,
       maxAge:
         24 *
         60 *
