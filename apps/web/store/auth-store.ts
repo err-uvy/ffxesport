@@ -33,16 +33,26 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     }
   },
   async login(email, password, rememberMe) {
-    const response = await api.post("/auth/login", {
-      email,
-      password,
-      rememberMe,
-      deviceFingerprint: getDeviceFingerprint()
-    });
-    const user = response.data.data as SafeUser;
-    set({ user, loaded: true });
-    return user;
-  },
+
+  await api.post("/auth/login", {
+    email,
+    password,
+    rememberMe,
+    deviceFingerprint: getDeviceFingerprint()
+  });
+
+  const meResponse = await api.get("/auth/me");
+
+  const user = meResponse.data.data as SafeUser;
+
+  set({
+    user,
+    loaded: true,
+    loading: false
+  });
+
+  return user;
+},
   async register(input) {
     const response = await api.post("/auth/register", {
       ...input,

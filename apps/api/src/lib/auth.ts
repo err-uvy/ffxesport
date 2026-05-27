@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import type { Response } from "express";
 import type { RoleName, User } from "@prisma/client";
-import { env, isProduction } from "../config/env";
+import { env } from "../config/env";
 
 export type TokenPayload = {
   sub: string;
@@ -23,15 +23,22 @@ export function verifyPassword(password: string, hash: string) {
 }
 
 export function sha256(value: string) {
-  return crypto.createHash("sha256").update(value).digest("hex");
+  return crypto
+    .createHash("sha256")
+    .update(value)
+    .digest("hex");
 }
 
 export function randomToken(bytes = 32) {
-  return crypto.randomBytes(bytes).toString("hex");
+  return crypto
+    .randomBytes(bytes)
+    .toString("hex");
 }
 
 export function generateOtp() {
-  return String(crypto.randomInt(100000, 999999));
+  return String(
+    crypto.randomInt(100000, 999999)
+  );
 }
 
 export function signAccessToken(input: {
@@ -46,9 +53,14 @@ export function signAccessToken(input: {
     type: "access"
   };
 
-  return jwt.sign(payload, env.JWT_ACCESS_SECRET, {
-    expiresIn: env.ACCESS_TOKEN_TTL as jwt.SignOptions["expiresIn"]
-  });
+  return jwt.sign(
+    payload,
+    env.JWT_ACCESS_SECRET,
+    {
+      expiresIn:
+        env.ACCESS_TOKEN_TTL as jwt.SignOptions["expiresIn"]
+    }
+  );
 }
 
 export function signRefreshToken(input: {
@@ -63,9 +75,13 @@ export function signRefreshToken(input: {
     type: "refresh"
   };
 
-  return jwt.sign(payload, env.JWT_REFRESH_SECRET, {
-    expiresIn: `${env.REFRESH_TOKEN_TTL_DAYS}d`
-  });
+  return jwt.sign(
+    payload,
+    env.JWT_REFRESH_SECRET,
+    {
+      expiresIn: `${env.REFRESH_TOKEN_TTL_DAYS}d`
+    }
+  );
 }
 
 export function verifyAccessToken(token: string) {
@@ -75,7 +91,9 @@ export function verifyAccessToken(token: string) {
   ) as TokenPayload;
 
   if (payload.type !== "access") {
-    throw new Error("Invalid access token");
+    throw new Error(
+      "Invalid access token"
+    );
   }
 
   return payload;
@@ -88,7 +106,9 @@ export function verifyRefreshToken(token: string) {
   ) as TokenPayload;
 
   if (payload.type !== "refresh") {
-    throw new Error("Invalid refresh token");
+    throw new Error(
+      "Invalid refresh token"
+    );
   }
 
   return payload;
@@ -110,56 +130,88 @@ export function setAuthCookies(
   accessToken: string,
   refreshToken: string
 ) {
-  const cookieBase: {
-    httpOnly: boolean;
-    secure: boolean;
-    sameSite: "none" | "lax";
-    path: string;
-  } = {
+
+  // IMPORTANT:
+  // localhost frontend + render backend
+  // needs lax + secure false
+
+  const cookieBase = {
     httpOnly: true,
-    secure: isProduction,
-    sameSite: isProduction ? "none" : "lax",
-    path: "/"
+    secure: false,
+    sameSite: "lax" as const,
+    path: "/",
+    domain: undefined
   };
 
   // ACCESS TOKEN
-  res.cookie("ffx_access", accessToken, {
-    ...cookieBase,
-    maxAge: 15 * 60 * 1000
-  });
+  res.cookie(
+    "ffx_access",
+    accessToken,
+    {
+      ...cookieBase,
+      maxAge:
+        15 *
+        60 *
+        1000
+    }
+  );
 
   // REFRESH TOKEN
-  res.cookie("ffx_refresh", refreshToken, {
-    ...cookieBase,
-    maxAge:
-      env.REFRESH_TOKEN_TTL_DAYS *
-      24 *
-      60 *
-      60 *
-      1000
-  });
+  res.cookie(
+    "ffx_refresh",
+    refreshToken,
+    {
+      ...cookieBase,
+      maxAge:
+        env.REFRESH_TOKEN_TTL_DAYS *
+        24 *
+        60 *
+        60 *
+        1000
+    }
+  );
 
   // CSRF TOKEN
-  res.cookie("ffx_csrf", crypto.randomUUID(), {
-    secure: isProduction,
-    sameSite: (isProduction ? "none" : "lax") as "none" | "lax",
-    path: "/",
-    maxAge: 24 * 60 * 60 * 1000
-  });
+  res.cookie(
+    "ffx_csrf",
+    crypto.randomUUID(),
+    {
+      secure: false,
+      sameSite: "lax",
+      path: "/",
+      domain: undefined,
+      maxAge:
+        24 *
+        60 *
+        60 *
+        1000
+    }
+  );
 }
 
-export function clearAuthCookies(res: Response) {
-  res.clearCookie("ffx_access", {
-    path: "/"
-  });
+export function clearAuthCookies(
+  res: Response
+) {
+  res.clearCookie(
+    "ffx_access",
+    {
+      path: "/"
+    }
+  );
 
-  res.clearCookie("ffx_refresh", {
-    path: "/"
-  });
+  res.clearCookie(
+    "ffx_refresh",
+    {
+      path: "/"
+    }
+  );
 
-  res.clearCookie("ffx_csrf", {
-    path: "/"
-  });
+  res.clearCookie(
+    "ffx_csrf",
+    {
+      path: "/"
+    }
+  );
 }
 
 export function safeUser(
@@ -178,10 +230,12 @@ export function safeUser(
     avatarUrl: user.avatarUrl,
     bio: user.bio,
     status: user.status,
-    emailVerified: user.emailVerified,
+    emailVerified:
+      user.emailVerified,
     roles:
       user.roles?.map(
-        (entry) => entry.role.name
+        (entry) =>
+          entry.role.name
       ) ?? []
   };
 }
