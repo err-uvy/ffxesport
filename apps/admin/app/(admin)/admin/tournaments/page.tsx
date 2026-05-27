@@ -14,7 +14,7 @@ import {
   Input
 } from "@/ui";
 
-import { formatMoney } from "@ffx/utils";
+import { formatMoney } from "@/utils";
 
 import {
   CalendarDays,

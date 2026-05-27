@@ -25,7 +25,7 @@ import {
 
 import {
   formatMoney
-} from "@ffx/utils";
+} from "@/utils";
 
 import {
   PageHeader
