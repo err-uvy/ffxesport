@@ -6,7 +6,7 @@ import { ApiError, asyncHandler } from "../lib/errors";
 import { prisma } from "../lib/prisma";
 import { emitRealtime } from "../lib/realtime";
 import { uploadBuffer } from "../lib/storage";
-import { scoreBattleRoyale } from "../../utils";
+import { scoreBattleRoyale } from "../../utils/src";
 const router = Router();
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 8 * 1024 * 1024 } });
 
