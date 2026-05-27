@@ -79,20 +79,17 @@ export default function LoginPage() {
   ) {
 
     try {
-
       await login(
-        values.email,
-        values.password,
-        values.rememberMe
-      );
+  values.email,
+  values.password,
+  values.rememberMe
+);
 
-      toast.success(
-        "Welcome back to FFX ESPORTS"
-      );
+toast.success(
+  "Welcome back to FFX ESPORTS"
+);
 
-      router.replace(
-        "/dashboard"
-      );
+window.location.href = "/dashboard";
 
     } catch (error) {
 
