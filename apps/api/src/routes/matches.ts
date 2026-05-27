@@ -1,13 +1,12 @@
 import multer from "multer";
 import { Router } from "express";
 import { z } from "zod";
-import { scoreBattleRoyale } from "@ffx/utils";
 import { audit } from "../lib/audit";
 import { ApiError, asyncHandler } from "../lib/errors";
 import { prisma } from "../lib/prisma";
 import { emitRealtime } from "../lib/realtime";
 import { uploadBuffer } from "../lib/storage";
-
+import { scoreBattleRoyale } from "../../utils";
 const router = Router();
 const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 8 * 1024 * 1024 } });
 

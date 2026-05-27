@@ -1,7 +1,6 @@
 import { Game, PrismaClient, RoleName } from "@prisma/client";
-import { buildTournamentCode, calculatePrizeDistribution, slugify } from "@ffx/utils";
 import { hashPassword } from "../src/lib/auth";
-
+import { buildTournamentCode, calculatePrizeDistribution, slugify } from "../utils";
 const prisma = new PrismaClient();
 
 const permissions = [

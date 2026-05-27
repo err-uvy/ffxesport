@@ -1,7 +1,6 @@
 import type { NextFunction, Request, Response } from "express";
-import { fingerprintRiskScore } from "@ffx/utils";
 import { prisma } from "../lib/prisma";
-
+import { fingerprintRiskScore } from "../../utils";
 export async function trackDevice(req: Request, _res: Response, next: NextFunction) {
   try {
     if (!req.user) return next();

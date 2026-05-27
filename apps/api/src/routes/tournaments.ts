@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { Game, Prisma, TournamentMode, TournamentStatus } from "@prisma/client";
 import { z } from "zod";
-import { buildTournamentCode, calculatePrizeDistribution, slugify } from "@ffx/utils";
+import { buildTournamentCode, calculatePrizeDistribution, slugify } from "../../utils";
 import { adminLog, audit } from "../lib/audit";
 import { ApiError, asyncHandler } from "../lib/errors";
 import { cacheJson, invalidateCache } from "../lib/redis";
