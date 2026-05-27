@@ -159,16 +159,18 @@ function csrfProtection(
       .randomBytes(32)
       .toString("hex");
 
-    res.cookie(
-      "ffx_csrf",
-      token,
-      {
-        httpOnly: false,
-        secure: true,
-        sameSite: "none",
-        path: "/"
-      }
-    );
+      res.cookie(
+  "ffx_csrf",
+  token,
+  {
+    httpOnly: false,
+    secure: isProduction,
+    sameSite: isProduction
+      ? "none"
+      : "lax",
+    path: "/"
+  }
+);
   }
 
   // SAFE METHODS

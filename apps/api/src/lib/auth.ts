@@ -183,23 +183,28 @@ export function setAuthCookies(
 export function clearAuthCookies(
   res: Response
 ) {
+  const cookieOptions = {
+    httpOnly: true,
+    secure: true,
+    sameSite: "none" as const,
+    path: "/"
+  };
+
   res.clearCookie(
     "ffx_access",
-    {
-      path: "/"
-    }
+    cookieOptions
   );
 
   res.clearCookie(
     "ffx_refresh",
-    {
-      path: "/"
-    }
+    cookieOptions
   );
 
   res.clearCookie(
     "ffx_csrf",
     {
+      secure: true,
+      sameSite: "none",
       path: "/"
     }
   );
