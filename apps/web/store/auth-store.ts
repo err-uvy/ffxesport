@@ -19,6 +19,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   user: null,
   loading: false,
   loaded: false,
+
   async loadMe() {
     if (get().loading) return get().user;
     set({ loading: true });
@@ -28,31 +29,27 @@ export const useAuthStore = create<AuthState>((set, get) => ({
       set({ user, loading: false, loaded: true });
       return user;
     } catch {
+      // 401 = not logged in, not an error worth showing
       set({ user: null, loading: false, loaded: true });
       return null;
     }
   },
+
   async login(email, password, rememberMe) {
+    // ✅ Use login response directly — avoids a second /auth/me
+    // call where the cookie may not yet be available
+    const response = await api.post("/auth/login", {
+      email,
+      password,
+      rememberMe,
+      deviceFingerprint: getDeviceFingerprint()
+    });
 
-  await api.post("/auth/login", {
-    email,
-    password,
-    rememberMe,
-    deviceFingerprint: getDeviceFingerprint()
-  });
+    const user = response.data.data as SafeUser;
+    set({ user, loaded: true, loading: false });
+    return user;
+  },
 
-  const meResponse = await api.get("/auth/me");
-
-  const user = meResponse.data.data as SafeUser;
-
-  set({
-    user,
-    loaded: true,
-    loading: false
-  });
-
-  return user;
-},
   async register(input) {
     const response = await api.post("/auth/register", {
       ...input,
@@ -62,6 +59,7 @@ export const useAuthStore = create<AuthState>((set, get) => ({
     set({ user, loaded: true });
     return user;
   },
+
   async logout() {
     await api.post("/auth/logout");
     set({ user: null, loaded: true });
