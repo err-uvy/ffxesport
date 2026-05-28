@@ -20,20 +20,59 @@ export const useAuthStore = create<AuthState>((set, get) => ({
   loading: false,
   loaded: false,
 
+
   async loadMe() {
-    if (get().loading) return get().user;
-    set({ loading: true });
-    try {
-      const response = await api.get("/auth/me");
-      const user = response.data.data as SafeUser;
-      set({ user, loading: false, loaded: true });
-      return user;
-    } catch {
-      // 401 = not logged in, not an error worth showing
-      set({ user: null, loading: false, loaded: true });
+
+  if (get().loading) {
+    return get().user;
+  }
+
+  set({
+    loading: true
+  });
+
+  try {
+
+    const response =
+      await api.get("/auth/me");
+
+    const user =
+      response.data.data as SafeUser;
+
+    set({
+      user,
+      loading: false,
+      loaded: true
+    });
+
+    return user;
+
+  } catch (error: any) {
+
+    // Ignore auth timing issues
+    if (
+      error?.response?.status === 401
+    ) {
+
+      set({
+        user: null,
+        loading: false,
+        loaded: true
+      });
+
       return null;
     }
-  },
+
+    console.error(error);
+
+    set({
+      loading: false,
+      loaded: true
+    });
+
+    return null;
+  }
+},
 
   async login(email, password, rememberMe) {
     // ✅ Use login response directly — avoids a second /auth/me

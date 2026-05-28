@@ -7,7 +7,8 @@ import {
   Swords,
   Trophy,
 } from "lucide-react";
-
+import { useRouter } from "next/navigation";
+import { useAuthStore } from "@/store/auth-store";
 import { Card, Skeleton } from "@/ui";
 import { formatMoney } from "@/utils";
 
@@ -50,21 +51,72 @@ export default function DashboardPage() {
   });
 
   const [loading, setLoading] = useState(true);
+  const router = useRouter();
 
-  useEffect(() => {
-    Promise.all([
-      api.get("/profile"),
-      api.get("/tournaments?status=REGISTRATION_OPEN&pageSize=3"),
-    ])
-      .then(([profile, tournaments]) => {
-        setData({
-          profile: profile.data.data,
-          tournaments: tournaments.data.data,
-        });
-      })
-      .finally(() => setLoading(false));
-  }, []);
+const {
+  user,
+  loaded,
+  loadMe
+} = useAuthStore();
+useEffect(() => {
 
+  async function init() {
+
+    try {
+
+      const currentUser =
+        await loadMe();
+
+      if (!currentUser) {
+
+        router.push("/login");
+        return;
+      }
+
+      const results =
+        await Promise.allSettled([
+
+          api.get("/profile"),
+
+          api.get(
+            "/tournaments?status=REGISTRATION_OPEN&pageSize=3"
+          )
+
+        ]);
+
+      const profile =
+        results[0];
+
+      const tournaments =
+        results[1];
+
+      setData({
+
+        profile:
+          profile.status === "fulfilled"
+            ? profile.value.data.data
+            : undefined,
+
+        tournaments:
+          tournaments.status === "fulfilled"
+            ? tournaments.value.data.data
+            : []
+
+      });
+
+    } catch (error) {
+
+      console.error(error);
+
+    } finally {
+
+      setLoading(false);
+    }
+  }
+
+  init();
+
+}, [loadMe, router]);
   const wallet = data.profile?.user.wallet;
 
   return (
