@@ -47,21 +47,18 @@ export function TournamentCard({
   return (
 
     <Card
-      className="
-        group
-        relative
-        overflow-hidden
-        rounded-[30px]
-        border
-        border-white/10
-        bg-[#081120]/80
-        backdrop-blur-2xl
-        transition-all
-        duration-300
-        hover:-translate-y-1
-        hover:border-cyan-400/20
-        hover:shadow-[0_0_50px_rgba(34,211,238,.12)]
-      "
+className="
+glass-panel
+gradient-border
+group
+relative
+overflow-hidden
+rounded-[30px]
+transition-all
+duration-300
+hover:-translate-y-1
+hover:shadow-[0_0_40px_rgba(0,229,255,.12)]
+"
     >
 
       {/* BACKGROUND GRID */}
@@ -97,7 +94,19 @@ export function TournamentCard({
           to-transparent
         "
       />
-
+      <div
+  className="
+    pointer-events-none
+    absolute
+    -left-10
+    bottom-0
+    h-40
+    w-40
+    rounded-full
+    bg-violet-500/10
+    blur-[90px]
+  "
+/>
       {/* HERO IMAGE */}
 
       <div
@@ -150,9 +159,9 @@ export function TournamentCard({
             absolute
             inset-0
             bg-gradient-to-t
-            from-[#081120]
-            via-transparent
-            to-transparent
+from-[#050816]
+via-[#050816]/40
+to-transparent
           "
         />
 
@@ -203,15 +212,16 @@ export function TournamentCard({
         >
 
           <h3
-            className="
-              text-2xl
-              font-black
-              leading-tight
-              text-white
-            "
-          >
-            {tournament.title}
-          </h3>
+  className="
+    font-display
+    text-2xl
+    font-bold
+    leading-tight
+    text-white
+  "
+>
+  {tournament.title}
+</h3>
 
           <div
             className="
@@ -222,7 +232,7 @@ export function TournamentCard({
               text-xs
               uppercase
               tracking-[0.22em]
-              text-cyan-300
+              text-white
             "
           >
 
@@ -242,14 +252,13 @@ export function TournamentCard({
       </div>
 
       {/* CONTENT */}
-
-      <div
-        className="
-          relative
-          z-10
-          p-4
-        "
-      >
+<div
+  className="
+    relative
+    z-10
+    p-5
+  "
+>
 
         {/* STATS */}
 
@@ -289,7 +298,7 @@ export function TournamentCard({
             icon={Users}
             label="Players"
             value={`${tournament.filledSlots}/${tournament.maxSlots}`}
-            iconColor="text-cyan-300"
+            iconColor="text-white"
           />
 
           <StatBox
@@ -316,7 +325,7 @@ export function TournamentCard({
               font-bold
               uppercase
               tracking-[0.18em]
-              text-slate-400
+              text-cyan-200/60
             "
           >
             <span>Slot Fill</span>
@@ -351,32 +360,31 @@ export function TournamentCard({
           >
             Join Now
           </Button>
-
-          <Link
-            href={`/tournaments/${tournament.slug}`}
-
-            className="
-              inline-flex
-              h-11
-              flex-1
-              items-center
-              justify-center
-              rounded-xl
-              border
-              border-white/10
-              bg-white/[0.04]
-              px-4
-              text-sm
-              font-bold
-              text-white
-              transition-all
-              duration-300
-              hover:border-cyan-400/30
-              hover:bg-cyan-400/[0.08]
-            "
-          >
-            View Details
-          </Link>
+            <Link
+  href={`/tournaments/${tournament.slug}`}
+  className="
+    inline-flex
+    h-11
+    flex-1
+    items-center
+    justify-center
+    rounded-xl
+    border
+    border-cyan-400/15
+    bg-cyan-400/[0.05]
+    px-4
+    text-sm
+    font-semibold
+    text-cyan-200
+    transition-all
+    duration-300
+    hover:border-cyan-400/35
+    hover:bg-cyan-400/[0.10]
+  "
+>
+  View Details
+</Link>
+      
         </div>
       </div>
     </Card>
@@ -394,20 +402,14 @@ function StatBox({
   value: string;
   iconColor: string;
 }) {
-
   return (
-
     <div
       className="
+        glass-panel
         rounded-2xl
-        border
-        border-white/10
-        bg-white/[0.03]
         p-4
-        backdrop-blur-xl
       "
     >
-
       <div
         className="
           flex
@@ -415,33 +417,36 @@ function StatBox({
           gap-2
         "
       >
-
         <Icon
           size={16}
           className={iconColor}
         />
 
-        <span
-          className="
-            text-[11px]
-            font-bold
-            uppercase
-            tracking-[0.18em]
-            text-slate-500
-          "
+       
+         <span
+  className="
+    font-display
+    text-[11px]
+    font-semibold
+    uppercase
+    tracking-[0.18em]
+    text-cyan-200/60
+  "
+
         >
           {label}
         </span>
       </div>
 
       <div
-        className="
-          mt-3
-          text-lg
-          font-black
-          text-white
-        "
-      >
+  className="
+    font-display
+    mt-3
+    text-lg
+    font-bold
+    text-white
+  "
+>
         {value}
       </div>
     </div>

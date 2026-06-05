@@ -159,7 +159,7 @@ export default function AdminLoginPage() {
 
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(0,229,255,.14),transparent_28%),radial-gradient(circle_at_top_right,rgba(255,0,128,.12),transparent_24%),radial-gradient(circle_at_bottom,rgba(124,58,237,.15),transparent_32%)]" />
 
-      <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/10 blur-3xl" />
+      <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl" />
 
       {/* ================================= */}
       {/* LOGIN CARD */}

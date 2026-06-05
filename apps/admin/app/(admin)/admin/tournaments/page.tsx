@@ -533,7 +533,7 @@ export default function AdminTournamentsPage() {
               transition-all
               duration-300
 
-              hover:border-cyan-400/20
+              hover:border-white/5
             "
             >
 
@@ -711,7 +711,7 @@ function Stat({
       transition-all
       duration-300
 
-      hover:border-cyan-400/20
+      hover:border-white/5
       hover:bg-cyan-400/[0.04]
     "
     >

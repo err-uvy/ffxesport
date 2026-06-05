@@ -120,23 +120,20 @@ useEffect(() => {
   const wallet = data.profile?.user.wallet;
 
   return (
-    <div className="main-container">
+    <div className="relative min-h-screen">
+  <div className="pointer-events-none absolute inset-0 grid-fade" />
+  <div className="main-container relative z-10">
 
       {/* HEADER */}
 
-      <div className="mb-10">
-        <p className="text-sm font-medium tracking-widest text-zinc-500 uppercase">
-          Live Ecosystem
-        </p>
-
-        <h1 className="mt-3 text-5xl font-bold tracking-tight text-white">
-          Dashboard
-        </h1>
-
-        <p className="mt-3 max-w-2xl text-zinc-400">
-          Secure tournaments, squads, wallets, and competitive match operations.
-        </p>
-      </div>
+      <PageHeader
+  eyebrow="COMPETE • DOMINATE • RISE"
+  title="Dashboard"
+>
+  <div className="rounded-full border border-white/5 bg-primary/10 px-4 py-2 text-sm font-medium text-white">
+    LIVE
+  </div>
+</PageHeader>
 
       {/* METRICS */}
 
@@ -145,7 +142,7 @@ useEffect(() => {
           {Array.from({ length: 4 }).map((_, index) => (
             <Skeleton
               key={index}
-              className="h-28 rounded-3xl"
+              className="skeleton h-28 rounded-3xl"
             />
           ))}
         </div>
@@ -192,13 +189,13 @@ useEffect(() => {
       <div className="mt-8 grid gap-6 xl:grid-cols-[1.4fr_.8fr]">
 
         {/* EARNINGS */}
-
-        <Card className="premium-card p-7">
+        <Card className="premium-card glass-panel gradient-border p-7">
+        
 
           <div className="mb-8 flex items-center justify-between">
 
             <div>
-              <p className="text-sm font-medium uppercase tracking-widest text-zinc-500">
+              <p className="text-sm font-medium uppercase tracking-widest text-cyan-200/60">
                 Analytics
               </p>
 
@@ -211,7 +208,7 @@ useEffect(() => {
               </p>
             </div>
 
-            <div className="rounded-full border border-blue-500/20 bg-blue-500/10 px-4 py-2 text-sm font-medium text-blue-400">
+            <div className="rounded-full border border-white/5 bg-primary/10 px-4 py-2 text-sm font-medium text-white">
               Live
             </div>
           </div>
@@ -223,9 +220,9 @@ useEffect(() => {
 
         {/* ACHIEVEMENTS */}
 
-        <Card className="premium-card p-7">
+        <Card className="premium-card glass-panel gradient-border p-7">
 
-          <p className="text-sm font-medium uppercase tracking-widest text-zinc-500">
+          <p className="text-sm font-medium uppercase tracking-widest text-cyan-200/60">
             Recognition
           </p>
 
@@ -240,15 +237,13 @@ useEffect(() => {
                 <div
                   key={achievement}
                   className="
-                    rounded-2xl
-                    border
-                    border-white/5
-                    bg-[#151515]
-                    px-4
-                    py-3
-                    text-sm
-                    font-medium
-                    text-zinc-200
+                    glass-panel
+rounded-2xl
+px-4
+py-3
+text-sm
+font-medium
+text-slate-200
                   "
                 >
                   {achievement}
@@ -270,7 +265,7 @@ useEffect(() => {
             Open Slots
           </p>
 
-          <h2 className="mt-1 text-5xl font-bold tracking-tight text-white">
+          <h2 className="font-display mt-1 text-5xl font-bold tracking-tight text-white">
             Upcoming Tournaments
           </h2>
         </div>
@@ -287,5 +282,7 @@ useEffect(() => {
         </div>
       </div>
     </div>
+    </div>
+
   );
 }

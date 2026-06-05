@@ -1,4 +1,5 @@
 import type { LucideIcon } from "lucide-react";
+
 import { Card } from "@/ui";
 
 export function EmptyState({
@@ -17,33 +18,24 @@ export function EmptyState({
       className="
         relative
         overflow-hidden
-        rounded-[28px]
+        rounded-[32px]
         border
-        border-white/10
-        bg-[#081120]/80
+        border-white/[0.06]
+        bg-[#0B0F19]
         p-8
-        backdrop-blur-2xl
+        shadow-[0_10px_60px_rgba(0,0,0,0.45)]
       "
     >
 
-      {/* BACKGROUND GLOW */}
+      {/* BACKGROUND */}
 
       <div
         className="
           absolute
-          left-1/2
-          top-1/2
-          h-[260px]
-          w-[260px]
-          -translate-x-1/2
-          -translate-y-1/2
-          rounded-full
-          bg-cyan-500/[0.06]
-          blur-[90px]
+          inset-0
+          bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.10),transparent_45%)]
         "
       />
-
-      {/* GRID */}
 
       <div
         className="
@@ -54,11 +46,11 @@ export function EmptyState({
         style={{
           backgroundImage:
             `
-            linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px)
-          `,
+              linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px)
+            `,
           backgroundSize:
-            "36px 36px"
+            "42px 42px"
         }}
       />
 
@@ -69,7 +61,7 @@ export function EmptyState({
           relative
           z-10
           flex
-          min-h-[320px]
+          min-h-[340px]
           flex-col
           items-center
           justify-center
@@ -79,61 +71,75 @@ export function EmptyState({
 
         {/* ICON */}
 
-        <div
-          className="
-            relative
-            mb-6
-          "
-        >
+        <div className="relative mb-8">
 
-          {/* OUTER GLOW */}
+          {/* GLOW */}
 
           <div
             className="
               absolute
               inset-0
-              rounded-3xl
-              bg-cyan-400/20
-              blur-2xl
+              rounded-[30px]
+              bg-blue-500/20
+              blur-3xl
             "
           />
 
-          {/* ICON BOX */}
+          {/* BOX */}
 
           <div
             className="
               relative
               flex
-              h-20
-              w-20
+              h-24
+              w-24
               items-center
               justify-center
-              rounded-[24px]
+              rounded-[28px]
               border
-              border-cyan-400/20
+              border-white/[0.08]
               bg-gradient-to-br
-              from-cyan-400/15
-              via-blue-500/10
-              to-purple-500/15
-              shadow-[0_0_35px_rgba(34,211,238,.15)]
-              backdrop-blur-xl
+              from-[#131A2A]
+              to-[#0F172A]
+              shadow-[0_0_40px_rgba(37,99,235,0.18)]
             "
           >
 
             <Icon
-              size={34}
+              size={38}
               className="
-                text-cyan-300
+                text-blue-400
               "
             />
           </div>
+        </div>
+
+        {/* EYEBROW */}
+
+        <div
+          className="
+            rounded-full
+            border
+            border-blue-500/20
+            bg-blue-500/10
+            px-4
+            py-2
+            text-[11px]
+            font-bold
+            uppercase
+            tracking-[0.35em]
+            text-blue-300
+          "
+        >
+          FFX ESPORTS
         </div>
 
         {/* TITLE */}
 
         <h3
           className="
-            text-2xl
+            mt-6
+            text-3xl
             font-black
             tracking-tight
             text-white
@@ -147,26 +153,50 @@ export function EmptyState({
         <p
           className="
             mt-4
-            max-w-lg
+            max-w-xl
             text-sm
             leading-8
-            text-slate-400
+            text-zinc-400
           "
         >
           {body}
         </p>
 
-        {/* BOTTOM LINE */}
+        {/* ACTION HINT */}
+
+        <div
+          className="
+            mt-8
+            inline-flex
+            items-center
+            gap-2
+            rounded-full
+            border
+            border-white/[0.06]
+            bg-[#111827]
+            px-5
+            py-3
+            text-xs
+            font-semibold
+            uppercase
+            tracking-[0.2em]
+            text-zinc-500
+          "
+        >
+          Waiting For Activity
+        </div>
+
+        {/* LINE */}
 
         <div
           className="
             mt-8
             h-[2px]
-            w-28
+            w-32
             rounded-full
             bg-gradient-to-r
             from-transparent
-            via-cyan-400/70
+            via-blue-500
             to-transparent
           "
         />

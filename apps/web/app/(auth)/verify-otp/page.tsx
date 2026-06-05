@@ -8,10 +8,7 @@ import {
 
 import {
   BadgeCheck,
-  Mail,
   ShieldCheck,
-  Sparkles,
-  Send,
   TimerReset
 } from "lucide-react";
 
@@ -132,93 +129,18 @@ export default function VerifyOtpPage() {
 
     <div
       className="
-        relative
         min-h-screen
-        overflow-hidden
-        bg-[#050816]
+        bg-background
+        text-white
       "
     >
 
-      {/* BACKGROUND */}
-
       <div
         className="
-          absolute
-          inset-0
-          opacity-20
-        "
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&w=1600&q=80')",
-          backgroundSize:
-            "cover",
-          backgroundPosition:
-            "center"
-        }}
-      />
-
-      <div
-        className="
-          absolute
-          inset-0
-          bg-gradient-to-br
-          from-[#050816]
-          via-[#050816]/90
-          to-black
-        "
-      />
-
-      <div
-        className="
-          absolute
-          inset-0
-          opacity-[0.05]
-        "
-        style={{
-          backgroundImage:
-            `
-            linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px)
-          `,
-          backgroundSize:
-            "42px 42px"
-        }}
-      />
-
-      <div
-        className="
-          absolute
-          top-[-120px]
-          right-[-120px]
-          h-[320px]
-          w-[320px]
-          rounded-full
-          bg-blue-500/20
-          blur-[120px]
-        "
-      />
-
-      <div
-        className="
-          absolute
-          bottom-[-140px]
-          left-[-140px]
-          h-[320px]
-          w-[320px]
-          rounded-full
-          bg-cyan-500/10
-          blur-[120px]
-        "
-      />
-
-      {/* MAIN */}
-
-      <div
-        className="
-          relative
-          z-10
+          mx-auto
           flex
           min-h-screen
+          max-w-[1400px]
           items-center
           justify-center
           px-5
@@ -230,163 +152,106 @@ export default function VerifyOtpPage() {
           className="
             grid
             w-full
-            max-w-6xl
             overflow-hidden
-            rounded-[40px]
+            rounded-[32px]
             border
-            border-white/10
-            bg-[#0b1020]/80
-            backdrop-blur-2xl
+            border-border
+            bg-card
             xl:grid-cols-2
           "
         >
 
-          {/* LEFT */}
+          {/* LEFT SIDE */}
 
           <div
             className="
-              relative
               hidden
-              overflow-hidden
               border-r
-              border-white/10
-              xl:block
+              border-border
+              p-14
+              xl:flex
+              xl:flex-col
+              xl:justify-between
             "
           >
 
-            <div
-              className="
-                absolute
-                inset-0
-                opacity-25
-              "
-              style={{
-                backgroundImage:
-                  "url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80')",
-                backgroundSize:
-                  "cover",
-                backgroundPosition:
-                  "center"
-              }}
-            />
-
-            <div
-              className="
-                absolute
-                inset-0
-                bg-gradient-to-br
-                from-cyan-500/10
-                via-black/85
-                to-blue-600/20
-              "
-            />
-
-            <div
-              className="
-                relative
-                z-10
-                flex
-                h-full
-                flex-col
-                justify-between
-                p-14
-              "
-            >
-
-              <div>
-
-                <div
-                  className="
-                    inline-flex
-                    items-center
-                    gap-2
-                    rounded-full
-                    border
-                    border-cyan-400/20
-                    bg-cyan-400/10
-                    px-4
-                    py-2
-                    text-sm
-                    font-semibold
-                    text-cyan-100
-                  "
-                >
-
-                  <Sparkles
-                    size={15}
-                  />
-
-                  VERIFIED PLAYER SYSTEM
-                </div>
-
-                <h1
-                  className="
-                    mt-8
-                    text-6xl
-                    font-black
-                    leading-tight
-                    text-white
-                  "
-                >
-                  Verify Your
-                  <span
-                    className="
-                      block
-                      bg-gradient-to-r
-                      from-cyan-300
-                      to-blue-400
-                      bg-clip-text
-                      text-transparent
-                    "
-                  >
-                    Esports Identity
-                  </span>
-                </h1>
-
-                <p
-                  className="
-                    mt-4
-                    max-w-xl
-                    text-lg
-                    leading-8
-                    text-slate-300
-                  "
-                >
-                  Secure your player profile,
-                  unlock tournaments,
-                  and activate trusted
-                  esports participation.
-                </p>
-              </div>
+            <div>
 
               <div
                 className="
-                  space-y-5
+                  inline-flex
+                  items-center
+                  rounded-full
+                  border
+                  border-border
+                  bg-background-secondary
+                  px-4
+                  py-2
+                  text-xs
+                  font-semibold
+                  uppercase
+                  tracking-[0.25em]
+                  text-muted
                 "
               >
-
-                <Feature
-                  icon={ShieldCheck}
-                  title="Secure Verification"
-                  body="OTP verification keeps tournaments trusted and prevents fake accounts."
-                />
-
-                <Feature
-                  icon={BadgeCheck}
-                  title="Verified Badge"
-                  body="Unlock verified player status across FFX ESPORTS systems."
-                />
-
-                <Feature
-                  icon={Mail}
-                  title="Protected Access"
-                  body="Your email becomes secured for wallet recovery and login safety."
-                />
+                VERIFIED PLAYER SYSTEM
               </div>
+
+              <h1
+                className="
+                  mt-8
+                  max-w-xl
+                  text-6xl
+                  font-bold
+                  leading-[1.05]
+                  tracking-tight
+                  text-white
+                "
+              >
+                Verify your
+                esports identity.
+              </h1>
+
+              <p
+                className="
+                  mt-6
+                  max-w-xl
+                  text-lg
+                  leading-8
+                  text-muted
+                "
+              >
+                Activate your player profile,
+                unlock tournaments,
+                secure wallet access,
+                and enter competitive matchmaking.
+              </p>
+            </div>
+
+            <div
+              className="
+                space-y-4
+              "
+            >
+
+              <Feature
+                title="Trusted Verification"
+                body="OTP verification prevents fake accounts and protects tournament integrity."
+              />
+
+              <Feature
+                title="Protected Wallet Access"
+                body="Verified email helps secure withdrawals, recovery, and player authentication."
+              />
+
+              <Feature
+                title="Competitive Access"
+                body="Verified players unlock premium tournaments and ranked participation."
+              />
             </div>
           </div>
 
-          {/* RIGHT */}
+          {/* RIGHT SIDE */}
 
           <div
             className="
@@ -412,33 +277,33 @@ export default function VerifyOtpPage() {
                 className="
                   mb-8
                   flex
-                  h-20
-                  w-20
+                  h-18
+                  w-18
                   items-center
                   justify-center
-                  rounded-[28px]
-                  bg-cyan-500/10
-                  text-cyan-300
-                  shadow-[0_0_50px_rgba(34,211,238,.25)]
+                  rounded-3xl
+                  border
+                  border-border
+                  bg-background-secondary
                 "
               >
 
                 <BadgeCheck
-                  size={38}
+                  size={34}
                 />
               </div>
 
-              {/* TITLE */}
+              {/* HEADER */}
 
               <div>
 
                 <div
                   className="
-                    text-sm
+                    text-xs
                     font-semibold
                     uppercase
                     tracking-[0.3em]
-                    text-cyan-300
+                    text-muted
                   "
                 >
                   ACCOUNT VERIFICATION
@@ -448,7 +313,8 @@ export default function VerifyOtpPage() {
                   className="
                     mt-3
                     text-4xl
-                    font-black
+                    font-bold
+                    tracking-tight
                     text-white
                   "
                 >
@@ -460,11 +326,12 @@ export default function VerifyOtpPage() {
                     mt-4
                     text-base
                     leading-7
-                    text-slate-400
+                    text-muted
                   "
                 >
-                  Enter your verification code
-                  to activate your FFX ESPORTS account.
+                  Enter the verification code sent
+                  to your email address to activate
+                  your FFX ESPORTS account.
                 </p>
               </div>
 
@@ -480,6 +347,8 @@ export default function VerifyOtpPage() {
                 )}
               >
 
+                {/* EMAIL */}
+
                 <div>
 
                   <label
@@ -487,8 +356,8 @@ export default function VerifyOtpPage() {
                       mb-2
                       block
                       text-sm
-                      font-semibold
-                      text-slate-300
+                      font-medium
+                      text-white
                     "
                   >
                     Email Address
@@ -503,12 +372,14 @@ export default function VerifyOtpPage() {
                     className="
                       h-14
                       rounded-2xl
-                      border-white/10
-                      bg-[#111827]
+                      border-border
+                      bg-background-secondary
                       text-white
                     "
                   />
                 </div>
+
+                {/* OTP */}
 
                 <div>
 
@@ -517,8 +388,8 @@ export default function VerifyOtpPage() {
                       mb-2
                       block
                       text-sm
-                      font-semibold
-                      text-slate-300
+                      font-medium
+                      text-white
                     "
                   >
                     OTP Code
@@ -533,15 +404,17 @@ export default function VerifyOtpPage() {
                     className="
                       h-14
                       rounded-2xl
-                      border-white/10
-                      bg-[#111827]
+                      border-border
+                      bg-background-secondary
                       text-center
-                      text-2xl
-                      tracking-[0.4em]
+                      text-xl
+                      tracking-[0.35em]
                       text-white
                     "
                   />
                 </div>
+
+                {/* VERIFY BUTTON */}
 
                 <Button
                   type="submit"
@@ -553,16 +426,13 @@ export default function VerifyOtpPage() {
                     h-14
                     w-full
                     rounded-2xl
-                    bg-cyan-500
                     text-base
-                    font-bold
-                    text-black
-                    hover:bg-cyan-400
+                    font-semibold
                   "
                 >
 
                   <ShieldCheck
-                    size={20}
+                    size={18}
                   />
 
                   {form.formState
@@ -583,15 +453,14 @@ export default function VerifyOtpPage() {
                   w-full
                   rounded-2xl
                   border
-                  border-white/10
-                  bg-white/[0.03]
+                  border-border
+                  bg-background-secondary
                   text-white
-                  hover:bg-white/[0.06]
                 "
               >
 
                 <TimerReset
-                  size={20}
+                  size={18}
                 />
 
                 Resend OTP
@@ -604,34 +473,34 @@ export default function VerifyOtpPage() {
                   mt-8
                   text-center
                   text-sm
-                  text-slate-400
+                  text-muted
                 "
               >
 
-                Continue to{" "}
+                Back to{" "}
 
                 <Link
-                  href="/dashboard"
+                  href="/login"
                   className="
-                    font-bold
-                    text-cyan-300
-                    transition
-                    hover:text-white
+                    font-semibold
+                    text-white
                   "
                 >
-                  dashboard
+                  login
                 </Link>
               </p>
 
+              {/* SECURITY */}
+
               <div
                 className="
-                  mt-4
+                  mt-6
                   flex
                   items-center
                   justify-center
                   gap-2
                   text-xs
-                  text-slate-500
+                  text-muted
                 "
               >
 
@@ -639,7 +508,7 @@ export default function VerifyOtpPage() {
                   size={14}
                 />
 
-                Protected by secure esports authentication
+                Secure encrypted authentication
               </div>
             </div>
           </div>
@@ -650,11 +519,9 @@ export default function VerifyOtpPage() {
 }
 
 function Feature({
-  icon: Icon,
   title,
   body
 }: {
-  icon: any;
   title: string;
   body: string;
 }) {
@@ -663,59 +530,34 @@ function Feature({
 
     <div
       className="
-        flex
-        items-start
-        gap-4
-        rounded-3xl
+        rounded-2xl
         border
-        border-white/10
-        bg-white/[0.03]
-        p-4
-        backdrop-blur-xl
+        border-border
+        bg-background-secondary
+        p-5
       "
     >
 
-      <div
+      <h3
         className="
-          flex
-          h-12
-          w-12
-          items-center
-          justify-center
-          rounded-2xl
-          bg-cyan-500/10
-          text-cyan-300
+          text-base
+          font-semibold
+          text-white
         "
       >
+        {title}
+      </h3>
 
-        <Icon
-          size={22}
-        />
-      </div>
-
-      <div>
-
-        <h3
-          className="
-            text-lg
-            font-bold
-            text-white
-          "
-        >
-          {title}
-        </h3>
-
-        <p
-          className="
-            mt-1
-            text-sm
-            leading-6
-            text-slate-400
-          "
-        >
-          {body}
-        </p>
-      </div>
+      <p
+        className="
+          mt-2
+          text-sm
+          leading-6
+          text-muted
+        "
+      >
+        {body}
+      </p>
     </div>
   );
 }

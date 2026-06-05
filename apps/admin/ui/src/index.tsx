@@ -33,7 +33,7 @@ export function Button({
       relative
       overflow-hidden
       border
-      border-cyan-400/20
+      border-white/5
 
       bg-[linear-gradient(135deg,#06B6D4,#2563EB,#7C3AED)]
 
@@ -298,7 +298,7 @@ export function Badge({
 
     blue:
       `
-      border-cyan-400/20
+      border-white/5
       bg-cyan-400/[0.08]
       text-cyan-200
       `,

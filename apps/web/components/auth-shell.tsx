@@ -1,5 +1,3 @@
-import { ParticleField } from "./particle-field";
-
 export function AuthShell({
   children,
   title,
@@ -9,99 +7,37 @@ export function AuthShell({
   title: string;
   subtitle: string;
 }) {
-
   return (
-
     <main
       className="
-        relative
         min-h-screen
-        overflow-hidden
-        bg-[#050816]
+        bg-background
         px-4
         py-8
         text-white
         sm:px-6
       "
     >
-
-      {/* PARTICLES */}
-
-      <ParticleField />
-
-      {/* GRID BACKGROUND */}
-
       <div
         className="
-          absolute
-          inset-0
-          opacity-[0.04]
-        "
-        style={{
-          backgroundImage:
-            `
-            linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px)
-          `,
-          backgroundSize:
-            "40px 40px"
-        }}
-      />
-
-      {/* GLOW EFFECTS */}
-
-      <div
-        className="
-          absolute
-          left-[-120px]
-          top-[-120px]
-          h-[320px]
-          w-[320px]
-          rounded-full
-          bg-cyan-500/10
-          blur-[120px]
-        "
-      />
-
-      <div
-        className="
-          absolute
-          bottom-[-120px]
-          right-[-120px]
-          h-[320px]
-          w-[320px]
-          rounded-full
-          bg-blue-600/10
-          blur-[120px]
-        "
-      />
-
-      {/* CONTENT */}
-
-      <div
-        className="
-          relative
-          z-10
           mx-auto
           flex
           min-h-[calc(100vh-4rem)]
           w-full
-          max-w-full
+          max-w-[1400px]
           items-center
           justify-center
         "
       >
-
         <section
           className="
             grid
             w-full
             items-center
-            gap-10
-            lg:grid-cols-[1fr_460px]
+            gap-16
+            lg:grid-cols-[1fr_480px]
           "
         >
-
           {/* LEFT SIDE */}
 
           <div
@@ -110,7 +46,6 @@ export function AuthShell({
               lg:block
             "
           >
-
             {/* BADGE */}
 
             <div
@@ -118,32 +53,19 @@ export function AuthShell({
                 mb-6
                 inline-flex
                 items-center
-                gap-2
                 rounded-full
                 border
-                border-cyan-400/20
-                bg-cyan-400/10
-                px-5
+                border-border
+                bg-card
+                px-4
                 py-2
                 text-xs
-                font-bold
+                font-semibold
                 uppercase
-                tracking-[0.35em]
-                text-cyan-300
-                backdrop-blur-xl
+                tracking-[0.25em]
+                text-muted
               "
             >
-
-              <span
-                className="
-                  h-2
-                  w-2
-                  rounded-full
-                  bg-cyan-400
-                  shadow-[0_0_12px_rgba(34,211,238,1)]
-                "
-              />
-
               FFX ESPORTS
             </div>
 
@@ -153,113 +75,68 @@ export function AuthShell({
               className="
                 max-w-3xl
                 text-5xl
-                font-black
-                leading-[1.1]
+                font-bold
+                leading-[1.05]
+                tracking-tight
                 text-white
-                xl:text-7xl
+                xl:text-6xl
               "
             >
-
-              India’s
-              <span
-                className="
-                  bg-gradient-to-r
-                  from-cyan-300
-                  via-blue-400
-                  to-purple-400
-                  bg-clip-text
-                  text-transparent
-                "
-              >
-                {" "}
-                next-gen{" "}
-              </span>
-
-              esports arena for elite battle royale players.
+            Competitive esports platform
+built for modern tournament
+gaming.
             </h1>
 
             {/* SUBTEXT */}
 
             <p
               className="
-                mt-4
+                mt-6
                 max-w-2xl
                 text-lg
                 leading-8
-                text-slate-400
+                text-muted
               "
             >
-
-              Join premium tournaments, real-time match rooms,
-              verified wallets, secure prize pools, and
-              competitive squad battles — all in one futuristic
-              gaming ecosystem.
+              Join premium tournaments,
+              secure wallets, real-time
+              match rooms, and competitive
+              gaming events in one unified
+              platform.
             </p>
 
-            {/* FEATURE BOXES */}
+            {/* FEATURE CARDS */}
 
             <div
               className="
                 mt-10
                 grid
-                max-w-3xl
-                grid-cols-3
+                max-w-2xl
+                grid-cols-2
                 gap-4
+                min-h-[88px]
               "
             >
-
               {[
-                "Free Fire",
-                "BGMI",
-                "CODM",
-                "Valorant",
+                "Real-time Matches",
                 "Instant Wallet",
-                "Live Match Rooms"
+                "Secure Prize Pools",
+                "Tournament Analytics"
               ].map((item) => (
-
                 <div
                   key={item}
                   className="
-                    group
-                    relative
-                    overflow-hidden
-                    rounded-2xl
-                    border
-                    border-white/10
-                    bg-white/[0.03]
-                    p-4
-                    backdrop-blur-xl
-                    transition-all
-                    duration-300
-                    hover:border-cyan-400/20
-                    hover:bg-cyan-400/[0.05]
+                   premium-card
+min-h-[88px]
+rounded-2xl
+px-5
+py-4
+                    text-sm
+                    font-medium
+                    text-white
                   "
                 >
-
-                  <div
-                    className="
-                      absolute
-                      inset-0
-                      bg-gradient-to-br
-                      from-cyan-500/[0.03]
-                      to-blue-500/[0.02]
-                      opacity-0
-                      transition
-                      duration-300
-                      group-hover:opacity-100
-                    "
-                  />
-
-                  <div
-                    className="
-                      relative
-                      text-sm
-                      font-bold
-                      text-slate-200
-                    "
-                  >
-                    {item}
-                  </div>
+                  {item}
                 </div>
               ))}
             </div>
@@ -270,56 +147,26 @@ export function AuthShell({
           <div
             className="
               relative
+w-full
+max-w-[480px]
+ml-auto
             "
           >
-
-            {/* OUTER GLOW */}
-
-            <div
-              className="
-                absolute
-                inset-0
-                rounded-[32px]
-                bg-gradient-to-br
-                from-cyan-400/20
-                via-blue-500/10
-                to-purple-500/20
-                blur-2xl
-              "
-            />
-
-            {/* CARD */}
-
             <div
               className="
                 relative
-                overflow-hidden
                 rounded-[32px]
                 border
-                border-white/10
-                bg-[#081120]/80
+                border-border
+                bg-card
                 p-7
-                shadow-[0_0_80px_rgba(0,0,0,.45)]
-                backdrop-blur-3xl
+                shadow-card
+transition-all
+duration-200
+hover:border-primary/20
                 sm:p-9
               "
             >
-
-              {/* TOP LIGHT */}
-
-              <div
-                className="
-                  absolute
-                  inset-x-0
-                  top-0
-                  h-[2px]
-                  bg-gradient-to-r
-                  from-transparent
-                  via-cyan-400
-                  to-transparent
-                "
-              />
-
               {/* HEADER */}
 
               <div
@@ -327,22 +174,21 @@ export function AuthShell({
                   mb-8
                 "
               >
-
                 <div
                   className="
                     mb-4
                     inline-flex
                     rounded-full
                     border
-                    border-cyan-400/20
-                    bg-cyan-400/10
+                    border-border
+                    bg-background-secondary
                     px-4
                     py-1.5
                     text-[11px]
-                    font-bold
+                    font-semibold
                     uppercase
                     tracking-[0.3em]
-                    text-cyan-300
+                    text-muted
                   "
                 >
                   FFX ESPORTS
@@ -351,7 +197,7 @@ export function AuthShell({
                 <h2
                   className="
                     text-2xl
-                    font-black
+                    font-bold
                     tracking-tight
                     text-white
                   "
@@ -364,7 +210,7 @@ export function AuthShell({
                     mt-3
                     text-sm
                     leading-7
-                    text-slate-400
+                    text-muted
                   "
                 >
                   {subtitle}
@@ -376,21 +222,6 @@ export function AuthShell({
               <div>
                 {children}
               </div>
-
-              {/* BOTTOM GLOW */}
-
-              <div
-                className="
-                  absolute
-                  bottom-[-60px]
-                  right-[-60px]
-                  h-40
-                  w-40
-                  rounded-full
-                  bg-cyan-500/10
-                  blur-[80px]
-                "
-              />
             </div>
           </div>
         </section>

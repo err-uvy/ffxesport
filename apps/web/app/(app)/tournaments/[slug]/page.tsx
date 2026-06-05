@@ -5,15 +5,17 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 
 import {
-  Clock3,
-  Trophy,
-  Users,
-  Flame,
-  Swords,
-  ShieldCheck,
   ArrowRight,
-  Gamepad2
+  Clock3,
+  Flame,
+  Gamepad2,
+  ShieldCheck,
+  Swords,
+  Trophy,
+  Users
 } from "lucide-react";
+
+import { toast } from "sonner";
 
 import {
   Badge,
@@ -23,16 +25,14 @@ import {
   Skeleton
 } from "@/ui";
 
-import { toast } from "sonner";
-
-import { formatMoney } from "@/utils";
-
 import { PageHeader } from "@/components/page-header";
 
 import {
   api,
   apiMessage
 } from "@/lib/api";
+
+import { formatMoney } from "@/utils";
 
 type Detail = {
   id: string;
@@ -81,8 +81,11 @@ type Detail = {
 
   matches: {
     id: string;
+
     mapName: string;
+
     startsAt: string;
+
     status: string;
   }[];
 };
@@ -139,7 +142,12 @@ export default function TournamentDetailPage() {
   if (!tournament) {
 
     return (
-      <Skeleton className="h-[80vh]" />
+      <Skeleton
+        className="
+          h-[80vh]
+          rounded-[32px]
+        "
+      />
     );
   }
 
@@ -150,9 +158,7 @@ export default function TournamentDetailPage() {
   );
 
   return (
-    <div className="pb-10">
-
-      {/* HEADER */}
+    <div className="space-y-6 pb-10">
 
       <PageHeader
         eyebrow={tournament.game.replace(
@@ -167,10 +173,12 @@ export default function TournamentDetailPage() {
           className="
             h-12
             rounded-2xl
-            bg-blue-600
-            px-7
+            bg-white
+            px-6
+            text-sm
             font-semibold
-            hover:bg-blue-700
+            text-black
+            hover:bg-zinc-200
           "
         >
           Join Tournament
@@ -181,148 +189,254 @@ export default function TournamentDetailPage() {
 
       <section
         className="
-          relative
-          overflow-hidden
-          rounded-[34px]
+          rounded-[32px]
           border
-          border-white/10
-          bg-[#0f1117]
-          p-7
-          shadow-2xl
-          xl:p-10
+          border-border
+          bg-card
+          p-6
+          lg:p-8
         "
       >
 
-        {/* BACKGROUND */}
+        <div className="flex flex-wrap items-center gap-3">
+
+          <Badge tone="blue">
+            {tournament.mode.replace(
+              "_",
+              " "
+            )}
+          </Badge>
+
+          <Badge
+            tone={
+              tournament.status ===
+              "LIVE"
+                ? "green"
+                : "pink"
+            }
+          >
+            {tournament.status.replace(
+              "_",
+              " "
+            )}
+          </Badge>
+
+          <Badge tone="black">
+            Entry Fee{" "}
+            {formatMoney(
+              tournament.entryFee
+            )}
+          </Badge>
+        </div>
 
         <div
           className="
-            absolute
-            inset-0
-            opacity-30
+            mt-6
+            grid
+            gap-8
+            xl:grid-cols-[1fr_340px]
           "
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1600&q=80')",
-            backgroundSize: "cover",
-            backgroundPosition: "center"
-          }}
-        />
+        >
 
-        <div
-          className="
-            absolute
-            inset-0
-            bg-gradient-to-br
-            from-blue-600/30
-            via-black/70
-            to-cyan-500/20
-          "
-        />
+          {/* LEFT */}
 
-        {/* CONTENT */}
+          <div>
 
-        <div className="relative z-10">
-
-          <div className="flex flex-wrap gap-3">
-
-            <Badge tone="blue">
-              {tournament.mode.replace(
-                "_",
-                " "
-              )}
-            </Badge>
-
-            <Badge
-              tone={
-                tournament.status ===
-                "LIVE"
-                  ? "green"
-                  : "pink"
-              }
+            <h1
+              className="
+                max-w-4xl
+                text-4xl
+                font-bold
+                tracking-tight
+                text-white
+                xl:text-5xl
+              "
             >
-              {tournament.status.replace(
-                "_",
-                " "
-              )}
-            </Badge>
+              {tournament.title}
+            </h1>
 
-            <Badge tone="black">
-              Entry{" "}
-              {formatMoney(
-                tournament.entryFee
-              )}
-            </Badge>
+            <p
+              className="
+                mt-5
+                max-w-3xl
+                text-base
+                leading-8
+                text-muted
+              "
+            >
+              {tournament.description}
+            </p>
+
+            <div
+              className="
+                mt-8
+                grid
+                gap-4
+                sm:grid-cols-2
+                xl:grid-cols-4
+              "
+            >
+
+              <StatCard
+                icon={Trophy}
+                label="Prize Pool"
+                value={formatMoney(
+                  tournament.prizePool
+                )}
+              />
+
+              <StatCard
+                icon={Users}
+                label="Slots"
+                value={`${tournament.filledSlots}/${tournament.maxSlots}`}
+              />
+
+              <StatCard
+                icon={Clock3}
+                label="Starts At"
+                value={new Date(
+                  tournament.startsAt
+                ).toLocaleDateString()}
+              />
+
+              <StatCard
+                icon={Flame}
+                label="Status"
+                value={tournament.status.replace(
+                  "_",
+                  " "
+                )}
+              />
+            </div>
           </div>
 
-          <h1
+          {/* RIGHT */}
+
+          <Card
             className="
-              mt-4
-              max-w-4xl
-              text-4xl
-              font-black
-              leading-tight
-              text-white
-              xl:text-6xl
+              rounded-[28px]
+              border
+              border-border
+              bg-background-secondary
+              p-6
             "
           >
-            {tournament.title}
-          </h1>
 
-          <p
-            className="
-              mt-4
-              max-w-3xl
-              text-base
-              leading-8
-              text-zinc-300
-              xl:text-lg
-            "
-          >
-            {tournament.description}
-          </p>
+            <div className="flex items-center justify-between">
 
-          {/* STATS */}
+              <div>
 
-          <div className="mt-8 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
+                <div
+                  className="
+                    text-xs
+                    font-semibold
+                    uppercase
+                    tracking-[0.25em]
+                    text-muted
+                  "
+                >
+                  Registration Status
+                </div>
 
-            <StatCard
-              icon={Trophy}
-              label="Prize Pool"
-              value={formatMoney(
-                tournament.prizePool
-              )}
+                <div
+                  className="
+                    mt-2
+                    text-3xl
+                    font-bold
+                    text-white
+                  "
+                >
+                  {slots}%
+                </div>
+              </div>
+
+              <div
+                className="
+                  flex
+                  h-14
+                  w-14
+                  items-center
+                  justify-center
+                  rounded-2xl
+                  bg-primary/10
+                  text-primary
+                "
+              >
+                <Users size={24} />
+              </div>
+            </div>
+
+            <Progress
+              value={slots}
+              className="mt-6"
             />
 
-            <StatCard
-              icon={Users}
-              label="Slots"
-              value={`${tournament.filledSlots}/${tournament.maxSlots}`}
-            />
+            <div
+              className="
+                mt-6
+                rounded-2xl
+                border
+                border-border
+                bg-card
+                p-4
+              "
+            >
 
-            <StatCard
-              icon={Clock3}
-              label="Starts At"
-              value={new Date(
-                tournament.startsAt
-              ).toLocaleString()}
-            />
+              <div className="flex items-center justify-between">
 
-            <StatCard
-              icon={Flame}
-              label="Status"
-              value={tournament.status.replace(
-                "_",
-                " "
-              )}
-            />
-          </div>
+                <div className="text-sm text-muted">
+                  Registered Players
+                </div>
+
+                <div className="font-semibold text-white">
+                  {tournament.filledSlots}
+                </div>
+              </div>
+
+              <div className="mt-4 flex items-center justify-between">
+
+                <div className="text-sm text-muted">
+                  Remaining Slots
+                </div>
+
+                <div className="font-semibold text-white">
+                  {tournament.maxSlots -
+                    tournament.filledSlots}
+                </div>
+              </div>
+            </div>
+
+            <Button
+              onClick={join}
+              className="
+                mt-6
+                h-12
+                w-full
+                rounded-2xl
+                bg-white
+                font-semibold
+                text-black
+                hover:bg-zinc-200
+              "
+            >
+
+              Join Tournament
+
+              <ArrowRight size={18} />
+            </Button>
+          </Card>
         </div>
       </section>
 
       {/* GRID */}
 
-      <div className="mt-7 grid gap-6 xl:grid-cols-[0.85fr_1.15fr]">
+      <div
+        className="
+          grid
+          gap-6
+          xl:grid-cols-[0.9fr_1.1fr]
+        "
+      >
 
         {/* LEFT */}
 
@@ -334,42 +448,19 @@ export default function TournamentDetailPage() {
             className="
               rounded-[30px]
               border
-              border-white/5
-              bg-[#101010]
+              border-border
+              bg-card
               p-6
             "
           >
 
-            <div className="flex items-center gap-3">
+            <SectionHeader
+              icon={Trophy}
+              title="Prize Distribution"
+              subtitle="Winning rewards"
+            />
 
-              <div
-                className="
-                  flex
-                  h-12
-                  w-12
-                  items-center
-                  justify-center
-                  rounded-2xl
-                  bg-yellow-500/10
-                  text-yellow-400
-                "
-              >
-                <Trophy size={20} />
-              </div>
-
-              <div>
-
-                <h2 className="text-2xl font-bold text-white">
-                  Prize Distribution
-                </h2>
-
-                <p className="text-sm text-zinc-400">
-                  Winning breakdown
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-4 space-y-3">
+            <div className="mt-6 space-y-3">
 
               {tournament.prizeDistributions.map(
                 (prize) => (
@@ -382,25 +473,26 @@ export default function TournamentDetailPage() {
                       justify-between
                       rounded-2xl
                       border
-                      border-white/5
-                      bg-[#181818]
+                      border-border
+                      bg-background-secondary
                       px-5
                       py-4
                     "
                   >
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-4">
 
                       <div
                         className="
                           flex
-                          h-10
-                          w-10
+                          h-12
+                          w-12
                           items-center
                           justify-center
-                          rounded-xl
-                          bg-blue-500/10
-                          text-blue-400
+                          rounded-2xl
+                          bg-primary/10
+                          text-primary
+                          font-bold
                         "
                       >
                         #{prize.rank}
@@ -408,17 +500,23 @@ export default function TournamentDetailPage() {
 
                       <div>
 
-                        <div className="font-bold text-white">
+                        <div className="font-semibold text-white">
                           Rank {prize.rank}
                         </div>
 
-                        <div className="text-xs text-zinc-500">
+                        <div className="text-sm text-muted">
                           Tournament Reward
                         </div>
                       </div>
                     </div>
 
-                    <div className="text-lg font-black text-green-400">
+                    <div
+                      className="
+                        text-lg
+                        font-bold
+                        text-white
+                      "
+                    >
                       {formatMoney(
                         prize.amount
                       )}
@@ -435,42 +533,19 @@ export default function TournamentDetailPage() {
             className="
               rounded-[30px]
               border
-              border-white/5
-              bg-[#101010]
+              border-border
+              bg-card
               p-6
             "
           >
 
-            <div className="flex items-center gap-3">
+            <SectionHeader
+              icon={Gamepad2}
+              title="Match Schedule"
+              subtitle="Upcoming rounds"
+            />
 
-              <div
-                className="
-                  flex
-                  h-12
-                  w-12
-                  items-center
-                  justify-center
-                  rounded-2xl
-                  bg-cyan-500/10
-                  text-cyan-400
-                "
-              >
-                <Gamepad2 size={20} />
-              </div>
-
-              <div>
-
-                <h2 className="text-2xl font-bold text-white">
-                  Match Schedule
-                </h2>
-
-                <p className="text-sm text-zinc-400">
-                  Upcoming battle rounds
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-4 space-y-3">
+            <div className="mt-6 space-y-3">
 
               {tournament.matches.map(
                 (match) => (
@@ -480,21 +555,21 @@ export default function TournamentDetailPage() {
                     className="
                       rounded-2xl
                       border
-                      border-white/5
-                      bg-[#181818]
-                      p-4
+                      border-border
+                      bg-background-secondary
+                      p-5
                     "
                   >
 
-                    <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center justify-between">
 
                       <div>
 
-                        <div className="font-bold text-white">
+                        <div className="font-semibold text-white">
                           {match.mapName}
                         </div>
 
-                        <div className="mt-1 text-sm text-zinc-500">
+                        <div className="mt-2 text-sm text-muted">
                           {new Date(
                             match.startsAt
                           ).toLocaleString()}
@@ -523,52 +598,32 @@ export default function TournamentDetailPage() {
 
         <div className="space-y-6">
 
-          {/* SLOT STATUS */}
+          {/* PARTICIPANTS */}
 
           <Card
             className="
               rounded-[30px]
               border
-              border-white/5
-              bg-[#101010]
+              border-border
+              bg-card
               p-6
             "
           >
 
-            <div className="flex items-center justify-between gap-3">
-
-              <div>
-
-                <h2 className="text-2xl font-bold text-white">
-                  Slot Capacity
-                </h2>
-
-                <p className="mt-1 text-sm text-zinc-400">
-                  Tournament registrations
-                </p>
-              </div>
-
-              <div
-                className="
-                  rounded-2xl
-                  bg-blue-500/10
-                  px-4
-                  py-2
-                  text-sm
-                  font-bold
-                  text-blue-300
-                "
-              >
-                {slots}%
-              </div>
-            </div>
-
-            <Progress
-              value={slots}
-              className="mt-4"
+            <SectionHeader
+              icon={ShieldCheck}
+              title="Participants"
+              subtitle="Registered tournament players"
             />
 
-            <div className="mt-7 grid gap-3 sm:grid-cols-2">
+            <div
+              className="
+                mt-6
+                grid
+                gap-3
+                sm:grid-cols-2
+              "
+            >
 
               {tournament.participants.map(
                 (participant) => (
@@ -578,8 +633,8 @@ export default function TournamentDetailPage() {
                     className="
                       rounded-2xl
                       border
-                      border-white/5
-                      bg-[#181818]
+                      border-border
+                      bg-background-secondary
                       p-4
                     "
                   >
@@ -588,19 +643,13 @@ export default function TournamentDetailPage() {
 
                       <div>
 
-                        <div className="font-bold text-white">
-                          Slot{" "}
-                          {
-                            participant.slotNumber
-                          }
+                        <div className="font-semibold text-white">
+                          Slot {participant.slotNumber}
                         </div>
 
-                        <div className="mt-1 text-sm text-zinc-400">
-                          {participant
-                            .team?.name ??
-                            participant
-                              .user
-                              ?.username ??
+                        <div className="mt-1 text-sm text-muted">
+                          {participant.team?.name ??
+                            participant.user?.username ??
                             "Player"}
                         </div>
                       </div>
@@ -617,9 +666,7 @@ export default function TournamentDetailPage() {
                           text-green-400
                         "
                       >
-                        <ShieldCheck
-                          size={18}
-                        />
+                        <ShieldCheck size={18} />
                       </div>
                     </div>
                   </div>
@@ -634,48 +681,25 @@ export default function TournamentDetailPage() {
             className="
               rounded-[30px]
               border
-              border-white/5
-              bg-[#101010]
+              border-border
+              bg-card
               p-6
             "
           >
 
-            <div className="flex items-center gap-3">
-
-              <div
-                className="
-                  flex
-                  h-12
-                  w-12
-                  items-center
-                  justify-center
-                  rounded-2xl
-                  bg-purple-500/10
-                  text-purple-400
-                "
-              >
-                <Swords size={20} />
-              </div>
-
-              <div>
-
-                <h2 className="text-2xl font-bold text-white">
-                  Rules & Guidelines
-                </h2>
-
-                <p className="text-sm text-zinc-400">
-                  Read carefully before joining
-                </p>
-              </div>
-            </div>
+            <SectionHeader
+              icon={Swords}
+              title="Rules & Guidelines"
+              subtitle="Tournament regulations"
+            />
 
             <div
               className="
-                mt-4
-                rounded-3xl
+                mt-6
+                rounded-2xl
                 border
-                border-white/5
-                bg-[#181818]
+                border-border
+                bg-background-secondary
                 p-6
               "
             >
@@ -685,30 +709,68 @@ export default function TournamentDetailPage() {
                   whitespace-pre-wrap
                   text-sm
                   leading-8
-                  text-zinc-300
+                  text-muted
                 "
               >
                 {tournament.rules}
               </p>
-
-              <div
-                className="
-                  mt-4
-                  inline-flex
-                  items-center
-                  gap-2
-                  text-sm
-                  font-semibold
-                  text-blue-400
-                "
-              >
-                Follow all rules carefully
-
-                <ArrowRight size={16} />
-              </div>
             </div>
           </Card>
         </div>
+      </div>
+    </div>
+  );
+}
+
+function SectionHeader({
+  icon: Icon,
+  title,
+  subtitle
+}: {
+  icon: any;
+  title: string;
+  subtitle: string;
+}) {
+
+  return (
+    <div className="flex items-center gap-4">
+
+      <div
+        className="
+          flex
+          h-12
+          w-12
+          items-center
+          justify-center
+          rounded-2xl
+          bg-primary/10
+          text-primary
+        "
+      >
+        <Icon size={20} />
+      </div>
+
+      <div>
+
+        <h2
+          className="
+            text-xl
+            font-bold
+            text-white
+          "
+        >
+          {title}
+        </h2>
+
+        <p
+          className="
+            mt-1
+            text-sm
+            text-muted
+          "
+        >
+          {subtitle}
+        </p>
       </div>
     </div>
   );
@@ -727,38 +789,53 @@ function StatCard({
   return (
     <div
       className="
-        rounded-3xl
+        rounded-2xl
         border
-        border-white/10
-        bg-black/25
+        border-border
+        bg-background-secondary
         p-4
-        backdrop-blur-xl
       "
     >
 
       <div
         className="
-          mb-4
           flex
-          h-12
-          w-12
+          h-11
+          w-11
           items-center
           justify-center
-          rounded-2xl
-          bg-blue-500/10
-          text-blue-400
+          rounded-xl
+          bg-primary/10
+          text-primary
         "
       >
-        <Icon size={22} />
+        <Icon size={20} />
       </div>
 
-      <div className="text-xs uppercase tracking-[0.2em] text-zinc-500">
+      <div
+        className="
+          mt-4
+          text-xs
+          font-semibold
+          uppercase
+          tracking-[0.25em]
+          text-muted
+        "
+      >
         {label}
       </div>
 
-      <div className="mt-1 text-lg font-black text-white">
+      <div
+        className="
+          mt-2
+          text-lg
+          font-bold
+          text-white
+        "
+      >
         {value}
       </div>
     </div>
   );
 }
+

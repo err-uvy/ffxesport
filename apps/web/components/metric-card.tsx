@@ -20,17 +20,23 @@ export function MetricCard({
         group
         relative
         overflow-hidden
-        rounded-[28px]
+
+        rounded-[26px]
+
         border
-        border-white/10
-        bg-[#081120]/80
-        p-4
-        backdrop-blur-2xl
+        border-white/8
+
+        bg-[#0b0b0f]/95
+
+        p-5
+
         transition-all
         duration-300
+
         hover:-translate-y-1
-        hover:border-cyan-400/20
-        hover:shadow-[0_0_40px_rgba(34,211,238,.12)]
+        hover:border-white/20
+hover:bg-[#101014]
+hover:shadow-[0_0_40px_rgba(255,255,255,.04)]
       "
     >
 
@@ -40,7 +46,7 @@ export function MetricCard({
         className="
           absolute
           inset-0
-          opacity-[0.03]
+          opacity-[0.025]
         "
         style={{
           backgroundImage:
@@ -53,32 +59,33 @@ export function MetricCard({
         }}
       />
 
-      {/* GLOW */}
+      {/* SOFT GLOW */}
 
       <div
         className="
           absolute
-          right-[-50px]
-          top-[-50px]
+          right-0
+          top-0
           h-40
           w-40
           rounded-full
-          bg-cyan-400/[0.08]
-          blur-[80px]
+          bg-blue-500/[0.05]
+          blur-[90px]
         "
       />
 
-      {/* TOP BORDER */}
+      {/* TOP LINE */}
 
       <div
         className="
           absolute
           inset-x-0
           top-0
-          h-[2px]
+          h-[1px]
+
           bg-gradient-to-r
           from-transparent
-          via-cyan-400/70
+          via-blue-500/30
           to-transparent
         "
       />
@@ -89,6 +96,7 @@ export function MetricCard({
         className="
           relative
           z-10
+
           flex
           items-start
           justify-between
@@ -98,61 +106,93 @@ export function MetricCard({
 
         {/* LEFT */}
 
-        <div>
+        <div className="flex-1">
+
+          {/* LABEL */}
 
           <div
             className="
-              text-xs
-              font-bold
+              text-[11px]
+              font-semibold
               uppercase
-              tracking-[0.25em]
-              text-slate-500
+              tracking-[0.32em]
+              text-zinc-600
+transition-colors
+duration-300
+group-hover:text-zinc-300
             "
           >
             {label}
           </div>
 
+          {/* VALUE */}
+
           <div
             className="
-              mt-3
-              text-4xl
-              font-black
-              tracking-tight
-              text-white
+              mt-5
+
+            text-[52px]
+font-black
+leading-none
+tracking-[-0.04em]
+
+text-zinc-100
+
+transition-colors
+duration-300
+
+group-hover:text-white
             "
+           
           >
             {value}
           </div>
 
+          {/* DETAIL */}
+
           <div
             className="
-              mt-3
+              mt-5
+
               inline-flex
               items-center
+
               rounded-full
+
               border
-              border-cyan-400/10
-              bg-cyan-400/[0.06]
+             
+
+           
+
               px-3
-              py-1
-              text-[11px]
-              font-semibold
+              py-1.5
+
+              text-[10px]
+              font-bold
+
               uppercase
-              tracking-[0.18em]
-              text-cyan-300
+              tracking-[0.22em]
+
+              border-white/10
+bg-white/[0.02]
+
+text-zinc-500
+
+transition-all
+duration-300
+
+group-hover:border-white/20
+group-hover:bg-white/[0.05]
+group-hover:text-zinc-200
             "
           >
             {detail}
           </div>
         </div>
 
-        {/* RIGHT ICON */}
+        {/* ICON */}
 
-        <div
-          className="
-            relative
-          "
-        >
+        <div className="relative">
 
           {/* ICON GLOW */}
 
@@ -160,9 +200,12 @@ export function MetricCard({
             className="
               absolute
               inset-0
+
               rounded-2xl
-              bg-cyan-400/20
-              blur-xl
+
+              bg-blue-500/[0.12]
+
+              blur-2xl
             "
           />
 
@@ -171,22 +214,30 @@ export function MetricCard({
           <div
             className="
               relative
+
               flex
               h-16
               w-16
               items-center
               justify-center
+
               rounded-2xl
+
               border
-              border-cyan-400/20
-              bg-gradient-to-br
-              from-cyan-400/15
-              via-blue-500/10
-              to-purple-500/15
-              text-cyan-300
-              shadow-[0_0_25px_rgba(34,211,238,.15)]
+              
+
+              
+             border-blue-500/10
+
+bg-gradient-to-br
+from-blue-500/[0.10]
+to-cyan-400/[0.04]
+
+text-blue-300
+
               transition-all
               duration-300
+
               group-hover:scale-105
             "
           >

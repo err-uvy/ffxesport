@@ -539,7 +539,7 @@ function SecurityItem({
 
       transition-all
 
-      hover:border-cyan-400/20
+      hover:border-white/5
     "
     >
 

@@ -43,7 +43,7 @@ export default function ForbiddenPage() {
 
       {/* Floating Glow */}
 
-      <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-400/10 blur-3xl" />
+      <div className="absolute left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/10 blur-3xl" />
 
       {/* ================================= */}
       {/* CARD */}
@@ -188,7 +188,7 @@ export default function ForbiddenPage() {
 
                   rounded-xl
 
-                  bg-cyan-400/10
+                  bg-primary/10
 
                   text-cyan-200
                 "

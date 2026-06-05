@@ -1,6 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useState
+} from "react";
 
 import {
   Crown,
@@ -8,7 +11,12 @@ import {
   Swords,
   Users,
   UserPlus,
-  Gamepad2
+  Gamepad2,
+  Sparkles,
+  ShieldCheck,
+  Trophy,
+  Copy,
+  ArrowRight
 } from "lucide-react";
 
 import { toast } from "sonner";
@@ -20,8 +28,18 @@ import {
   Input
 } from "@/ui";
 
-import { EmptyState } from "@/components/empty-state";
-import { api, apiMessage } from "@/lib/api";
+import {
+  EmptyState
+} from "@/components/empty-state";
+
+import {
+  PageHeader
+} from "@/components/page-header";
+
+import {
+  api,
+  apiMessage
+} from "@/lib/api";
 
 type Team = {
   id: string;
@@ -73,7 +91,9 @@ export default function TeamsPage() {
     api
       .get("/teams")
       .then((response) =>
-        setTeams(response.data.data)
+        setTeams(
+          response.data.data
+        )
       );
   }
 
@@ -81,11 +101,14 @@ export default function TeamsPage() {
 
     try {
 
-      await api.post("/teams", {
-        name,
-        tag,
-        game
-      });
+      await api.post(
+        "/teams",
+        {
+          name,
+          tag,
+          game
+        }
+      );
 
       toast.success(
         "Squad created successfully"
@@ -98,7 +121,9 @@ export default function TeamsPage() {
 
     } catch (error) {
 
-      toast.error(apiMessage(error));
+      toast.error(
+        apiMessage(error)
+      );
     }
   }
 
@@ -111,7 +136,8 @@ export default function TeamsPage() {
       await api.post(
         `/teams/${teamId}/invite`,
         {
-          usernameOrEmail: invite
+          usernameOrEmail:
+            invite
         }
       );
 
@@ -125,45 +151,132 @@ export default function TeamsPage() {
 
     } catch (error) {
 
-      toast.error(apiMessage(error));
+      toast.error(
+        apiMessage(error)
+      );
     }
   }
 
+  function copyCode(
+    code: string
+  ) {
+
+    navigator.clipboard.writeText(
+      code
+    );
+
+    toast.success(
+      "Invite code copied"
+    );
+  }
+
   return (
-    <div className="main-container">
+    <div className="space-y-6 pb-10">
 
       {/* HEADER */}
 
-      <div className="mb-10">
+      <PageHeader
+        eyebrow="FFX Squad Hub"
+        title="Teams"
+      >
 
-        <p className="text-sm font-medium uppercase tracking-[0.3em] text-zinc-500">
-          FFX Squad Hub
-        </p>
+        <div
+          className="
+            rounded-2xl
+            border
+            border-border
+            bg-card
+            px-5
+            py-3
+          "
+        >
 
-        <h1 className="mt-3 text-5xl font-bold tracking-tight text-white">
-          Teams
-        </h1>
+          <div
+            className="
+              text-xs
+              font-semibold
+              uppercase
+              tracking-[0.25em]
+              text-muted
+            "
+          >
+            Active Squads
+          </div>
 
-        <p className="mt-3 max-w-2xl text-zinc-400">
-          Build elite rosters, invite players,
-          and dominate tournaments together.
-        </p>
-      </div>
+          <div
+            className="
+              mt-1
+              text-2xl
+              font-black
+              text-white
+            "
+          >
+            {teams.length}
+          </div>
+        </div>
+      </PageHeader>
+
+      {/* HERO */}
+
+      <section
+        className="
+          rounded-[32px]
+          border
+          border-border
+          bg-card
+          p-6
+          lg:p-8
+        "
+      >
+
+        <div
+          className="
+            grid
+            gap-5
+            md:grid-cols-2
+            xl:grid-cols-4
+          "
+        >
+
+          <HeroCard
+            icon={Users}
+            title="Elite Squads"
+            value="Competitive"
+          />
+
+          <HeroCard
+            icon={ShieldCheck}
+            title="Verified Players"
+            value="Protected"
+          />
+
+          <HeroCard
+            icon={Sparkles}
+            title="Tournament Ready"
+            value="Active"
+          />
+
+          <HeroCard
+            icon={Trophy}
+            title="Team Rankings"
+            value="Live"
+          />
+        </div>
+      </section>
 
       {/* CREATE TEAM */}
 
       <Card
         className="
-          premium-card
-          mb-8
+          rounded-[32px]
           border
-          border-white/5
-          bg-[#101010]
+          border-border
+          bg-card
           p-6
         "
       >
 
-        <div className="mb-6 flex items-center gap-4">
+        <div className="flex items-center gap-4">
 
           <div
             className="
@@ -172,55 +285,81 @@ export default function TeamsPage() {
               w-14
               items-center
               justify-center
-              rounded-2xl
-              bg-blue-500/10
-              text-blue-400
+              rounded-3xl
+              bg-primary/10
+              text-primary
             "
           >
+
             <Users size={26} />
           </div>
 
           <div>
 
-            <h2 className="text-2xl font-bold text-white">
+            <h2
+              className="
+                text-2xl
+                font-bold
+                text-white
+              "
+            >
               Create Squad
             </h2>
 
-            <p className="mt-1 text-sm text-zinc-400">
-              Launch your competitive team
+            <p
+              className="
+                mt-1
+                text-sm
+                text-muted
+              "
+            >
+              Launch your competitive roster
             </p>
           </div>
         </div>
 
-        <div className="grid gap-4 xl:grid-cols-[1fr_.5fr_.55fr_auto]">
+        <div
+          className="
+            mt-8
+            grid
+            gap-4
+            xl:grid-cols-[1fr_180px_180px_auto]
+          "
+        >
 
           <Input
             placeholder="Team name"
             value={name}
-            onChange={(event: any) =>
+            onChange={(
+              event: any
+            ) =>
               setName(
-                event.target.value
+                event.target
+                  .value
               )
             }
             className="
               h-12
-              border-white/10
-              bg-[#181818]
+              border-border
+              bg-background-secondary
             "
           />
 
           <Input
             placeholder="Clan tag"
             value={tag}
-            onChange={(event: any) =>
+            onChange={(
+              event: any
+            ) =>
               setTag(
-                event.target.value
+                event.target
+                  .value
               )
             }
             className="
               h-12
-              border-white/10
-              bg-[#181818]
+              border-border
+              bg-background-secondary
             "
           />
 
@@ -229,17 +368,20 @@ export default function TeamsPage() {
               h-12
               rounded-2xl
               border
-              border-white/10
-              bg-[#181818]
+              border-border
+              bg-background-secondary
               px-4
               text-sm
               text-white
               outline-none
             "
             value={game}
-            onChange={(event: any) =>
+            onChange={(
+              event: any
+            ) =>
               setGame(
-                event.target.value
+                event.target
+                  .value
               )
             }
           >
@@ -255,7 +397,10 @@ export default function TeamsPage() {
                 key={item}
                 value={item}
               >
-                {item.replace("_", " ")}
+                {item.replace(
+                  "_",
+                  " "
+                )}
               </option>
             ))}
           </select>
@@ -265,13 +410,17 @@ export default function TeamsPage() {
             className="
               h-12
               rounded-2xl
-              bg-blue-600
+              bg-primary
               px-8
               font-semibold
-              hover:bg-blue-700
             "
           >
-            Create
+
+            Create Team
+
+            <ArrowRight
+              size={18}
+            />
           </Button>
         </div>
       </Card>
@@ -287,20 +436,29 @@ export default function TeamsPage() {
             <Card
               key={team.id}
               className="
-                premium-card
+                rounded-[32px]
                 border
-                border-white/5
-                bg-[#101010]
+                border-border
+                bg-card
                 p-6
                 transition-all
-                duration-200
-                hover:border-blue-500/20
+                duration-300
+                hover:border-primary/20
               "
             >
 
               {/* TOP */}
 
-              <div className="flex flex-col gap-5 xl:flex-row xl:items-start xl:justify-between">
+              <div
+                className="
+                  flex
+                  flex-col
+                  gap-5
+                  lg:flex-row
+                  lg:items-start
+                  lg:justify-between
+                "
+              >
 
                 <div className="flex gap-4">
 
@@ -314,21 +472,30 @@ export default function TeamsPage() {
                       shrink-0
                       items-center
                       justify-center
-                      rounded-2xl
-                      bg-blue-500/10
-                      text-blue-400
+                      rounded-3xl
+                      bg-primary/10
+                      text-primary
                     "
                   >
-                    <Gamepad2 size={28} />
+
+                    <Gamepad2
+                      size={28}
+                    />
                   </div>
 
-                  {/* TEXT */}
+                  {/* CONTENT */}
 
                   <div>
 
                     <div className="flex items-center gap-3">
 
-                      <h2 className="text-2xl font-bold text-white">
+                      <h2
+                        className="
+                          text-2xl
+                          font-bold
+                          text-white
+                        "
+                      >
                         {team.name}
                       </h2>
 
@@ -336,84 +503,94 @@ export default function TeamsPage() {
                         className="
                           rounded-full
                           border
-                          border-blue-500/20
-                          bg-blue-500/10
+                          border-primary/20
+                          bg-primary/10
                           px-3
                           py-1
                           text-xs
                           font-bold
                           uppercase
                           tracking-[0.15em]
-                          text-blue-300
+                          text-primary
                         "
                       >
                         {team.tag}
                       </div>
                     </div>
 
-                    <div className="mt-3 flex flex-wrap gap-3">
+                    <div className="mt-4 flex flex-wrap gap-2">
 
-                      <div
-                        className="
-                          rounded-full
-                          border
-                          border-white/10
-                          bg-[#181818]
-                          px-3
-                          py-1.5
-                          text-xs
-                          font-semibold
-                          uppercase
-                          tracking-[0.15em]
-                          text-zinc-400
-                        "
-                      >
+                      <Badge tone="black">
                         {team.game.replace(
                           "_",
                           " "
                         )}
-                      </div>
+                      </Badge>
 
-                      <div
-                        className="
-                          rounded-full
-                          border
-                          border-green-500/20
-                          bg-green-500/10
-                          px-3
-                          py-1.5
-                          text-xs
-                          font-semibold
-                          uppercase
-                          tracking-[0.15em]
-                          text-green-300
-                        "
-                      >
-                        {team.members.length} Members
-                      </div>
+                      <Badge tone="green">
+                        {
+                          team.members
+                            .length
+                        }{" "}
+                        Members
+                      </Badge>
                     </div>
                   </div>
                 </div>
 
                 {/* INVITE CODE */}
 
-                <Badge tone="blue">
+                <button
+                  onClick={() =>
+                    copyCode(
+                      team.inviteCode
+                    )
+                  }
+                  className="
+                    flex
+                    items-center
+                    gap-2
+                    rounded-2xl
+                    border
+                    border-border
+                    bg-background-secondary
+                    px-4
+                    py-3
+                    text-sm
+                    font-semibold
+                    text-white
+                    transition-all
+                    hover:border-primary/20
+                  "
+                >
+
                   {team.inviteCode}
-                </Badge>
+
+                  <Copy
+                    size={16}
+                  />
+                </button>
               </div>
 
               {/* MEMBERS */}
 
-              <div className="mt-7">
+              <div className="mt-8">
 
                 <div className="mb-4 flex items-center gap-2">
 
                   <Swords
                     size={18}
-                    className="text-blue-400"
+                    className="
+                      text-primary
+                    "
                   />
 
-                  <h3 className="font-bold text-white">
+                  <h3
+                    className="
+                      font-bold
+                      text-white
+                    "
+                  >
                     Squad Members
                   </h3>
                 </div>
@@ -424,15 +601,17 @@ export default function TeamsPage() {
                     (member) => (
 
                       <div
-                        key={member.id}
+                        key={
+                          member.id
+                        }
                         className="
                           flex
                           items-center
                           justify-between
                           rounded-3xl
                           border
-                          border-white/5
-                          bg-[#181818]
+                          border-border
+                          bg-background-secondary
                           px-4
                           py-4
                         "
@@ -447,58 +626,70 @@ export default function TeamsPage() {
                               w-11
                               items-center
                               justify-center
-                              rounded-xl
-                              bg-blue-500/10
-                              text-blue-400
+                              rounded-2xl
+                              bg-primary/10
+                              text-primary
                             "
                           >
 
                             {member.role ===
                             "CAPTAIN" ? (
 
-                              <Crown size={18} />
+                              <Crown
+                                size={18}
+                              />
 
                             ) : (
 
-                              <Shield size={18} />
+                              <Shield
+                                size={18}
+                              />
                             )}
                           </div>
 
                           <div>
 
-                            <div className="font-semibold text-white">
+                            <div
+                              className="
+                                font-semibold
+                                text-white
+                              "
+                            >
                               {
-                                member.user
+                                member
+                                  .user
                                   .username
                               }
                             </div>
 
-                            <div className="mt-1 text-xs uppercase tracking-[0.15em] text-zinc-500">
-                              {member.role}
+                            <div
+                              className="
+                                mt-1
+                                text-xs
+                                uppercase
+                                tracking-[0.15em]
+                                text-muted
+                              "
+                            >
+                              {
+                                member.role
+                              }
                             </div>
                           </div>
                         </div>
 
-                        <div
-                          className={`
-                            rounded-full
-                            px-3
-                            py-1.5
-                            text-xs
-                            font-semibold
-                            uppercase
-                            tracking-[0.15em]
-
-                            ${
-                              member.status ===
-                              "ACTIVE"
-                                ? "bg-green-500/10 text-green-300 border border-green-500/20"
-                                : "bg-orange-500/10 text-orange-300 border border-orange-500/20"
-                            }
-                          `}
+                        <Badge
+                          tone={
+                            member.status ===
+                            "ACTIVE"
+                              ? "green"
+                              : "amber"
+                          }
                         >
-                          {member.status}
-                        </div>
+                          {
+                            member.status
+                          }
+                        </Badge>
                       </div>
                     )
                   )}
@@ -507,48 +698,66 @@ export default function TeamsPage() {
 
               {/* INVITE */}
 
-              <div className="mt-7">
+              <div className="mt-8">
 
                 <div className="mb-4 flex items-center gap-2">
 
                   <UserPlus
                     size={18}
-                    className="text-blue-400"
+                    className="
+                      text-primary
+                    "
                   />
 
-                  <h3 className="font-bold text-white">
+                  <h3
+                    className="
+                      font-bold
+                      text-white
+                    "
+                  >
                     Invite Player
                   </h3>
                 </div>
 
-                <div className="flex flex-col gap-3 xl:flex-row">
+                <div
+                  className="
+                    flex
+                    flex-col
+                    gap-3
+                    lg:flex-row
+                  "
+                >
 
                   <Input
                     placeholder="username or email"
                     value={invite}
-                    onChange={(event: any) =>
+                    onChange={(
+                      event: any
+                    ) =>
                       setInvite(
-                        event.target.value
+                        event.target
+                          .value
                       )
                     }
                     className="
                       h-12
-                      border-white/10
-                      bg-[#181818]
+                      border-border
+                      bg-background-secondary
                     "
                   />
 
                   <Button
                     variant="secondary"
                     onClick={() =>
-                      inviteUser(team.id)
+                      inviteUser(
+                        team.id
+                      )
                     }
                     className="
                       h-12
                       rounded-2xl
-                      border-white/10
-                      bg-[#181818]
-                      hover:bg-[#202020]
+                      border-border
+                      bg-background-secondary
                     "
                   >
                     Invite
@@ -563,10 +772,75 @@ export default function TeamsPage() {
 
         <EmptyState
           icon={Users}
-          title="No teams yet"
+          title="No Teams Yet"
           body="Create your first competitive squad and dominate upcoming tournaments."
         />
       )}
     </div>
   );
 }
+
+function HeroCard({
+  icon: Icon,
+  title,
+  value
+}: {
+  icon: any;
+  title: string;
+  value: string;
+}) {
+
+  return (
+    <div
+      className="
+        rounded-3xl
+        border
+        border-border
+        bg-background-secondary
+        p-5
+      "
+    >
+
+      <div
+        className="
+          flex
+          h-12
+          w-12
+          items-center
+          justify-center
+          rounded-2xl
+          bg-primary/10
+          text-primary
+        "
+      >
+
+        <Icon size={22} />
+      </div>
+
+      <div
+        className="
+          mt-4
+          text-xs
+          font-semibold
+          uppercase
+          tracking-[0.2em]
+          text-muted
+        "
+      >
+        {title}
+      </div>
+
+      <div
+        className="
+          mt-1
+          text-2xl
+          font-black
+          text-white
+        "
+      >
+        {value}
+      </div>
+    </div>
+  );
+}
+

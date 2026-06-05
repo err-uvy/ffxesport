@@ -21,7 +21,6 @@ import {
   LogOut,
   Menu,
   ShieldCheck,
-  Sparkles,
   Swords,
   Trophy,
   Users,
@@ -38,10 +37,6 @@ import {
   Button,
   cn
 } from "@/ui";
-
-import {
-  ParticleField
-} from "./particle-field";
 
 import {
   getSocket
@@ -222,153 +217,84 @@ export function AppShell({
     );
   }
 
+
   if (!loaded && !user) {
-
-    return (
-
-      <div
-        className="
-          relative
-          flex
-          min-h-screen
-          items-center
-          justify-center
-          overflow-hidden
-          bg-[#050816]
-          text-white
-        "
-      >
-
-        <ParticleField />
-
-        <div
-          className="
-            absolute
-            h-72
-            w-64
-            rounded-full
-            bg-cyan-500/10
-            blur-[120px]
-          "
-        />
-
-        <div
-          className="
-            relative
-            flex
-            h-20
-            w-20
-            items-center
-            justify-center
-            rounded-full
-            border
-            border-cyan-400/20
-            bg-white/[0.03]
-            backdrop-blur-xl
-          "
-        >
-
-          <div
-            className="
-              h-12
-              w-12
-              animate-spin
-              rounded-full
-              border-[3px]
-              border-cyan-300
-              border-t-transparent
-            "
-          />
-        </div>
-      </div>
-    );
-  }
-
   return (
-
     <div
       className="
-        relative
+        flex
         min-h-screen
-        overflow-hidden
-        bg-[#050816]
-        text-white
+        items-center
+        justify-center
+        bg-background
       "
     >
-
-      {/* BACKGROUND */}
-
-      <ParticleField />
-
       <div
         className="
-          absolute
-          inset-0
-          opacity-[0.04]
-        "
-        style={{
-          backgroundImage:
-            `
-            linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px)
-          `,
-          backgroundSize:
-            "40px 40px"
-        }}
-      />
-
-      <div
-        className="
-          absolute
-          top-[-180px]
-          right-[-180px]
-          h-[400px]
-          w-[400px]
+          flex
+          h-16
+          w-16
+          items-center
+          justify-center
           rounded-full
-          bg-cyan-500/10
-          blur-[140px]
+          border
+          border-border
+          bg-card
         "
-      />
-
-      <div
-        className="
-          absolute
-          bottom-[-180px]
-          left-[-180px]
-          h-[400px]
-          w-[400px]
-          rounded-full
-          bg-blue-600/10
-          blur-[140px]
-        "
-      />
-
-      {/* SIDEBAR */}
-
-      <aside
-        className={cn(
-
-          `
-          fixed
-          inset-y-0
-          left-0
-          z-50
-          w-[290px]
-          border-r
-          border-white/10
-          bg-[#081120]/85
-          backdrop-blur-3xl
-          transition-all
-          duration-300
-          lg:translate-x-0
-          `,
-
-          open
-            ? "translate-x-0"
-            : "-translate-x-full"
-        )}
       >
+        <div
+          className="
+            h-8
+            w-8
+            animate-spin
+            rounded-full
+            border-2
+            border-primary
+            border-t-transparent
+          "
+        />
+      </div>
+    </div>
+  );
+}
+return (<div
+  className="
+    min-h-screen
+    bg-background
+    text-white
+  "
+>
+      {/* SIDEBAR */}
+  <aside
+  className={cn(
 
+    `
+    fixed
+    inset-y-0
+    left-0
+    z-50
+
+    flex
+    h-screen
+    w-[270px]
+    flex-col
+
+    border-r
+    border-border
+
+    bg-sidebar
+
+    transition-all
+    duration-300
+
+    lg:translate-x-0
+    `,
+
+    open
+      ? "translate-x-0"
+      : "-translate-x-full"
+  )}
+>        
         {/* LOGO */}
 
         <div
@@ -377,7 +303,7 @@ export function AppShell({
             items-center
             justify-between
             border-b
-            border-white/10
+            border-border
             px-6
             py-6
           "
@@ -394,31 +320,20 @@ export function AppShell({
 
             <div
               className="
-                relative
-                flex
-                h-14
-                w-14
-                items-center
-                justify-center
-                overflow-hidden
-                rounded-2xl
-                bg-gradient-to-br
-                from-cyan-400
-                via-blue-500
-                to-purple-600
-                text-lg
-                font-black
-                shadow-[0_0_35px_rgba(34,211,238,.35)]
-              "
+flex
+h-12
+w-12
+items-center
+justify-center
+rounded-2xl
+bg-primary
+text-white
+font-bold
+text-sm
+"
             >
 
-              <div
-                className="
-                  absolute
-                  inset-0
-                  bg-white/10
-                "
-              />
+        
 
               FX
             </div>
@@ -426,12 +341,13 @@ export function AppShell({
             <div>
 
               <div
-                className="
-                  text-lg
-                  font-black
-                  tracking-wide
-                "
-              >
+  className="
+    
+    text-lg
+    font-bold
+    tracking-wide
+  "
+>
                 FFX ESPORTS
               </div>
 
@@ -445,15 +361,13 @@ export function AppShell({
                   font-bold
                   uppercase
                   tracking-[0.35em]
-                  text-cyan-300
+                  text-muted
                 "
               >
 
-                <Sparkles
-                  size={11}
-                />
+                
 
-                ARENA OS
+                COMPETITIVE PLATFORM
               </div>
             </div>
           </Link>
@@ -462,7 +376,7 @@ export function AppShell({
             className="
               rounded-xl
               border
-              border-white/10
+              border-border
               p-2
               transition
               hover:bg-white/5
@@ -480,11 +394,14 @@ export function AppShell({
         {/* NAVIGATION */}
 
         <div
-          className="
-            px-4
-            py-5
-          "
-        >
+  className="
+    flex-1
+    overflow-y-auto
+
+    px-3
+    py-5
+  "
+>
 
           <div
             className="
@@ -494,7 +411,8 @@ export function AppShell({
               font-bold
               uppercase
               tracking-[0.3em]
-              text-slate-500
+              bg-primary/10
+text-primary
             "
           >
             MAIN NAVIGATION
@@ -527,56 +445,44 @@ export function AppShell({
 
                     `
                     group
-                    relative
-                    flex
-                    h-14
-                    items-center
-                    gap-4
-                    overflow-hidden
-                    rounded-2xl
+relative
+flex
+h-14
+items-center
+gap-4
+rounded-2xl
                     px-4
                     text-sm
                     font-semibold
                     transition-all
-                    duration-300
+                    duration-200
+ease-out
                     `,
 
                     active
 
                       ? `
-                        border
-                        border-cyan-400/20
-                        bg-gradient-to-r
-                        from-cyan-500/15
-                        to-blue-500/10
-                        text-white
-                        shadow-[0_0_30px_rgba(34,211,238,.12)]
+                        
+                        bg-primary/10
+border
+border-primary/20
+text-white
+
+                        
+                       
                       `
 
                       : `
-                        text-slate-400
+                        text-muted
                         hover:border
-                        hover:border-white/10
+                        hover:border-border
                         hover:bg-white/[0.04]
                         hover:text-white
                       `
                   )}
                 >
 
-                  {active && (
 
-                    <div
-                      className="
-                        absolute
-                        left-0
-                        top-0
-                        h-full
-                        w-1
-                        rounded-r-full
-                        bg-cyan-400
-                      "
-                    />
-                  )}
 
                   <div
                     className={cn(
@@ -592,16 +498,15 @@ export function AppShell({
                       `,
 
                       active
-
-                        ? `
-                          bg-cyan-400/15
-                          text-cyan-300
-                        `
-
-                        : `
-                          bg-white/[0.03]
-                          group-hover:bg-white/[0.06]
-                        `
+  ? `
+     
+      bg-primary/10
+text-primary
+    `
+  : `
+      bg-white/[0.03]
+      group-hover:bg-white/[0.06]
+    `
                     )}
                   >
 
@@ -620,31 +525,25 @@ export function AppShell({
         {/* USER CARD */}
 
         <div
-          className="
-            absolute
-            bottom-5
-            left-4
-            right-4
-          "
-        >
+  className="
+    border-t
+    border-border
+
+    p-4
+  "
+>
 
           <div
             className="
-              overflow-hidden
-              rounded-3xl
-              border
-              border-white/10
-              bg-white/[0.03]
-              backdrop-blur-2xl
-            "
+premium-card
+rounded-3xl
+p-4
+"
           >
 
             <div
               className="
-                bg-gradient-to-r
-                from-cyan-500/10
-                via-blue-500/10
-                to-purple-500/10
+                         
                 p-4
               "
             >
@@ -660,17 +559,15 @@ export function AppShell({
                 <div
                   className="
                     flex
-                    h-14
-                    w-14
-                    items-center
-                    justify-center
-                    rounded-2xl
-                    bg-gradient-to-br
-                    from-cyan-400
-                    to-blue-600
-                    text-lg
-                    font-black
-                    shadow-[0_0_25px_rgba(34,211,238,.25)]
+h-14
+w-14
+items-center
+justify-center
+rounded-2xl
+bg-primary
+text-lg
+font-bold
+text-white
                   "
                 >
 
@@ -689,7 +586,7 @@ export function AppShell({
                     className="
                       truncate
                       text-base
-                      font-black
+                  font-bold
                     "
                   >
                     {user?.username ??
@@ -700,7 +597,7 @@ export function AppShell({
                     className="
                       truncate
                       text-xs
-                      text-slate-400
+                      text-muted
                     "
                   >
                     {user?.email}
@@ -719,8 +616,8 @@ export function AppShell({
                   w-full
                   rounded-2xl
                   border
-                  border-white/10
-                  bg-white/[0.03]
+                 border-border
+                  secondary-button
                   text-white
                   transition
                   hover:bg-red-500/10
@@ -738,12 +635,24 @@ export function AppShell({
           </div>
         </div>
       </aside>
-
+                {open && (
+  <div
+    className="
+      fixed
+      inset-0
+      z-40
+      bg-black/60
+      backdrop-blur-sm
+      lg:hidden
+    "
+    onClick={() => setOpen(false)}
+  />
+)}
       {/* MAIN */}
 
       <div
         className="
-          lg:pl-[290px]
+          lg:pl-[270px]
         "
       >
 
@@ -751,14 +660,14 @@ export function AppShell({
 
         <header
           className="
-            sticky
-            top-0
-            z-40
-            border-b
-            border-white/10
-            bg-[#050816]/70
-            backdrop-blur-3xl
-          "
+sticky
+top-0
+z-40
+border-b
+border-border
+bg-background/80
+backdrop-blur-xl
+"
         >
 
           <div
@@ -789,7 +698,7 @@ export function AppShell({
                   justify-center
                   rounded-2xl
                   border
-                  border-white/10
+                  border-border
                   bg-white/[0.03]
                   transition
                   hover:bg-white/[0.05]
@@ -806,25 +715,25 @@ export function AppShell({
               <div>
 
                 <div
-                  className="
-                    text-xs
-                    font-bold
-                    uppercase
-                    tracking-[0.3em]
-                    text-cyan-300
-                  "
-                >
-                  LIVE ECOSYSTEM
+  className="
+    text-xs
+    font-bold
+    uppercase
+    tracking-[0.35em]
+    text-muted
+  "
+>
+                  FFX ESPORTS
                 </div>
 
                 <div
                   className="
                     mt-1
                     text-sm
-                    text-slate-400
+                    text-muted
                   "
                 >
-                  Premium esports operations center
+                  Competitive gaming dashboard
                 </div>
               </div>
             </div>
@@ -848,12 +757,14 @@ export function AppShell({
                   justify-center
                   rounded-2xl
                   border
-                  border-white/10
-                  bg-white/[0.03]
-                  text-cyan-300
+                  border-border
+                  bg-card
+                  
                   transition
-                  hover:border-cyan-400/30
-                  hover:bg-cyan-400/10
+                  text-white
+hover:border-primary/30
+hover:bg-primary/10
+                 
                 "
               >
 
@@ -869,8 +780,8 @@ export function AppShell({
                     h-2
                     w-2
                     rounded-full
-                    bg-cyan-400
-                    shadow-[0_0_12px_rgba(34,211,238,1)]
+                    bg-primary
+                   
                   "
                 />
               </Link>
@@ -886,7 +797,7 @@ export function AppShell({
             z-10
             mx-auto
             w-full
-            max-w-[1700px]
+            max-w-[1600px]
             px-5
             py-6
             sm:px-8
@@ -897,5 +808,6 @@ export function AppShell({
         </main>
       </div>
     </div>
+  
   );
 }

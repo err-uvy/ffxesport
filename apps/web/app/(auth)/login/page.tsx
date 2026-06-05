@@ -8,12 +8,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
   ArrowRight,
-  Disc3,
   Mail,
-  ShieldCheck,
-  Sparkles,
-  Trophy,
-  Zap
+  Disc3
 } from "lucide-react";
 
 import { useForm } from "react-hook-form";
@@ -63,9 +59,7 @@ export default function LoginPage() {
   const form =
     useForm<FormValues>({
       resolver:
-        zodResolver(
-          schema
-        ),
+        zodResolver(schema),
 
       defaultValues: {
         email: "",
@@ -77,22 +71,24 @@ export default function LoginPage() {
   async function onSubmit(
     values: FormValues
   ) {
-
     try {
 
       await login(
-  values.email,
-  values.password,
-  values.rememberMe
-);
+        values.email,
+        values.password,
+        values.rememberMe
+      );
 
-toast.success(
-  "Welcome back to FFX ESPORTS"
-);
+      toast.success(
+        "Welcome back"
+      );
 
-router.push("/dashboard");
-router.refresh();
-     
+      router.push(
+        "/dashboard"
+      );
+
+      router.refresh();
+
     } catch (error) {
 
       toast.error(
@@ -102,301 +98,175 @@ router.refresh();
   }
 
   return (
-
     <div
       className="
-        relative
         min-h-screen
-        overflow-hidden
-        bg-[#050816]
+        bg-background
+        text-white
       "
     >
-
-      {/* BACKGROUND */}
-
       <div
         className="
-          absolute
-          inset-0
-          opacity-20
-        "
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&w=1600&q=80')",
-          backgroundSize:
-            "cover",
-          backgroundPosition:
-            "center"
-        }}
-      />
-
-      <div
-        className="
-          absolute
-          inset-0
-          bg-[radial-gradient(circle_at_top,rgba(37,99,235,.25),transparent_35%)]
-        "
-      />
-
-      <div
-        className="
-          absolute
-          inset-0
-          bg-gradient-to-br
-          from-[#050816]
-          via-[#050816]/90
-          to-black
-        "
-      />
-
-      {/* GRID */}
-
-      <div
-        className="
-          absolute
-          inset-0
-          opacity-[0.05]
-        "
-        style={{
-          backgroundImage:
-            `
-            linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px)
-          `,
-          backgroundSize:
-            "45px 45px"
-        }}
-      />
-
-      {/* CONTENT */}
-
-      <div
-        className="
-          relative
-          z-10
+          mx-auto
           flex
           min-h-screen
+          w-full
+          max-w-[1400px]
           items-center
           justify-center
           px-5
           py-10
         "
       >
-
         <div
           className="
             grid
             w-full
-            max-w-full
-            overflow-hidden
-            rounded-[40px]
-            border
-            border-white/10
-            bg-[#0b1020]/80
-            backdrop-blur-2xl
-            xl:grid-cols-2
+            items-center
+            gap-16
+            lg:grid-cols-[1fr_480px]
           "
         >
+          {/* LEFT SIDE */}
 
-          {/* LEFT SECTION */}
+          <div
+            className="
+              hidden
+              lg:block
+            "
+          >
+            <div
+              className="
+                mb-6
+                inline-flex
+                rounded-full
+                border
+                border-border
+                bg-card
+                px-4
+                py-2
+                text-xs
+                font-semibold
+                uppercase
+                tracking-[0.25em]
+                text-muted
+              "
+            >
+              FFX ESPORTS
+            </div>
+
+            <h1
+              className="
+                max-w-3xl
+                text-5xl
+                font-bold
+                leading-[1.05]
+                tracking-tight
+                text-white
+                xl:text-6xl
+              "
+            >
+              Competitive esports platform
+              built for modern tournament
+              gaming.
+            </h1>
+
+            <p
+              className="
+                mt-6
+                max-w-2xl
+                text-lg
+                leading-8
+                text-muted
+              "
+            >
+              Join premium tournaments,
+              secure wallets, real-time
+              match rooms, and competitive
+              gaming events in one unified
+              platform.
+            </p>
+
+            <div
+              className="
+                mt-10
+                grid
+                max-w-2xl
+                grid-cols-2
+                gap-4
+              "
+            >
+              {[
+                "Real-time Matches",
+                "Instant Wallet",
+                "Secure Prize Pools",
+                "Tournament Analytics"
+              ].map((item) => (
+                <div
+                  key={item}
+                  className="
+                    premium-card
+                    min-h-[88px]
+                    rounded-2xl
+                    px-5
+                    py-4
+                    text-sm
+                    font-medium
+                    text-white
+                  "
+                >
+                  {item}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* RIGHT SIDE */}
 
           <div
             className="
               relative
-              hidden
-              overflow-hidden
-              border-r
-              border-white/10
-              xl:block
+              w-full
+              max-w-[480px]
+              ml-auto
             "
           >
-
             <div
               className="
-                absolute
-                inset-0
-                opacity-25
-              "
-              style={{
-                backgroundImage:
-                  "url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80')",
-                backgroundSize:
-                  "cover",
-                backgroundPosition:
-                  "center"
-              }}
-            />
-
-            <div
-              className="
-                absolute
-                inset-0
-                bg-gradient-to-br
-                from-blue-600/25
-                via-black/80
-                to-cyan-500/10
-              "
-            />
-
-            <div
-              className="
-                relative
-                z-10
-                flex
-                h-full
-                flex-col
-                justify-between
-                p-12
+                rounded-[32px]
+                border
+                border-border
+                bg-card
+                p-7
+                shadow-card
+                transition-all
+                duration-200
+                hover:border-primary/20
+                sm:p-9
               "
             >
-
-              <div>
-
-                <div
-                  className="
-                    inline-flex
-                    items-center
-                    gap-2
-                    rounded-full
-                    border
-                    border-blue-500/20
-                    bg-blue-500/10
-                    px-4
-                    py-2
-                    text-sm
-                    font-semibold
-                    text-blue-100
-                  "
-                >
-
-                  <Sparkles
-                    size={16}
-                  />
-
-                  FFX ESPORTS PLATFORM
-                </div>
-
-                <h1
-                  className="
-                    mt-8
-                    text-6xl
-                    font-black
-                    leading-tight
-                    text-white
-                  "
-                >
-                  Enter The
-                  <span
-                    className="
-                      block
-                      bg-gradient-to-r
-                      from-blue-400
-                      to-cyan-300
-                      bg-clip-text
-                      text-transparent
-                    "
-                  >
-                    Battle Arena
-                  </span>
-                </h1>
-
-                <p
-                  className="
-                    mt-4
-                    max-w-xl
-                    text-lg
-                    leading-8
-                    text-slate-300
-                  "
-                >
-                  Compete in premium esports
-                  tournaments, build elite squads,
-                  earn winnings,
-                  and dominate global rankings.
-                </p>
-              </div>
-
-              <div
-                className="
-                  grid
-                  gap-5
-                "
-              >
-
-                <Feature
-                  icon={Trophy}
-                  title="Competitive Tournaments"
-                  body="Daily battle royale and esports events with real cash rewards."
-                />
-
-                <Feature
-                  icon={ShieldCheck}
-                  title="Secure Authentication"
-                  body="Protected player sessions and advanced anti-fraud security."
-                />
-
-                <Feature
-                  icon={Zap}
-                  title="Realtime Match System"
-                  body="Live rooms, score tracking, leaderboards, and tournament automation."
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* RIGHT SECTION */}
-
-          <div
-            className="
-              flex
-              items-center
-              justify-center
-              p-6
-              sm:p-10
-              xl:p-16
-            "
-          >
-
-            <div
-              className="
-                w-full
-                max-w-md
-              "
-            >
-
-              {/* LOGO */}
+              {/* HEADER */}
 
               <div
                 className="
                   mb-8
-                  flex
-                  h-20
-                  w-20
-                  items-center
-                  justify-center
-                  rounded-[28px]
-                  bg-blue-500/10
-                  text-blue-400
-                  shadow-[0_0_50px_rgba(59,130,246,.25)]
                 "
               >
-
-                <ShieldCheck
-                  size={38}
-                />
-              </div>
-
-              {/* TEXT */}
-
-              <div>
-
                 <div
                   className="
-                    text-sm
+                    mb-4
+                    inline-flex
+                    rounded-full
+                    border
+                    border-border
+                    bg-background-secondary
+                    px-4
+                    py-1.5
+                    text-[11px]
                     font-semibold
                     uppercase
                     tracking-[0.3em]
-                    text-blue-300
+                    text-muted
                   "
                 >
                   PLAYER LOGIN
@@ -404,27 +274,25 @@ router.refresh();
 
                 <h2
                   className="
-                    mt-3
-                    text-4xl
-                    font-black
+                    text-3xl
+                    font-bold
+                    tracking-tight
                     text-white
                   "
                 >
-                  Welcome Back
+                  Welcome back
                 </h2>
 
                 <p
                   className="
-                    mt-4
-                    text-base
+                    mt-3
+                    text-sm
                     leading-7
-                    text-slate-400
+                    text-muted
                   "
                 >
-                  Login securely to access tournaments,
-                  squads,
-                  wallet,
-                  rankings,
+                  Login to access tournaments,
+                  wallet, rankings, squads,
                   and match operations.
                 </p>
               </div>
@@ -433,25 +301,22 @@ router.refresh();
 
               <form
                 className="
-                  mt-10
                   space-y-5
                 "
                 onSubmit={form.handleSubmit(
                   onSubmit
                 )}
               >
-
                 {/* EMAIL */}
 
                 <div>
-
                   <label
                     className="
                       mb-2
                       block
                       text-sm
-                      font-semibold
-                      text-slate-300
+                      font-medium
+                      text-muted
                     "
                   >
                     Email Address
@@ -459,32 +324,31 @@ router.refresh();
 
                   <Input
                     type="email"
-                    placeholder="player@ffxesports.com"
+                    placeholder="player@example.com"
                     {...form.register(
                       "email"
                     )}
                     className="
                       h-14
                       rounded-2xl
-                      border-white/10
-                      bg-[#111827]
+                      border-border
+                      bg-background-secondary
                       text-white
+                      focus:border-primary
                     "
                   />
-
                 </div>
 
                 {/* PASSWORD */}
 
                 <div>
-
                   <label
                     className="
                       mb-2
                       block
                       text-sm
-                      font-semibold
-                      text-slate-300
+                      font-medium
+                      text-muted
                     "
                   >
                     Password
@@ -492,19 +356,19 @@ router.refresh();
 
                   <Input
                     type="password"
-                    placeholder="Your password"
+                    placeholder="Enter password"
                     {...form.register(
                       "password"
                     )}
                     className="
                       h-14
                       rounded-2xl
-                      border-white/10
-                      bg-[#111827]
+                      border-border
+                      bg-background-secondary
                       text-white
+                      focus:border-primary
                     "
                   />
-
                 </div>
 
                 {/* OPTIONS */}
@@ -517,16 +381,14 @@ router.refresh();
                     text-sm
                   "
                 >
-
                   <label
                     className="
                       flex
                       items-center
                       gap-2
-                      text-slate-300
+                      text-muted
                     "
                   >
-
                     <input
                       type="checkbox"
                       className="
@@ -545,8 +407,8 @@ router.refresh();
                   <Link
                     href="/forgot-password"
                     className="
-                      font-semibold
-                      text-blue-300
+                      font-medium
+                      text-primary
                       transition
                       hover:text-white
                     "
@@ -555,7 +417,7 @@ router.refresh();
                   </Link>
                 </div>
 
-                {/* LOGIN BUTTON */}
+                {/* BUTTON */}
 
                 <Button
                   type="submit"
@@ -567,15 +429,16 @@ router.refresh();
                     h-14
                     w-full
                     rounded-2xl
-                    bg-blue-600
+                    bg-primary
                     text-base
-                    font-bold
-                    hover:bg-blue-700
+                    font-semibold
+                    text-white
+                    transition
+                    hover:opacity-90
                   "
                 >
-
                   <ArrowRight
-                    size={20}
+                    size={18}
                   />
 
                   {form.formState
@@ -585,14 +448,13 @@ router.refresh();
                 </Button>
               </form>
 
-              {/* SOCIAL LOGIN */}
+              {/* SOCIAL */}
 
               <div
                 className="
                   mt-8
                 "
               >
-
                 <div
                   className="
                     mb-4
@@ -601,21 +463,20 @@ router.refresh();
                     gap-3
                   "
                 >
-
-                  <div className="h-px flex-1 bg-white/10" />
+                  <div className="h-px flex-1 bg-border" />
 
                   <span
                     className="
                       text-xs
                       uppercase
                       tracking-[0.25em]
-                      text-slate-500
+                      text-muted
                     "
                   >
                     Continue With
                   </span>
 
-                  <div className="h-px flex-1 bg-white/10" />
+                  <div className="h-px flex-1 bg-border" />
                 </div>
 
                 <div
@@ -625,7 +486,6 @@ router.refresh();
                     sm:grid-cols-2
                   "
                 >
-
                   <a
                     href={`${apiUrl}/auth/google`}
                     className="
@@ -636,21 +496,16 @@ router.refresh();
                       gap-2
                       rounded-2xl
                       border
-                      border-white/10
-                      bg-[#111827]
+                      border-border
+                      bg-background-secondary
                       text-sm
-                      font-semibold
+                      font-medium
                       text-white
                       transition
-                      hover:border-blue-400/40
-                      hover:bg-[#172036]
+                      hover:border-primary/20
                     "
                   >
-
-                    <Mail
-                      size={18}
-                    />
-
+                    <Mail size={18} />
                     Google
                   </a>
 
@@ -664,21 +519,16 @@ router.refresh();
                       gap-2
                       rounded-2xl
                       border
-                      border-white/10
-                      bg-[#111827]
+                      border-border
+                      bg-background-secondary
                       text-sm
-                      font-semibold
+                      font-medium
                       text-white
                       transition
-                      hover:border-cyan-400/40
-                      hover:bg-[#172036]
+                      hover:border-primary/20
                     "
                   >
-
-                    <Disc3
-                      size={18}
-                    />
-
+                    <Disc3 size={18} />
                     Discord
                   </a>
                 </div>
@@ -691,22 +541,21 @@ router.refresh();
                   mt-8
                   text-center
                   text-sm
-                  text-slate-400
+                  text-muted
                 "
               >
-
                 New to FFX ESPORTS?{" "}
 
                 <Link
                   href="/register"
                   className="
-                    font-bold
-                    text-blue-300
+                    font-semibold
+                    text-primary
                     transition
                     hover:text-white
                   "
                 >
-                  Create Account
+                  Create account
                 </Link>
               </p>
             </div>
@@ -717,73 +566,3 @@ router.refresh();
   );
 }
 
-function Feature({
-  icon: Icon,
-  title,
-  body
-}: {
-  icon: any;
-  title: string;
-  body: string;
-}) {
-
-  return (
-
-    <div
-      className="
-        flex
-        items-start
-        gap-4
-        rounded-3xl
-        border
-        border-white/10
-        bg-white/[0.03]
-        p-4
-        backdrop-blur-xl
-      "
-    >
-
-      <div
-        className="
-          flex
-          h-12
-          w-12
-          items-center
-          justify-center
-          rounded-2xl
-          bg-blue-500/10
-          text-blue-400
-        "
-      >
-
-        <Icon
-          size={22}
-        />
-      </div>
-
-      <div>
-
-        <h3
-          className="
-            text-lg
-            font-bold
-            text-white
-          "
-        >
-          {title}
-        </h3>
-
-        <p
-          className="
-            mt-1
-            text-sm
-            leading-6
-            text-slate-400
-          "
-        >
-          {body}
-        </p>
-      </div>
-    </div>
-  );
-}

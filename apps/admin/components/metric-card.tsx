@@ -34,7 +34,7 @@ export function MetricCard({
       duration-300
 
       hover:-translate-y-1
-      hover:border-cyan-400/20
+      hover:border-white/5
 
       hover:shadow-[0_0_40px_rgba(34,211,238,.12)]
     "
@@ -137,7 +137,7 @@ export function MetricCard({
           rounded-2xl
 
           border
-          border-cyan-400/20
+          border-white/5
 
           bg-[linear-gradient(135deg,rgba(34,211,238,.14),rgba(59,130,246,.08),rgba(124,58,237,.12))]
 

@@ -1,3 +1,4 @@
+
 "use client";
 
 import {
@@ -38,9 +39,7 @@ import {
 
 type Team = {
   id: string;
-
   name: string;
-
   game: string;
 };
 
@@ -152,56 +151,37 @@ export default function TournamentsPage() {
   }
 
   return (
-    <div className="pb-10">
+
+    <div
+      className="
+        pb-10
+        space-y-8
+      "
+    >
 
       {/* HERO */}
 
       <section
         className="
-          relative
-          overflow-hidden
-          rounded-[36px]
+          rounded-[32px]
           border
-          border-white/10
-          bg-[#0d0d0d]
-          p-7
+          border-border
+          bg-card
+          p-8
           xl:p-10
         "
       >
 
-        {/* BG */}
+        <div>
 
-        <div
-          className="
-            absolute
-            inset-0
-            opacity-20
-          "
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=1600&q=80')",
-            backgroundSize: "cover",
-            backgroundPosition:
-              "center"
-          }}
-        />
-
-        <div
-          className="
-            absolute
-            inset-0
-            bg-gradient-to-br
-            from-blue-600/20
-            via-black/80
-            to-cyan-500/10
-          "
-        />
-
-        {/* CONTENT */}
-
-        <div className="relative z-10">
-
-          <div className="flex flex-wrap items-center gap-3">
+          <div
+            className="
+              flex
+              flex-wrap
+              items-center
+              gap-4
+            "
+          >
 
             <div
               className="
@@ -211,11 +191,13 @@ export default function TournamentsPage() {
                 items-center
                 justify-center
                 rounded-2xl
-                bg-blue-500/10
-                text-blue-400
+                border
+                border-border
+                bg-background-secondary
+                text-white
               "
             >
-              <Trophy size={28} />
+              <Trophy size={26} />
             </div>
 
             <div>
@@ -223,10 +205,10 @@ export default function TournamentsPage() {
               <div
                 className="
                   text-xs
-                  font-semibold
+                  font-medium
                   uppercase
                   tracking-[0.3em]
-                  text-zinc-500
+                  text-muted
                 "
               >
                 FFX ESPORTS
@@ -236,9 +218,10 @@ export default function TournamentsPage() {
                 className="
                   mt-1
                   text-4xl
-                  font-black
+                  font-bold
+                  tracking-tight
                   text-white
-                  xl:text-6xl
+                  xl:text-5xl
                 "
               >
                 Tournaments
@@ -248,23 +231,30 @@ export default function TournamentsPage() {
 
           <p
             className="
-              mt-4
+              mt-5
               max-w-3xl
               text-base
               leading-8
-              text-zinc-300
-              xl:text-lg
+              text-muted
             "
           >
-            Discover premium esports tournaments,
-            compete with top players,
-            earn rewards,
-            and dominate the battlefield.
+            Browse active esports tournaments,
+            monitor prize pools,
+            join competitive events,
+            and track participation across games.
           </p>
 
           {/* STATS */}
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          <div
+            className="
+              mt-10
+              grid
+              gap-4
+              sm:grid-cols-2
+              xl:grid-cols-4
+            "
+          >
 
             <InfoCard
               icon={Flame}
@@ -276,7 +266,7 @@ export default function TournamentsPage() {
 
             <InfoCard
               icon={Users}
-              title="Registered Players"
+              title="Players"
               value="25K+"
             />
 
@@ -297,66 +287,75 @@ export default function TournamentsPage() {
 
       {/* FILTERS */}
 
-      <div className="mt-8">
+      <PageHeader
+        eyebrow="Tournament Browser"
+        title="Browse Events"
+      >
 
-        <PageHeader
-          eyebrow="Arena Browser"
-          title="Browse Tournaments"
+        <div
+          className="
+            flex
+            flex-wrap
+            gap-3
+          "
         >
 
-          <div className="flex flex-wrap gap-3">
+          {[
+            "ALL",
+            "FREE_FIRE",
+            "BGMI",
+            "CODM",
+            "VALORANT"
+          ].map((item) => (
 
-            {[
-              "ALL",
-              "FREE_FIRE",
-              "BGMI",
-              "CODM",
-              "VALORANT"
-            ].map((item) => (
+            <Button
+              key={item}
+              variant={
+                game === item
+                  ? "primary"
+                  : "secondary"
+              }
+              onClick={() =>
+                setGame(item)
+              }
+              className={`
+                h-11
+                rounded-2xl
+                border
+                px-5
+                font-medium
 
-              <Button
-                key={item}
-                variant={
+                ${
                   game === item
-                    ? "primary"
-                    : "secondary"
+                    ? "border-primary bg-primary text-white"
+                    : "border-border bg-card text-muted hover:bg-background-secondary"
                 }
-                onClick={() =>
-                  setGame(item)
-                }
-                className={`
-                  h-11
-                  rounded-2xl
-                  border
-                  px-5
-                  font-semibold
-                  transition-all
+              `}
+            >
 
-                  ${
-                    game === item
-                      ? "border-blue-500/30 bg-blue-600 text-white"
-                      : "border-white/10 bg-[#151515] text-zinc-300 hover:bg-[#1d1d1d]"
-                  }
-                `}
-              >
+              <Filter size={16} />
 
-                <Filter size={16} />
-
-                {item.replace(
-                  "_",
-                  " "
-                )}
-              </Button>
-            ))}
-          </div>
-        </PageHeader>
-      </div>
+              {item.replace(
+                "_",
+                " "
+              )}
+            </Button>
+          ))}
+        </div>
+      </PageHeader>
 
       {/* CONTENT */}
 
       {loading ? (
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div
+          className="
+            grid
+            gap-6
+            md:grid-cols-2
+            xl:grid-cols-3
+          "
+        >
 
           {Array.from({
             length: 6
@@ -365,8 +364,8 @@ export default function TournamentsPage() {
             <Skeleton
               key={index}
               className="
-                h-[430px]
-                rounded-[30px]
+                h-[420px]
+                rounded-3xl
               "
             />
           ))}
@@ -374,7 +373,14 @@ export default function TournamentsPage() {
 
       ) : filtered.length ? (
 
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+        <div
+          className="
+            grid
+            gap-6
+            md:grid-cols-2
+            xl:grid-cols-3
+          "
+        >
 
           {filtered.map(
             (tournament) => (
@@ -382,36 +388,23 @@ export default function TournamentsPage() {
               <div
                 key={tournament.id}
                 className="
-                  rounded-[32px]
+                  rounded-3xl
                   border
-                  border-white/5
-                  bg-[#101010]
-                  p-[1px]
-                  transition-all
-                  duration-300
-                  hover:-translate-y-1
-                  hover:border-blue-500/20
+                  border-border
+                  bg-card
                 "
               >
 
-                <div
-                  className="
-                    rounded-[32px]
-                    bg-[#101010]
-                  "
-                >
-
-                  <TournamentCard
-                    tournament={
+                <TournamentCard
+                  tournament={
+                    tournament
+                  }
+                  onJoin={() =>
+                    joinTournament(
                       tournament
-                    }
-                    onJoin={() =>
-                      joinTournament(
-                        tournament
-                      )
-                    }
-                  />
-                </div>
+                    )
+                  }
+                />
               </div>
             )
           )}
@@ -419,14 +412,11 @@ export default function TournamentsPage() {
 
       ) : (
 
-        <div className="mt-10">
-
-          <EmptyState
-            icon={Trophy}
-            title="No tournaments found"
-            body="Your selected filters currently have no active tournament slots available."
-          />
-        </div>
+        <EmptyState
+          icon={Trophy}
+          title="No tournaments found"
+          body="There are currently no tournaments available for the selected category."
+        />
       )}
     </div>
   );
@@ -443,39 +433,69 @@ function InfoCard({
 }) {
 
   return (
+
     <div
       className="
-        rounded-3xl
+        rounded-2xl
         border
-        border-white/10
-        bg-black/30
-        p-4
-        backdrop-blur-xl
+        border-border
+        bg-background-secondary
+        p-5
       "
     >
 
       <div
         className="
           flex
-          h-12
-          w-12
           items-center
-          justify-center
-          rounded-2xl
-          bg-blue-500/10
-          text-blue-400
+          justify-between
         "
       >
-        <Icon size={22} />
-      </div>
 
-      <div className="mt-4 text-xs uppercase tracking-[0.2em] text-zinc-500">
-        {title}
-      </div>
+        <div>
 
-      <div className="mt-1 text-2xl font-black text-white">
-        {value}
+          <div
+            className="
+              text-xs
+              font-medium
+              uppercase
+              tracking-[0.2em]
+              text-muted
+            "
+          >
+            {title}
+          </div>
+
+          <div
+            className="
+              mt-3
+              text-3xl
+              font-bold
+              text-white
+            "
+          >
+            {value}
+          </div>
+        </div>
+
+        <div
+          className="
+            flex
+            h-12
+            w-12
+            items-center
+            justify-center
+            rounded-2xl
+            border
+            border-border
+            bg-card
+            text-white
+          "
+        >
+          <Icon size={20} />
+        </div>
       </div>
     </div>
   );
 }
+

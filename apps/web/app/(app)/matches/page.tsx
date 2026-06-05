@@ -1,23 +1,42 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import {
+  useEffect,
+  useState
+} from "react";
 
 import {
   Clock,
   ImageUp,
   ShieldCheck,
+  Swords,
+  Trophy,
+  Users,
+  Gamepad2
 } from "lucide-react";
 
-import { toast } from "sonner";
+import {
+  toast
+} from "sonner";
 
 import {
   Button,
   Card,
-  Input,
+  Input
 } from "@/ui";
 
-import { EmptyState } from "@/components/empty-state";
-import { api, apiMessage } from "@/lib/api";
+import {
+  EmptyState
+} from "@/components/empty-state";
+
+import {
+  PageHeader
+} from "@/components/page-header";
+
+import {
+  api,
+  apiMessage
+} from "@/lib/api";
 
 type Match = {
   id: string;
@@ -25,6 +44,7 @@ type Match = {
   mapName: string;
 
   roomId?: string | null;
+
   roomPassword?: string | null;
 
   startsAt: string;
@@ -40,6 +60,7 @@ type Match = {
 };
 
 export default function MatchesPage() {
+
   const [matches, setMatches] =
     useState<Match[]>([]);
 
@@ -60,23 +81,35 @@ export default function MatchesPage() {
   }, []);
 
   function loadMatches() {
+
     api
       .get("/matches")
       .then((response) =>
-        setMatches(response.data.data)
+        setMatches(
+          response.data.data
+        )
       );
   }
 
   async function submitResult() {
-    if (!selected || !screenshot) {
+
+    if (
+      !selected ||
+      !screenshot
+    ) {
+
       return toast.error(
         "Select match and screenshot"
       );
     }
 
-    const body = new FormData();
+    const body =
+      new FormData();
 
-    body.append("kills", String(kills));
+    body.append(
+      "kills",
+      String(kills)
+    );
 
     body.append(
       "placement",
@@ -89,19 +122,20 @@ export default function MatchesPage() {
     );
 
     try {
+
       await api.post(
         `/matches/${selected.id}/submit-result`,
         body,
         {
           headers: {
             "content-type":
-              "multipart/form-data",
-          },
+              "multipart/form-data"
+          }
         }
       );
 
       toast.success(
-        "Result submitted for verification"
+        "Result submitted successfully"
       );
 
       setSelected(null);
@@ -109,37 +143,271 @@ export default function MatchesPage() {
       setScreenshot(null);
 
       loadMatches();
+
     } catch (error) {
-      toast.error(apiMessage(error));
+
+      toast.error(
+        apiMessage(error)
+      );
     }
   }
 
   return (
-    <div className="main-container">
+    <div className="space-y-6 pb-10">
 
       {/* HEADER */}
 
-      <div className="mb-10">
+      <PageHeader
+        eyebrow="Tournament Operations"
+        title="Matches"
+      >
 
-        <p className="text-sm font-medium uppercase tracking-[0.25em] text-zinc-500">
-          Match Operations
-        </p>
+        <div
+          className="
+            rounded-2xl
+            border
+            border-border
+            bg-card
+            px-5
+            py-3
+          "
+        >
 
-        <h1 className="mt-3 text-5xl font-bold tracking-tight text-white">
-          Matches
-        </h1>
+          <div
+            className="
+              text-xs
+              font-semibold
+              uppercase
+              tracking-[0.25em]
+              text-muted
+            "
+          >
+            Active Matches
+          </div>
 
-        <p className="mt-3 max-w-2xl text-zinc-400">
-          Access rooms, verify participation,
-          and securely upload match proofs.
-        </p>
-      </div>
+          <div
+            className="
+              mt-1
+              text-2xl
+              font-bold
+              text-white
+            "
+          >
+            {matches.length}
+          </div>
+        </div>
+      </PageHeader>
+
+      {/* HERO */}
+
+      <section
+        className="
+          rounded-[32px]
+          border
+          border-border
+          bg-card
+          p-6
+          lg:p-8
+        "
+      >
+
+        <div
+          className="
+            grid
+            gap-8
+            xl:grid-cols-[1fr_340px]
+          "
+        >
+
+          {/* LEFT */}
+
+          <div>
+
+            <div
+              className="
+                inline-flex
+                items-center
+                gap-2
+                rounded-full
+                border
+                border-border
+                bg-background-secondary
+                px-4
+                py-2
+                text-xs
+                font-semibold
+                uppercase
+                tracking-[0.25em]
+                text-muted
+              "
+            >
+              FFX Match Center
+            </div>
+
+            <h1
+              className="
+                mt-6
+                max-w-4xl
+                text-4xl
+                font-bold
+                tracking-tight
+                text-white
+                xl:text-5xl
+              "
+            >
+              Competitive match
+              operations & result
+              verification.
+            </h1>
+
+            <p
+              className="
+                mt-5
+                max-w-3xl
+                text-base
+                leading-8
+                text-muted
+              "
+            >
+              Access room credentials,
+              join battle matches,
+              and upload verified screenshots
+              for automated tournament scoring.
+            </p>
+
+            {/* STATS */}
+
+            <div
+              className="
+                mt-8
+                grid
+                gap-4
+                sm:grid-cols-2
+                xl:grid-cols-4
+              "
+            >
+
+              <QuickCard
+                icon={Gamepad2}
+                label="Live Rooms"
+                value={String(
+                  matches.length
+                )}
+              />
+
+              <QuickCard
+                icon={Users}
+                label="Competitive"
+                value="Realtime"
+              />
+
+              <QuickCard
+                icon={ShieldCheck}
+                label="Verification"
+                value="Secure"
+              />
+
+              <QuickCard
+                icon={Trophy}
+                label="Scoring"
+                value="Automated"
+              />
+            </div>
+          </div>
+
+          {/* RIGHT */}
+
+          <div
+            className="
+              rounded-[28px]
+              border
+              border-border
+              bg-background-secondary
+              p-6
+            "
+          >
+
+            <div className="flex items-center justify-between">
+
+              <div>
+
+                <div
+                  className="
+                    text-xs
+                    font-semibold
+                    uppercase
+                    tracking-[0.25em]
+                    text-muted
+                  "
+                >
+                  Match Status
+                </div>
+
+                <div
+                  className="
+                    mt-2
+                    text-3xl
+                    font-bold
+                    text-white
+                  "
+                >
+                  Live Ops
+                </div>
+              </div>
+
+              <div
+                className="
+                  flex
+                  h-16
+                  w-16
+                  items-center
+                  justify-center
+                  rounded-3xl
+                  bg-primary/10
+                  text-primary
+                "
+              >
+                <Swords size={30} />
+              </div>
+            </div>
+
+            <div className="mt-8 space-y-4">
+
+              <InfoRow
+                icon={Clock}
+                title="Realtime Rooms"
+              />
+
+              <InfoRow
+                icon={ShieldCheck}
+                title="Verified Proofs"
+              />
+
+              <InfoRow
+                icon={ImageUp}
+                title="Screenshot Upload"
+              />
+
+              <InfoRow
+                icon={Trophy}
+                title="Leaderboard Sync"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
 
       {matches.length ? (
 
-        <div className="grid gap-6 xl:grid-cols-[1fr_.75fr]">
+        <div
+          className="
+            grid
+            gap-6
+            xl:grid-cols-[1fr_380px]
+          "
+        >
 
-          {/* LEFT */}
+          {/* MATCH LIST */}
 
           <div className="space-y-5">
 
@@ -148,35 +416,53 @@ export default function MatchesPage() {
               <Card
                 key={match.id}
                 className="
-                  premium-card
-                  overflow-hidden
-                  p-7
+                  rounded-[30px]
+                  border
+                  border-border
+                  bg-card
+                  p-6
                 "
               >
 
-                {/* TOP */}
+                <div
+                  className="
+                    flex
+                    flex-col
+                    gap-6
+                    xl:flex-row
+                    xl:items-start
+                    xl:justify-between
+                  "
+                >
 
-                <div className="flex flex-col gap-6 xl:flex-row xl:items-start xl:justify-between">
+                  {/* LEFT */}
 
                   <div>
 
                     {/* BADGES */}
 
-                    <div className="mb-5 flex flex-wrap gap-3">
+                    <div
+                      className="
+                        mb-5
+                        flex
+                        flex-wrap
+                        gap-3
+                      "
+                    >
 
                       <div
                         className="
                           rounded-full
                           border
-                          border-white/5
-                          bg-[#18181b]
+                          border-border
+                          bg-background-secondary
                           px-4
                           py-2
                           text-xs
                           font-semibold
                           uppercase
-                          tracking-wider
-                          text-zinc-300
+                          tracking-[0.25em]
+                          text-muted
                         "
                       >
                         {match.tournament.game.replace(
@@ -194,10 +480,11 @@ export default function MatchesPage() {
                           text-xs
                           font-semibold
                           uppercase
-                          tracking-wider
+                          tracking-[0.25em]
 
                           ${
-                            match.status === "LIVE"
+                            match.status ===
+                            "LIVE"
                               ? `
                                 border-green-500/20
                                 bg-green-500/10
@@ -220,57 +507,91 @@ export default function MatchesPage() {
 
                     {/* TITLE */}
 
-                    <h2 className="text-2xl font-bold text-white">
+                    <h2
+                      className="
+                        text-2xl
+                        font-bold
+                        text-white
+                      "
+                    >
                       {match.tournament.title}
                     </h2>
 
-                    {/* DATE */}
+                    {/* META */}
 
-                    <div className="mt-4 flex flex-wrap items-center gap-3 text-zinc-400">
+                    <div
+                      className="
+                        mt-4
+                        flex
+                        flex-wrap
+                        items-center
+                        gap-3
+                        text-sm
+                        text-muted
+                      "
+                    >
 
                       <div className="flex items-center gap-2">
-                        <Clock className="h-4 w-4" />
 
-                        <span className="text-sm">
-                          {new Date(
-                            match.startsAt
-                          ).toLocaleString()}
-                        </span>
+                        <Clock
+                          className="
+                            h-4
+                            w-4
+                          "
+                        />
+
+                        {new Date(
+                          match.startsAt
+                        ).toLocaleString()}
                       </div>
 
-                      <div className="h-1 w-1 rounded-full bg-zinc-700" />
+                      <div
+                        className="
+                          h-1
+                          w-1
+                          rounded-full
+                          bg-border
+                        "
+                      />
 
-                      <span className="text-sm">
+                      <div>
                         {match.mapName}
-                      </span>
+                      </div>
                     </div>
                   </div>
 
                   {/* BUTTON */}
 
                   <Button
-                    className="
-                      rounded-2xl
-                      bg-blue-600
-                      px-5
-                      py-3
-                      text-sm
-                      font-semibold
-                      hover:bg-blue-700
-                    "
                     onClick={() =>
-                      setSelected(match)
+                      setSelected(
+                        match
+                      )
                     }
+                    className="
+                      h-12
+                      rounded-2xl
+                      bg-primary
+                      px-5
+                      font-semibold
+                    "
                   >
                     Submit Result
                   </Button>
                 </div>
 
-                {/* ROOM */}
+                {/* ROOMS */}
 
-                <div className="mt-8 grid gap-4 sm:grid-cols-2">
+                <div
+                  className="
+                    mt-8
+                    grid
+                    gap-4
+                    sm:grid-cols-2
+                  "
+                >
 
-                  <Room
+                  <RoomCard
                     label="Room ID"
                     value={
                       match.roomId ??
@@ -278,7 +599,7 @@ export default function MatchesPage() {
                     }
                   />
 
-                  <Room
+                  <RoomCard
                     label="Password"
                     value={
                       match.roomPassword ??
@@ -287,19 +608,39 @@ export default function MatchesPage() {
                   />
                 </div>
 
-                {/* INSTRUCTIONS */}
+                {/* RULES */}
 
                 <div
                   className="
-                    mt-7
-                    rounded-2xl
+                    mt-6
+                    rounded-3xl
                     border
-                    border-white/5
-                    bg-[#151515]
-                    p-4
+                    border-border
+                    bg-background-secondary
+                    p-5
                   "
                 >
-                  <p className="text-sm leading-7 text-zinc-400">
+
+                  <div
+                    className="
+                      text-xs
+                      font-semibold
+                      uppercase
+                      tracking-[0.25em]
+                      text-muted
+                    "
+                  >
+                    Instructions
+                  </div>
+
+                  <p
+                    className="
+                      mt-3
+                      text-sm
+                      leading-7
+                      text-muted
+                    "
+                  >
                     {match.instructions}
                   </p>
                 </div>
@@ -307,15 +648,18 @@ export default function MatchesPage() {
             ))}
           </div>
 
-          {/* RIGHT */}
+          {/* SIDEBAR */}
 
           <Card
             className="
-              premium-card
               sticky
               top-6
               h-fit
-              p-7
+              rounded-[30px]
+              border
+              border-border
+              bg-card
+              p-6
             "
           >
 
@@ -329,108 +673,172 @@ export default function MatchesPage() {
                   items-center
                   justify-center
                   rounded-2xl
-                  bg-blue-500/10
-                  text-blue-400
+                  bg-primary/10
+                  text-primary
                 "
               >
-                <ShieldCheck className="h-6 w-6" />
+                <ShieldCheck
+                  className="
+                    h-6
+                    w-6
+                  "
+                />
               </div>
 
               <div>
-                <p className="text-sm text-zinc-500">
-                  Verification
-                </p>
 
-                <h2 className="text-2xl font-bold text-white">
+                <div
+                  className="
+                    text-sm
+                    text-muted
+                  "
+                >
+                  Match Verification
+                </div>
+
+                <h2
+                  className="
+                    text-2xl
+                    font-bold
+                    text-white
+                  "
+                >
                   Proof Upload
                 </h2>
               </div>
             </div>
 
-            <p className="mt-4 text-sm leading-6 text-zinc-400">
-              Upload authentic match screenshots
-              for automated verification and
-              leaderboard processing.
+            <p
+              className="
+                mt-4
+                text-sm
+                leading-7
+                text-muted
+              "
+            >
+              Upload valid screenshots
+              for automated result processing
+              and leaderboard synchronization.
             </p>
 
             {/* SELECTED */}
 
             <div
               className="
-                mt-4
-                rounded-2xl
+                mt-5
+                rounded-3xl
                 border
-                border-white/5
-                bg-[#151515]
-                p-4
+                border-border
+                bg-background-secondary
+                p-5
               "
             >
-              <p className="text-xs uppercase tracking-[0.25em] text-zinc-500">
-                Selected Match
-              </p>
 
-              <h3 className="mt-1 text-lg font-semibold text-white">
+              <div
+                className="
+                  text-xs
+                  font-semibold
+                  uppercase
+                  tracking-[0.25em]
+                  text-muted
+                "
+              >
+                Selected Match
+              </div>
+
+              <div
+                className="
+                  mt-2
+                  text-lg
+                  font-semibold
+                  text-white
+                "
+              >
                 {selected
-                  ? selected.tournament.title
+                  ? selected
+                      .tournament
+                      .title
                   : "No Match Selected"}
-              </h3>
+              </div>
             </div>
 
             {/* FORM */}
 
-            <div className="mt-4 space-y-4">
+            <div className="mt-5 space-y-4">
 
               <div>
-                <p className="mb-2 text-sm font-medium text-zinc-400">
+
+                <div
+                  className="
+                    mb-2
+                    text-sm
+                    font-medium
+                    text-white
+                  "
+                >
                   Kills
-                </p>
+                </div>
 
                 <Input
                   type="number"
                   min={0}
                   value={kills}
-                  onChange={(event: any) =>
+                  onChange={(
+                    event: any
+                  ) =>
                     setKills(
                       Number(
-                        event.target.value
+                        event.target
+                          .value
                       )
                     )
                   }
                   className="
                     h-12
                     rounded-2xl
-                    border-white/5
-                    bg-[#151515]
+                    border-border
+                    bg-background-secondary
                   "
                 />
               </div>
 
               <div>
-                <p className="mb-2 text-sm font-medium text-zinc-400">
+
+                <div
+                  className="
+                    mb-2
+                    text-sm
+                    font-medium
+                    text-white
+                  "
+                >
                   Placement
-                </p>
+                </div>
 
                 <Input
                   type="number"
                   min={1}
                   value={placement}
-                  onChange={(event: any) =>
+                  onChange={(
+                    event: any
+                  ) =>
                     setPlacement(
                       Number(
-                        event.target.value
+                        event.target
+                          .value
                       )
                     )
                   }
                   className="
                     h-12
                     rounded-2xl
-                    border-white/5
-                    bg-[#151515]
+                    border-border
+                    bg-background-secondary
                   "
                 />
               </div>
 
-              {/* FILE */}
+              {/* UPLOAD */}
 
               <label
                 className="
@@ -439,19 +847,17 @@ export default function MatchesPage() {
                   flex-col
                   items-center
                   justify-center
-                  gap-3
+                  gap-4
                   rounded-3xl
                   border
                   border-dashed
-                  border-white/10
-                  bg-[#151515]
+                  border-border
+                  bg-background-secondary
                   px-6
                   py-10
                   text-center
                   transition-all
-                  duration-200
-                  hover:border-blue-500/30
-                  hover:bg-[#181818]
+                  hover:border-primary/40
                 "
               >
 
@@ -463,51 +869,68 @@ export default function MatchesPage() {
                     items-center
                     justify-center
                     rounded-2xl
-                    bg-blue-500/10
-                    text-blue-400
+                    bg-primary/10
+                    text-primary
                   "
                 >
-                  <ImageUp className="h-6 w-6" />
+                  <ImageUp
+                    className="
+                      h-6
+                      w-6
+                    "
+                  />
                 </div>
 
                 <div>
 
-                  <p className="font-semibold text-white">
+                  <div
+                    className="
+                      font-semibold
+                      text-white
+                    "
+                  >
                     {screenshot?.name ??
                       "Upload Screenshot"}
-                  </p>
+                  </div>
 
-                  <p className="mt-1 text-sm text-zinc-500">
-                    PNG, JPG up to 10MB
-                  </p>
+                  <div
+                    className="
+                      mt-1
+                      text-sm
+                      text-muted
+                    "
+                  >
+                    PNG or JPG • Max 10MB
+                  </div>
                 </div>
 
                 <input
                   type="file"
                   className="hidden"
                   accept="image/*"
-                  onChange={(event: any) =>
+                  onChange={(
+                    event: any
+                  ) =>
                     setScreenshot(
-                      event.target.files?.[0] ??
+                      event.target
+                        .files?.[0] ??
                         null
                     )
                   }
                 />
               </label>
 
-              {/* BUTTON */}
-
               <Button
+                onClick={
+                  submitResult
+                }
                 className="
                   h-12
                   w-full
                   rounded-2xl
-                  bg-blue-600
-                  text-sm
+                  bg-primary
                   font-semibold
-                  hover:bg-blue-700
                 "
-                onClick={submitResult}
               >
                 Submit Proof
               </Button>
@@ -520,38 +943,168 @@ export default function MatchesPage() {
         <EmptyState
           icon={Clock}
           title="No Matches Assigned"
-          body="Tournament rooms and competitive matches will appear after successful registration."
+          body="Tournament rooms and match operations will appear after successful registration."
         />
       )}
     </div>
   );
 }
 
-function Room({
+function QuickCard({
+  icon: Icon,
   label,
-  value,
+  value
 }: {
+  icon: any;
   label: string;
   value: string;
 }) {
+
   return (
     <div
       className="
         rounded-3xl
         border
-        border-white/5
-        bg-[#151515]
+        border-border
+        bg-background-secondary
         p-4
       "
     >
 
-      <p className="text-xs uppercase tracking-[0.25em] text-zinc-500">
-        {label}
-      </p>
+      <div
+        className="
+          flex
+          h-12
+          w-12
+          items-center
+          justify-center
+          rounded-2xl
+          bg-primary/10
+          text-primary
+        "
+      >
+        <Icon size={22} />
+      </div>
 
-      <div className="mt-3 text-lg font-semibold text-white">
+      <div
+        className="
+          mt-4
+          text-xs
+          font-semibold
+          uppercase
+          tracking-[0.25em]
+          text-muted
+        "
+      >
+        {label}
+      </div>
+
+      <div
+        className="
+          mt-1
+          text-2xl
+          font-bold
+          text-white
+        "
+      >
         {value}
       </div>
     </div>
   );
 }
+
+function InfoRow({
+  icon: Icon,
+  title
+}: {
+  icon: any;
+  title: string;
+}) {
+
+  return (
+    <div
+      className="
+        flex
+        items-center
+        gap-3
+        rounded-2xl
+        border
+        border-border
+        bg-card
+        p-4
+      "
+    >
+
+      <div
+        className="
+          flex
+          h-11
+          w-11
+          items-center
+          justify-center
+          rounded-xl
+          bg-primary/10
+          text-primary
+        "
+      >
+        <Icon size={18} />
+      </div>
+
+      <div
+        className="
+          text-sm
+          font-medium
+          text-white
+        "
+      >
+        {title}
+      </div>
+    </div>
+  );
+}
+
+function RoomCard({
+  label,
+  value
+}: {
+  label: string;
+  value: string;
+}) {
+
+  return (
+    <div
+      className="
+        rounded-3xl
+        border
+        border-border
+        bg-background-secondary
+        p-5
+      "
+    >
+
+      <div
+        className="
+          text-xs
+          font-semibold
+          uppercase
+          tracking-[0.25em]
+          text-muted
+        "
+      >
+        {label}
+      </div>
+
+      <div
+        className="
+          mt-3
+          text-lg
+          font-semibold
+          text-white
+        "
+      >
+        {value}
+      </div>
+    </div>
+  );
+}
+

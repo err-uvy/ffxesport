@@ -353,7 +353,7 @@ export function AdminShell({
                     active
                       ? `
                         border
-                        border-cyan-400/20
+                        border-white/5
 
                         bg-[linear-gradient(135deg,rgba(34,211,238,.16),rgba(59,130,246,.12),rgba(124,58,237,.16))]
 

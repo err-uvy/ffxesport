@@ -244,7 +244,7 @@ export default function AdminMatchesPage() {
             rounded-2xl
 
             border
-            border-cyan-400/20
+            border-white/5
 
             bg-cyan-400/[0.08]
 
@@ -339,7 +339,7 @@ export default function AdminMatchesPage() {
             transition-all
             duration-300
 
-            hover:border-cyan-400/20
+            hover:border-white/5
           "
           >
 
@@ -567,7 +567,7 @@ export default function AdminMatchesPage() {
                   rounded-xl
 
                   border
-                  border-cyan-400/20
+                  border-white/5
 
                   bg-cyan-400/[0.06]
 

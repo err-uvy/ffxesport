@@ -99,7 +99,7 @@ export function PageHeader({
             rounded-full
 
             border
-            border-cyan-400/20
+            border-white/5
 
             bg-cyan-400/[0.06]
 

@@ -10,7 +10,6 @@ export function cn(...inputs: ClassValue[]) {
 /* =========================================================
    BUTTON
 ========================================================= */
-
 type ButtonProps =
   React.ButtonHTMLAttributes<HTMLButtonElement> & {
     variant?:
@@ -30,20 +29,16 @@ export function Button({
 
     primary:
       `
-      relative
-      overflow-hidden
       border
-      border-cyan-400/20
+      border-blue-500/20
 
-      bg-[linear-gradient(135deg,#06B6D4,#2563EB,#7C3AED)]
+      bg-blue-600
 
       text-white
 
-      shadow-[0_0_30px_rgba(34,211,238,.18)]
+      hover:bg-blue-700
 
-      hover:shadow-[0_0_50px_rgba(59,130,246,.28)]
-
-      hover:-translate-y-[1px]
+      shadow-[0_10px_30px_rgba(37,99,235,.25)]
       `,
 
     secondary:
@@ -51,12 +46,11 @@ export function Button({
       border
       border-white/10
 
-      bg-white/[0.04]
+      bg-[#181818]
 
       text-white
 
-      hover:border-cyan-400/30
-      hover:bg-cyan-400/[0.06]
+      hover:bg-[#202020]
       `,
 
     ghost:
@@ -72,11 +66,11 @@ export function Button({
       border
       border-rose-400/20
 
-      bg-rose-500/[0.08]
+      bg-rose-500/[0.12]
 
       text-rose-100
 
-      hover:bg-rose-500/[0.16]
+      hover:bg-rose-500/[0.2]
       `
   };
 
@@ -86,7 +80,6 @@ export function Button({
 
         `
         inline-flex
-        h-11
         items-center
         justify-center
         gap-2
@@ -94,12 +87,13 @@ export function Button({
         rounded-2xl
 
         px-5
+        py-3
 
         text-sm
-        font-bold
+        font-semibold
 
         transition-all
-        duration-300
+        duration-200
 
         disabled:pointer-events-none
         disabled:opacity-50
@@ -114,7 +108,6 @@ export function Button({
     />
   );
 }
-
 /* =========================================================
    CARD
 ========================================================= */
@@ -298,7 +291,7 @@ export function Badge({
 
     blue:
       `
-      border-cyan-400/20
+      border-white/5
       bg-cyan-400/[0.08]
       text-cyan-200
       `,
@@ -385,7 +378,7 @@ export function Skeleton({
       className={cn(
 
         `
-        animate-pulse
+        skeleton
 
         rounded-2xl
 

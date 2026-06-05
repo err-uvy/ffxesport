@@ -161,7 +161,7 @@ export default function AdminSupportPage() {
             rounded-2xl
 
             border
-            border-cyan-400/20
+            border-white/5
 
             bg-cyan-400/[0.08]
 
@@ -235,7 +235,7 @@ export default function AdminSupportPage() {
             transition-all
             duration-300
 
-            hover:border-cyan-400/20
+            hover:border-white/5
           "
           >
 
@@ -366,7 +366,7 @@ export default function AdminSupportPage() {
 
                           <ShieldCheck
                             size={15}
-                            className="text-cyan-300"
+                            className="text-white"
                           />
                         )}
 

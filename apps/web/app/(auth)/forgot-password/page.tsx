@@ -6,9 +6,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
   ArrowLeft,
+  ChevronRight,
   KeyRound,
   ShieldCheck,
-  Sparkles
+  Sparkles,
+  LockKeyhole,
+  MailCheck
 } from "lucide-react";
 
 import { useForm } from "react-hook-form";
@@ -22,8 +25,6 @@ import {
   Input
 } from "@/ui";
 
-import { AuthShell } from "@/components/auth-shell";
-
 import {
   api,
   apiMessage
@@ -32,7 +33,7 @@ import {
 const schema = z.object({
   email: z
     .string()
-    .email()
+    .email("Enter valid email address")
 });
 
 export default function ForgotPasswordPage() {
@@ -107,7 +108,7 @@ export default function ForgotPasswordPage() {
         className="
           absolute
           inset-0
-          bg-[radial-gradient(circle_at_top,rgba(37,99,235,.25),transparent_40%)]
+          bg-[radial-gradient(circle_at_top,rgba(56,189,248,.12),transparent_35%)]
         "
       />
 
@@ -117,12 +118,59 @@ export default function ForgotPasswordPage() {
           inset-0
           bg-gradient-to-br
           from-[#050816]
-          via-[#050816]/90
+          via-[#040b16]/95
           to-black
         "
       />
 
-      {/* CONTENT */}
+      {/* GRID */}
+
+      <div
+        className="
+          absolute
+          inset-0
+          opacity-[0.04]
+        "
+        style={{
+          backgroundImage:
+            `
+            linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px)
+          `,
+          backgroundSize:
+            "40px 40px"
+        }}
+      />
+
+      {/* GLOW */}
+
+      <div
+        className="
+          absolute
+          right-[-120px]
+          top-[-120px]
+          h-[320px]
+          w-[320px]
+          rounded-full
+          bg-cyan-500/10
+          blur-[120px]
+        "
+      />
+
+      <div
+        className="
+          absolute
+          bottom-[-150px]
+          left-[-150px]
+          h-[320px]
+          w-[320px]
+          rounded-full
+          bg-blue-600/10
+          blur-[120px]
+        "
+      />
+
+      {/* MAIN */}
 
       <div
         className="
@@ -133,7 +181,7 @@ export default function ForgotPasswordPage() {
           items-center
           justify-center
           px-5
-          py-12
+          py-10
         "
       >
 
@@ -141,18 +189,19 @@ export default function ForgotPasswordPage() {
           className="
             grid
             w-full
-            max-w-6xl
+            max-w-7xl
             overflow-hidden
-            rounded-[40px]
+            rounded-[42px]
             border
             border-white/10
-            bg-[#0b1020]/80
+            bg-[#0b1220]/75
+            shadow-[0_0_80px_rgba(0,0,0,.45)]
             backdrop-blur-2xl
             xl:grid-cols-2
           "
         >
 
-          {/* LEFT SIDE */}
+          {/* LEFT */}
 
           <div
             className="
@@ -164,6 +213,8 @@ export default function ForgotPasswordPage() {
               xl:block
             "
           >
+
+            {/* IMAGE */}
 
             <div
               className="
@@ -181,16 +232,20 @@ export default function ForgotPasswordPage() {
               }}
             />
 
+            {/* OVERLAY */}
+
             <div
               className="
                 absolute
                 inset-0
                 bg-gradient-to-br
-                from-blue-600/30
-                via-black/70
-                to-cyan-500/10
+                from-cyan-500/10
+                via-black/85
+                to-blue-600/20
               "
             />
+
+            {/* CONTENT */}
 
             <div
               className="
@@ -200,9 +255,11 @@ export default function ForgotPasswordPage() {
                 h-full
                 flex-col
                 justify-between
-                p-10
+                p-14
               "
             >
+
+              {/* TOP */}
 
               <div>
 
@@ -213,73 +270,88 @@ export default function ForgotPasswordPage() {
                     gap-2
                     rounded-full
                     border
-                    border-blue-500/20
-                    bg-blue-500/10
+                    border-white/5
+                    bg-primary/10
                     px-4
                     py-2
                     text-sm
                     font-semibold
-                    text-blue-100
+                    text-cyan-100
+                    backdrop-blur-xl
                   "
                 >
-                  <Sparkles size={16} />
 
-                  FFX ESPORTS SECURITY
+                  <Sparkles size={15} />
+
+                  FFX ACCOUNT SECURITY
                 </div>
 
                 <h1
                   className="
                     mt-8
-                    text-5xl
+                    text-6xl
                     font-black
                     leading-tight
                     text-white
                   "
                 >
                   Recover Your
-                  <span className="block text-blue-400">
-                    Gaming Account
+                  <span
+                    className="
+                      block
+                      bg-gradient-to-r
+                      from-cyan-300
+                      to-blue-400
+                      bg-clip-text
+                      text-transparent
+                    "
+                  >
+                    Secure Access
                   </span>
                 </h1>
 
                 <p
                   className="
-                    mt-4
-                    max-w-md
+                    mt-6
+                    max-w-xl
                     text-lg
                     leading-8
                     text-slate-300
                   "
                 >
-                  Secure password reset system
-                  for tournament players,
-                  esports teams,
-                  and verified gaming accounts.
+                  Restore access to your esports identity,
+                  wallet balance,
+                  tournament records,
+                  and competitive profile securely.
                 </p>
               </div>
+
+              {/* FEATURES */}
 
               <div className="space-y-5">
 
                 <Feature
-                  icon={
-                    ShieldCheck
-                  }
-                  title="Secure Recovery"
-                  body="Encrypted email token authentication system"
+                  icon={ShieldCheck}
+                  title="Encrypted Recovery"
+                  body="Advanced token-based password recovery system with secure validation."
                 />
 
                 <Feature
-                  icon={
-                    KeyRound
-                  }
-                  title="Fast Reset"
-                  body="Reset your password in under 60 seconds"
+                  icon={MailCheck}
+                  title="Instant Email Delivery"
+                  body="Receive reset instructions directly in your registered email inbox."
+                />
+
+                <Feature
+                  icon={LockKeyhole}
+                  title="Protected Authentication"
+                  body="Maintain full account integrity and secure player verification."
                 />
               </div>
             </div>
           </div>
 
-          {/* RIGHT SIDE */}
+          {/* RIGHT */}
 
           <div
             className="
@@ -288,30 +360,40 @@ export default function ForgotPasswordPage() {
               justify-center
               p-6
               sm:p-10
-              xl:p-14
+              xl:p-16
             "
           >
 
-            <div className="w-full max-w-md">
+            <div
+              className="
+                w-full
+                max-w-lg
+              "
+            >
+
+              {/* ICON */}
 
               <div
                 className="
                   mb-8
                   flex
-                  h-20
-                  w-20
+                  h-24
+                  w-24
                   items-center
                   justify-center
-                  rounded-[28px]
-                  bg-blue-500/10
-                  text-blue-400
-                  shadow-[0_0_50px_rgba(59,130,246,.25)]
+                  rounded-[30px]
+                  border
+                  border-cyan-400/10
+                  bg-cyan-500/10
+                  text-white
+                  shadow-[0_0_50px_rgba(34,211,238,.15)]
                 "
               >
-                <KeyRound
-                  size={38}
-                />
+
+                <KeyRound size={42} />
               </div>
+
+              {/* HEADING */}
 
               <div>
 
@@ -320,18 +402,19 @@ export default function ForgotPasswordPage() {
                     text-sm
                     font-semibold
                     uppercase
-                    tracking-[0.3em]
-                    text-blue-300
+                    tracking-[0.35em]
+                    text-white
                   "
                 >
-                  ACCOUNT RECOVERY
+                  PASSWORD RECOVERY
                 </div>
 
                 <h2
                   className="
-                    mt-3
-                    text-4xl
+                    mt-4
+                    text-5xl
                     font-black
+                    leading-tight
                     text-white
                   "
                 >
@@ -340,15 +423,15 @@ export default function ForgotPasswordPage() {
 
                 <p
                   className="
-                    mt-4
+                    mt-5
                     text-base
-                    leading-7
+                    leading-8
                     text-slate-400
                   "
                 >
-                  Enter your registered email
-                  address and we’ll send
-                  you a secure password reset link.
+                  Enter your registered email address
+                  and we’ll send you a secure password
+                  reset link instantly.
                 </p>
               </div>
 
@@ -357,18 +440,20 @@ export default function ForgotPasswordPage() {
               <form
                 className="
                   mt-10
-                  space-y-5
+                  space-y-6
                 "
                 onSubmit={form.handleSubmit(
                   onSubmit
                 )}
               >
 
+                {/* EMAIL */}
+
                 <div>
 
                   <label
                     className="
-                      mb-2
+                      mb-3
                       block
                       text-sm
                       font-semibold
@@ -388,16 +473,20 @@ export default function ForgotPasswordPage() {
                       h-14
                       rounded-2xl
                       border-white/10
-                      bg-[#111827]
+                      bg-[#121826]
                       text-white
+                      placeholder:text-slate-500
+                      focus:border-cyan-400/30
+                      focus:ring-0
                     "
                   />
 
                   {form.formState
                     .errors.email && (
+
                     <p
                       className="
-                        mt-1
+                        mt-2
                         text-sm
                         text-red-400
                       "
@@ -413,6 +502,75 @@ export default function ForgotPasswordPage() {
                   )}
                 </div>
 
+                {/* INFO */}
+
+                <div
+                  className="
+                    rounded-3xl
+                    border
+                    border-white/10
+                    bg-white/[0.03]
+                    p-5
+                  "
+                >
+
+                  <div
+                    className="
+                      flex
+                      items-start
+                      gap-4
+                    "
+                  >
+
+                    <div
+                      className="
+                        flex
+                        h-12
+                        w-12
+                        shrink-0
+                        items-center
+                        justify-center
+                        rounded-2xl
+                        bg-cyan-500/10
+                        text-white
+                      "
+                    >
+
+                      <ShieldCheck size={22} />
+                    </div>
+
+                    <div>
+
+                      <h3
+                        className="
+                          text-sm
+                          font-bold
+                          uppercase
+                          tracking-[0.2em]
+                          text-white
+                        "
+                      >
+                        Security Notice
+                      </h3>
+
+                      <p
+                        className="
+                          mt-2
+                          text-sm
+                          leading-7
+                          text-slate-400
+                        "
+                      >
+                        Reset links automatically expire
+                        after a limited duration for enhanced
+                        account protection.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* BUTTON */}
+
                 <Button
                   type="submit"
                   disabled={
@@ -423,21 +581,28 @@ export default function ForgotPasswordPage() {
                     h-14
                     w-full
                     rounded-2xl
-                    bg-blue-600
+                    border
+                    border-white/5
+                    bg-gradient-to-r
+                    from-cyan-500
+                    to-blue-600
                     text-base
                     font-bold
-                    hover:bg-blue-700
+                    text-white
+                    transition-all
+                    duration-300
+                    hover:scale-[1.01]
+                    hover:from-cyan-400
+                    hover:to-blue-500
                   "
                 >
 
-                  <KeyRound
-                    size={20}
-                  />
-
                   {form.formState
                     .isSubmitting
-                    ? "Sending..."
+                    ? "Sending Reset Link..."
                     : "Send Reset Link"}
+
+                  <ChevronRight size={20} />
                 </Button>
               </form>
 
@@ -461,17 +626,35 @@ export default function ForgotPasswordPage() {
                     text-sm
                     font-semibold
                     text-slate-400
-                    transition
+                    transition-all
+                    duration-200
                     hover:text-white
                   "
                 >
 
-                  <ArrowLeft
-                    size={16}
-                  />
+                  <ArrowLeft size={16} />
 
                   Back to Login
                 </Link>
+              </div>
+
+              {/* BOTTOM */}
+
+              <div
+                className="
+                  mt-6
+                  flex
+                  items-center
+                  justify-center
+                  gap-2
+                  text-xs
+                  text-slate-500
+                "
+              >
+
+                <ShieldCheck size={14} />
+
+                Protected esports authentication infrastructure
               </div>
             </div>
           </div>
@@ -492,6 +675,7 @@ function Feature({
 }) {
 
   return (
+
     <div
       className="
         flex
@@ -501,7 +685,7 @@ function Feature({
         border
         border-white/10
         bg-white/[0.03]
-        p-4
+        p-5
         backdrop-blur-xl
       "
     >
@@ -514,10 +698,11 @@ function Feature({
           items-center
           justify-center
           rounded-2xl
-          bg-blue-500/10
-          text-blue-400
+          bg-cyan-500/10
+          text-white
         "
       >
+
         <Icon size={22} />
       </div>
 
@@ -537,7 +722,7 @@ function Feature({
           className="
             mt-1
             text-sm
-            leading-6
+            leading-7
             text-slate-400
           "
         >

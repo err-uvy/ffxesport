@@ -6,14 +6,13 @@ import {
 } from "react";
 
 import {
+  ArrowDownCircle,
   CircleDollarSign,
   CreditCard,
   History,
-  WalletCards,
-  ArrowDownCircle,
+  IndianRupee,
   ShieldCheck,
-  Sparkles,
-  IndianRupee
+  WalletCards
 } from "lucide-react";
 
 import { toast } from "sonner";
@@ -25,16 +24,22 @@ import {
   Input
 } from "@/ui";
 
-import { formatMoney } from "@/utils";
+import {
+  MetricCard
+} from "@/components/metric-card";
 
-import { MetricCard } from "@/components/metric-card";
-
-import { PageHeader } from "@/components/page-header";
+import {
+  PageHeader
+} from "@/components/page-header";
 
 import {
   api,
   apiMessage
 } from "@/lib/api";
+
+import {
+  formatMoney
+} from "@/utils";
 
 declare global {
   interface Window {
@@ -161,7 +166,7 @@ export default function WalletPage() {
           name: "FFX ESPORTS",
 
           description:
-            "Wallet deposit",
+            "Wallet Deposit",
 
           order_id:
             payload.order.id,
@@ -228,150 +233,264 @@ export default function WalletPage() {
     data?.wallet;
 
   return (
-    <div className="pb-10">
+    <div className="space-y-6 pb-10">
+
+      {/* HEADER */}
+
+      <PageHeader
+        eyebrow="FFX PAYMENTS"
+        title="Wallet"
+      >
+
+        <div
+          className="
+            rounded-2xl
+            border
+            border-border
+            bg-card
+            px-5
+            py-3
+          "
+        >
+
+          <div
+            className="
+              text-xs
+              font-semibold
+              uppercase
+              tracking-[0.25em]
+              text-muted
+            "
+          >
+            Available Balance
+          </div>
+
+          <div
+            className="
+              mt-1
+              text-2xl
+              font-bold
+              text-white
+            "
+          >
+            {formatMoney(
+              wallet?.balance ?? 0
+            )}
+          </div>
+        </div>
+      </PageHeader>
 
       {/* HERO */}
 
       <section
         className="
-          relative
-          overflow-hidden
-          rounded-[36px]
+          rounded-[32px]
           border
-          border-white/10
-          bg-[#0d0d0d]
-          p-7
-          xl:p-10
+          border-border
+          bg-card
+          p-6
+          lg:p-8
         "
       >
 
-        {/* BG */}
-
         <div
           className="
-            absolute
-            inset-0
-            opacity-20
+            grid
+            gap-8
+            xl:grid-cols-[1fr_340px]
           "
-          style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80')",
-            backgroundSize: "cover",
-            backgroundPosition:
-              "center"
-          }}
-        />
+        >
 
-        <div
-          className="
-            absolute
-            inset-0
-            bg-gradient-to-br
-            from-blue-600/20
-            via-black/80
-            to-cyan-500/10
-          "
-        />
+          {/* LEFT */}
 
-        {/* CONTENT */}
-
-        <div className="relative z-10">
-
-          <div className="flex items-center gap-4">
+          <div>
 
             <div
               className="
-                flex
-                h-16
-                w-16
+                inline-flex
                 items-center
-                justify-center
-                rounded-3xl
-                bg-blue-500/10
-                text-blue-400
+                gap-2
+                rounded-full
+                border
+                border-border
+                bg-background-secondary
+                px-4
+                py-2
+                text-xs
+                font-semibold
+                uppercase
+                tracking-[0.25em]
+                text-muted
               "
             >
-              <WalletCards size={32} />
+              Secure Payment System
             </div>
 
-            <div>
+            <h1
+              className="
+                mt-6
+                max-w-4xl
+                text-4xl
+                font-bold
+                tracking-tight
+                text-white
+                xl:text-5xl
+              "
+            >
+              Manage your esports
+              wallet securely.
+            </h1>
+
+            <p
+              className="
+                mt-5
+                max-w-3xl
+                text-base
+                leading-8
+                text-muted
+              "
+            >
+              Deposit tournament funds,
+              withdraw winnings,
+              and manage secure payment
+              transactions inside the
+              FFX ESPORTS ecosystem.
+            </p>
+
+            <div
+              className="
+                mt-8
+                grid
+                gap-4
+                sm:grid-cols-2
+                xl:grid-cols-4
+              "
+            >
+
+              <QuickCard
+                icon={IndianRupee}
+                label="Instant Deposits"
+                value="Fast"
+              />
+
+              <QuickCard
+                icon={ShieldCheck}
+                label="Protected"
+                value="Secure"
+              />
+
+              <QuickCard
+                icon={WalletCards}
+                label="Wallet System"
+                value="Live"
+              />
+
+              <QuickCard
+                icon={ArrowDownCircle}
+                label="Withdrawals"
+                value="24/7"
+              />
+            </div>
+          </div>
+
+          {/* RIGHT */}
+
+          <Card
+            className="
+              rounded-[28px]
+              border
+              border-border
+              bg-background-secondary
+              p-6
+            "
+          >
+
+            <div className="flex items-center justify-between">
+
+              <div>
+
+                <div
+                  className="
+                    text-xs
+                    font-semibold
+                    uppercase
+                    tracking-[0.25em]
+                    text-muted
+                  "
+                >
+                  Total Wallet
+                </div>
+
+                <div
+                  className="
+                    mt-2
+                    text-4xl
+                    font-bold
+                    text-white
+                  "
+                >
+                  {formatMoney(
+                    wallet?.balance ?? 0
+                  )}
+                </div>
+              </div>
 
               <div
                 className="
-                  text-xs
-                  font-semibold
-                  uppercase
-                  tracking-[0.3em]
-                  text-zinc-500
+                  flex
+                  h-16
+                  w-16
+                  items-center
+                  justify-center
+                  rounded-3xl
+                  bg-primary/10
+                  text-primary
                 "
               >
-                FFX PAYMENTS
+                <WalletCards size={30} />
               </div>
-
-              <h1
-                className="
-                  mt-1
-                  text-4xl
-                  font-black
-                  text-white
-                  xl:text-6xl
-                "
-              >
-                Wallet
-              </h1>
             </div>
-          </div>
 
-          <p
-            className="
-              mt-4
-              max-w-3xl
-              text-base
-              leading-8
-              text-zinc-300
-              xl:text-lg
-            "
-          >
-            Deposit funds, join tournaments,
-            withdraw winnings,
-            and track every esports transaction
-            securely.
-          </p>
+            <div className="mt-8 space-y-4">
 
-          {/* QUICK STATS */}
+              <WalletRow
+                label="Winning Balance"
+                value={formatMoney(
+                  wallet?.winningBalance ??
+                    0
+                )}
+              />
 
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+              <WalletRow
+                label="Bonus Balance"
+                value={formatMoney(
+                  wallet?.bonusBalance ??
+                    0
+                )}
+              />
 
-            <QuickCard
-              icon={IndianRupee}
-              label="Fast Deposits"
-              value="Instant"
-            />
-
-            <QuickCard
-              icon={ShieldCheck}
-              label="Secure Payments"
-              value="100%"
-            />
-
-            <QuickCard
-              icon={Sparkles}
-              label="Bonus Rewards"
-              value="Active"
-            />
-
-            <QuickCard
-              icon={ArrowDownCircle}
-              label="Withdrawals"
-              value="24/7"
-            />
-          </div>
+              <WalletRow
+                label="Locked Balance"
+                value={formatMoney(
+                  wallet?.lockedBalance ??
+                    0
+                )}
+              />
+            </div>
+          </Card>
         </div>
       </section>
 
       {/* METRICS */}
 
-      <div className="mt-7 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+      <div
+        className="
+          grid
+          gap-5
+          md:grid-cols-2
+          xl:grid-cols-4
+        "
+      >
 
         <MetricCard
           icon={WalletCards}
@@ -379,43 +498,49 @@ export default function WalletPage() {
           value={formatMoney(
             wallet?.balance ?? 0
           )}
-          detail="Usable tournament balance"
+          detail="Available tournament balance"
         />
 
         <MetricCard
           icon={CircleDollarSign}
-          label="Winning"
+          label="Winning Balance"
           value={formatMoney(
             wallet?.winningBalance ??
               0
           )}
-          detail="Withdrawable cash rewards"
+          detail="Withdrawable rewards"
         />
 
         <MetricCard
           icon={CreditCard}
-          label="Bonus"
+          label="Bonus Balance"
           value={formatMoney(
             wallet?.bonusBalance ??
               0
           )}
-          detail="Promo & cashback credits"
+          detail="Promotional credits"
         />
 
         <MetricCard
           icon={History}
-          label="Locked"
+          label="Locked Funds"
           value={formatMoney(
             wallet?.lockedBalance ??
               0
           )}
-          detail="Tournament locked funds"
+          detail="Tournament locked amount"
         />
       </div>
 
-      {/* MAIN GRID */}
+      {/* GRID */}
 
-      <div className="mt-7 grid gap-6 xl:grid-cols-[0.85fr_1.15fr]">
+      <div
+        className="
+          grid
+          gap-6
+          xl:grid-cols-[0.8fr_1.2fr]
+        "
+      >
 
         {/* LEFT */}
 
@@ -425,68 +550,65 @@ export default function WalletPage() {
 
           <Card
             className="
-              rounded-[32px]
+              rounded-[30px]
               border
-              border-white/5
-              bg-[#101010]
+              border-border
+              bg-card
               p-6
             "
           >
 
-            <div className="flex items-center gap-3">
+            <SectionHeader
+              icon={CircleDollarSign}
+              title="Deposit Funds"
+              subtitle="Add money instantly"
+            />
 
-              <div
-                className="
-                  flex
-                  h-12
-                  w-12
-                  items-center
-                  justify-center
-                  rounded-2xl
-                  bg-green-500/10
-                  text-green-400
-                "
-              >
-                <CircleDollarSign
-                  size={22}
-                />
-              </div>
+            <div className="mt-6 space-y-4">
 
               <div>
 
-                <h2 className="text-2xl font-bold text-white">
-                  Deposit Funds
-                </h2>
+                <label
+                  className="
+                    mb-2
+                    block
+                    text-sm
+                    font-semibold
+                    text-muted
+                  "
+                >
+                  Deposit Amount
+                </label>
 
-                <p className="text-sm text-zinc-400">
-                  Add money instantly
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-4 space-y-4">
-
-              <Input
-                type="number"
-                min={10}
-                value={amount}
-                onChange={(
-                  event: any
-                ) =>
-                  setAmount(
-                    Number(
-                      event.target.value
+                <Input
+                  type="number"
+                  min={10}
+                  value={amount}
+                  onChange={(
+                    event: any
+                  ) =>
+                    setAmount(
+                      Number(
+                        event.target.value
+                      )
                     )
-                  )
-                }
-                className="
-                  h-12
-                  border-white/10
-                  bg-[#181818]
-                "
-              />
+                  }
+                  className="
+                    h-12
+                    rounded-2xl
+                    border-border
+                    bg-background-secondary
+                  "
+                />
+              </div>
 
-              <div className="grid grid-cols-2 gap-3">
+              <div
+                className="
+                  grid
+                  grid-cols-2
+                  gap-3
+                "
+              >
 
                 {(
                   [
@@ -505,17 +627,10 @@ export default function WalletPage() {
                     onClick={() =>
                       setProvider(item)
                     }
-                    className={`
+                    className="
                       h-12
                       rounded-2xl
-                      border
-
-                      ${
-                        provider === item
-                          ? "border-blue-500/20 bg-blue-600"
-                          : "border-white/10 bg-[#181818]"
-                      }
-                    `}
+                    "
                   >
                     {item}
                   </Button>
@@ -523,17 +638,18 @@ export default function WalletPage() {
               </div>
 
               <Button
+                onClick={
+                  createDeposit
+                }
                 className="
                   h-12
                   w-full
                   rounded-2xl
-                  bg-blue-600
+                  bg-white
                   font-semibold
-                  hover:bg-blue-700
+                  text-black
+                  hover:bg-zinc-200
                 "
-                onClick={
-                  createDeposit
-                }
               >
                 Create Payment
               </Button>
@@ -544,97 +660,101 @@ export default function WalletPage() {
 
           <Card
             className="
-              rounded-[32px]
+              rounded-[30px]
               border
-              border-white/5
-              bg-[#101010]
+              border-border
+              bg-card
               p-6
             "
           >
 
-            <div className="flex items-center gap-3">
+            <SectionHeader
+              icon={ArrowDownCircle}
+              title="Withdraw Funds"
+              subtitle="Transfer winnings securely"
+            />
 
-              <div
-                className="
-                  flex
-                  h-12
-                  w-12
-                  items-center
-                  justify-center
-                  rounded-2xl
-                  bg-yellow-500/10
-                  text-yellow-400
-                "
-              >
-                <ArrowDownCircle
-                  size={22}
+            <div className="mt-6 space-y-4">
+
+              <div>
+
+                <label
+                  className="
+                    mb-2
+                    block
+                    text-sm
+                    font-semibold
+                    text-muted
+                  "
+                >
+                  Withdrawal Amount
+                </label>
+
+                <Input
+                  type="number"
+                  min={100}
+                  value={
+                    withdrawAmount
+                  }
+                  onChange={(
+                    event: any
+                  ) =>
+                    setWithdrawAmount(
+                      Number(
+                        event.target.value
+                      )
+                    )
+                  }
+                  className="
+                    h-12
+                    rounded-2xl
+                    border-border
+                    bg-background-secondary
+                  "
                 />
               </div>
 
               <div>
 
-                <h2 className="text-2xl font-bold text-white">
-                  Withdraw Funds
-                </h2>
+                <label
+                  className="
+                    mb-2
+                    block
+                    text-sm
+                    font-semibold
+                    text-muted
+                  "
+                >
+                  UPI ID
+                </label>
 
-                <p className="text-sm text-zinc-400">
-                  Transfer winnings securely
-                </p>
-              </div>
-            </div>
-
-            <div className="mt-4 space-y-4">
-
-              <Input
-                type="number"
-                min={100}
-                value={
-                  withdrawAmount
-                }
-                onChange={(
-                  event: any
-                ) =>
-                  setWithdrawAmount(
-                    Number(
+                <Input
+                  placeholder="upi@bank"
+                  value={upi}
+                  onChange={(
+                    event: any
+                  ) =>
+                    setUpi(
                       event.target.value
                     )
-                  )
-                }
-                className="
-                  h-12
-                  border-white/10
-                  bg-[#181818]
-                "
-              />
-
-              <Input
-                placeholder="upi@bank"
-                value={upi}
-                onChange={(
-                  event: any
-                ) =>
-                  setUpi(
-                    event.target.value
-                  )
-                }
-                className="
-                  h-12
-                  border-white/10
-                  bg-[#181818]
-                "
-              />
+                  }
+                  className="
+                    h-12
+                    rounded-2xl
+                    border-border
+                    bg-background-secondary
+                  "
+                />
+              </div>
 
               <Button
+                onClick={withdraw}
                 variant="secondary"
                 className="
                   h-12
                   w-full
                   rounded-2xl
-                  border-white/10
-                  bg-[#181818]
-                  hover:bg-[#1f1f1f]
                 "
-                onClick={withdraw}
               >
                 Request Withdrawal
               </Button>
@@ -642,48 +762,25 @@ export default function WalletPage() {
           </Card>
         </div>
 
-        {/* TRANSACTION HISTORY */}
+        {/* TRANSACTIONS */}
 
         <Card
           className="
-            rounded-[32px]
+            rounded-[30px]
             border
-            border-white/5
-            bg-[#101010]
+            border-border
+            bg-card
             p-6
           "
         >
 
-          <div className="flex items-center gap-3">
+          <SectionHeader
+            icon={History}
+            title="Transaction History"
+            subtitle="Payment activity & records"
+          />
 
-            <div
-              className="
-                flex
-                h-12
-                w-12
-                items-center
-                justify-center
-                rounded-2xl
-                bg-blue-500/10
-                text-blue-400
-              "
-            >
-              <History size={22} />
-            </div>
-
-            <div>
-
-              <h2 className="text-2xl font-bold text-white">
-                Transaction History
-              </h2>
-
-              <p className="text-sm text-zinc-400">
-                Payment activity & records
-              </p>
-            </div>
-          </div>
-
-          <div className="mt-7 space-y-4">
+          <div className="mt-6 space-y-4">
 
             {(data?.transactions ??
               []).map((txn) => (
@@ -694,11 +791,11 @@ export default function WalletPage() {
                   flex
                   flex-col
                   gap-4
-                  rounded-3xl
+                  rounded-2xl
                   border
-                  border-white/5
-                  bg-[#181818]
-                  p-4
+                  border-border
+                  bg-background-secondary
+                  p-5
                   xl:flex-row
                   xl:items-center
                   xl:justify-between
@@ -707,21 +804,43 @@ export default function WalletPage() {
 
                 <div>
 
-                  <div className="text-lg font-bold text-white">
+                  <div
+                    className="
+                      text-lg
+                      font-semibold
+                      text-white
+                    "
+                  >
                     {txn.type.replace(
                       "_",
                       " "
                     )}
                   </div>
 
-                  <div className="mt-1 text-sm text-zinc-500">
+                  <div
+                    className="
+                      mt-2
+                      text-sm
+                      text-muted
+                    "
+                  >
                     {new Date(
                       txn.createdAt
                     ).toLocaleString()}
                   </div>
 
                   {txn.provider && (
-                    <div className="mt-1 text-xs uppercase tracking-[0.2em] text-blue-400">
+
+                    <div
+                      className="
+                        mt-2
+                        text-xs
+                        font-semibold
+                        uppercase
+                        tracking-[0.25em]
+                        text-primary
+                      "
+                    >
                       {
                         txn.provider
                       }
@@ -729,15 +848,21 @@ export default function WalletPage() {
                   )}
                 </div>
 
-                <div className="text-left xl:text-right">
+                <div className="xl:text-right">
 
-                  <div className="text-2xl font-black text-white">
+                  <div
+                    className="
+                      text-2xl
+                      font-bold
+                      text-white
+                    "
+                  >
                     {formatMoney(
                       txn.amount
                     )}
                   </div>
 
-                  <div className="mt-1">
+                  <div className="mt-2">
 
                     <Badge
                       tone={
@@ -756,8 +881,144 @@ export default function WalletPage() {
                 </div>
               </div>
             ))}
+
+            {!data?.transactions
+              ?.length && (
+
+              <div
+                className="
+                  rounded-2xl
+                  border
+                  border-border
+                  bg-background-secondary
+                  p-10
+                  text-center
+                "
+              >
+
+                <div
+                  className="
+                    text-lg
+                    font-semibold
+                    text-white
+                  "
+                >
+                  No transactions found
+                </div>
+
+                <p
+                  className="
+                    mt-2
+                    text-sm
+                    text-muted
+                  "
+                >
+                  Your wallet activity
+                  will appear here.
+                </p>
+              </div>
+            )}
           </div>
         </Card>
+      </div>
+    </div>
+  );
+}
+
+function SectionHeader({
+  icon: Icon,
+  title,
+  subtitle
+}: {
+  icon: any;
+  title: string;
+  subtitle: string;
+}) {
+
+  return (
+    <div className="flex items-center gap-4">
+
+      <div
+        className="
+          flex
+          h-12
+          w-12
+          items-center
+          justify-center
+          rounded-2xl
+          bg-primary/10
+          text-primary
+        "
+      >
+        <Icon size={20} />
+      </div>
+
+      <div>
+
+        <h2
+          className="
+            text-xl
+            font-bold
+            text-white
+          "
+        >
+          {title}
+        </h2>
+
+        <p
+          className="
+            mt-1
+            text-sm
+            text-muted
+          "
+        >
+          {subtitle}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function WalletRow({
+  label,
+  value
+}: {
+  label: string;
+  value: string;
+}) {
+
+  return (
+    <div
+      className="
+        flex
+        items-center
+        justify-between
+        rounded-2xl
+        border
+        border-border
+        bg-card
+        px-4
+        py-4
+      "
+    >
+
+      <div
+        className="
+          text-sm
+          text-muted
+        "
+      >
+        {label}
+      </div>
+
+      <div
+        className="
+          text-lg
+          font-bold
+          text-white
+        "
+      >
+        {value}
       </div>
     </div>
   );
@@ -776,35 +1037,50 @@ function QuickCard({
   return (
     <div
       className="
-        rounded-3xl
+        rounded-2xl
         border
-        border-white/10
-        bg-black/30
+        border-border
+        bg-background-secondary
         p-4
-        backdrop-blur-xl
       "
     >
 
       <div
         className="
           flex
-          h-12
-          w-12
+          h-11
+          w-11
           items-center
           justify-center
-          rounded-2xl
-          bg-blue-500/10
-          text-blue-400
+          rounded-xl
+          bg-primary/10
+          text-primary
         "
       >
-        <Icon size={22} />
+        <Icon size={20} />
       </div>
 
-      <div className="mt-4 text-xs uppercase tracking-[0.2em] text-zinc-500">
+      <div
+        className="
+          mt-4
+          text-xs
+          font-semibold
+          uppercase
+          tracking-[0.25em]
+          text-muted
+        "
+      >
         {label}
       </div>
 
-      <div className="mt-1 text-2xl font-black text-white">
+      <div
+        className="
+          mt-2
+          text-lg
+          font-bold
+          text-white
+        "
+      >
         {value}
       </div>
     </div>
@@ -848,3 +1124,4 @@ function loadScript(src: string) {
     }
   );
 }
+

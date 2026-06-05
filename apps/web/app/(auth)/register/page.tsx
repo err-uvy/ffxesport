@@ -8,12 +8,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import {
   ArrowRight,
-  ShieldCheck,
-  Sparkles,
   Trophy,
-  UserPlus,
+  Wallet,
   Users,
-  Wallet
+  UserPlus,
+  ShieldCheck
 } from "lucide-react";
 
 import { useForm } from "react-hook-form";
@@ -135,595 +134,455 @@ export default function RegisterPage() {
 
     <div
       className="
-        relative
         min-h-screen
-        overflow-hidden
-        bg-[#050816]
+        bg-background
+        text-white
       "
     >
 
-      {/* BACKGROUND */}
-
       <div
         className="
-          absolute
-          inset-0
-          opacity-20
-        "
-        style={{
-          backgroundImage:
-            "url('https://images.unsplash.com/photo-1542751110-97427bbecf20?auto=format&fit=crop&w=1600&q=80')",
-          backgroundSize:
-            "cover",
-          backgroundPosition:
-            "center"
-        }}
-      />
-
-      <div
-        className="
-          absolute
-          inset-0
-          bg-[radial-gradient(circle_at_top,rgba(37,99,235,.25),transparent_35%)]
-        "
-      />
-
-      <div
-        className="
-          absolute
-          inset-0
-          bg-gradient-to-br
-          from-[#050816]
-          via-[#050816]/90
-          to-black
-        "
-      />
-
-      {/* GRID */}
-
-      <div
-        className="
-          absolute
-          inset-0
-          opacity-[0.05]
-        "
-        style={{
-          backgroundImage:
-            `
-            linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px)
-          `,
-          backgroundSize:
-            "45px 45px"
-        }}
-      />
-
-      {/* MAIN */}
-
-      <div
-        className="
-          relative
-          z-10
-          flex
+          mx-auto
+          grid
           min-h-screen
-          items-center
-          justify-center
-          px-5
-          py-10
+          w-full
+          max-w-[1600px]
+          xl:grid-cols-2
         "
       >
 
+        {/* LEFT SECTION */}
+
         <div
           className="
-            grid
-            w-full
-            max-w-full
-            overflow-hidden
-            rounded-[40px]
-            border
-            border-white/10
-            bg-[#0b1020]/80
-            backdrop-blur-2xl
-            xl:grid-cols-2
+            hidden
+            border-r
+            border-border
+            px-16
+            py-14
+            xl:flex
+            xl:flex-col
+            xl:justify-between
           "
         >
 
-          {/* LEFT */}
+          <div>
+
+            <div
+              className="
+                inline-flex
+                items-center
+                rounded-full
+                border
+                border-primary/20
+                bg-primary/10
+                px-4
+                py-2
+                text-xs
+                font-semibold
+                uppercase
+                tracking-[0.25em]
+                text-primary
+              "
+            >
+              JOIN FFX ESPORTS
+            </div>
+
+            <h1
+              className="
+                mt-8
+                max-w-2xl
+                text-6xl
+                font-bold
+                leading-[1.05]
+                tracking-tight
+              "
+            >
+              Build your esports identity.
+            </h1>
+
+            <p
+              className="
+                mt-6
+                max-w-xl
+                text-lg
+                leading-8
+                text-muted
+              "
+            >
+              Create your competitive gaming account,
+              join tournaments,
+              manage squads,
+              and compete in premium esports events.
+            </p>
+          </div>
 
           <div
             className="
-              relative
-              hidden
-              overflow-hidden
-              border-r
-              border-white/10
-              xl:block
+              grid
+              gap-5
+              max-w-xl
             "
           >
 
-            <div
-              className="
-                absolute
-                inset-0
-                opacity-25
-              "
-              style={{
-                backgroundImage:
-                  "url('https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=1600&q=80')",
-                backgroundSize:
-                  "cover",
-                backgroundPosition:
-                  "center"
-              }}
+            <Feature
+              icon={Trophy}
+              title="Premium Tournaments"
+              body="Daily competitive events with secure prize systems."
             />
+
+            <Feature
+              icon={Wallet}
+              title="Integrated Wallet"
+              body="Fast deposits, withdrawals, rewards, and bonus management."
+            />
+
+            <Feature
+              icon={Users}
+              title="Team Ecosystem"
+              body="Create squads and compete with teammates in realtime."
+            />
+          </div>
+        </div>
+
+        {/* RIGHT SECTION */}
+
+        <div
+          className="
+            flex
+            items-center
+            justify-center
+            px-5
+            py-10
+            sm:px-8
+            lg:px-12
+          "
+        >
+
+          <div
+            className="
+              w-full
+              max-w-lg
+              rounded-[32px]
+              border
+              border-border
+              bg-card
+              p-8
+              shadow-card
+              sm:p-10
+            "
+          >
+
+            {/* ICON */}
 
             <div
               className="
-                absolute
-                inset-0
-                bg-gradient-to-br
-                from-blue-600/25
-                via-black/80
-                to-cyan-500/10
-              "
-            />
-
-            <div
-              className="
-                relative
-                z-10
+                mb-8
                 flex
-                h-full
-                flex-col
-                justify-between
-                p-12
+                h-20
+                w-20
+                items-center
+                justify-center
+                rounded-[28px]
+                bg-primary/10
+                text-primary
               "
             >
 
-              <div>
+              <UserPlus
+                size={38}
+              />
+            </div>
 
-                <div
-                  className="
-                    inline-flex
-                    items-center
-                    gap-2
-                    rounded-full
-                    border
-                    border-blue-500/20
-                    bg-blue-500/10
-                    px-4
-                    py-2
-                    text-sm
-                    font-semibold
-                    text-blue-100
-                  "
-                >
+            {/* HEADER */}
 
-                  <Sparkles
-                    size={16}
-                  />
+            <div>
 
-                  JOIN FFX ESPORTS
-                </div>
-
-                <h1
-                  className="
-                    mt-8
-                    text-6xl
-                    font-black
-                    leading-tight
-                    text-white
-                  "
-                >
-                  Build Your
-                  <span
-                    className="
-                      block
-                      bg-gradient-to-r
-                      from-blue-400
-                      to-cyan-300
-                      bg-clip-text
-                      text-transparent
-                    "
-                  >
-                    Esports Identity
-                  </span>
-                </h1>
-
-                <p
-                  className="
-                    mt-4
-                    max-w-xl
-                    text-lg
-                    leading-8
-                    text-slate-300
-                  "
-                >
-                  Create your competitive gaming account,
-                  join elite tournaments,
-                  manage squads,
-                  and compete for real rewards.
-                </p>
+              <div
+                className="
+                  text-sm
+                  font-semibold
+                  uppercase
+                  tracking-[0.3em]
+                  text-primary
+                "
+              >
+                CREATE ACCOUNT
               </div>
+
+              <h2
+                className="
+                  mt-3
+                  text-4xl
+                  font-bold
+                  tracking-tight
+                "
+              >
+                Start Your Journey
+              </h2>
+
+              <p
+                className="
+                  mt-4
+                  text-base
+                  leading-7
+                  text-muted
+                "
+              >
+                Register securely and access tournaments,
+                wallets,
+                squads,
+                rankings,
+                and realtime esports systems.
+              </p>
+            </div>
+
+            {/* FORM */}
+
+            <form
+              className="
+                mt-10
+                space-y-5
+              "
+              onSubmit={form.handleSubmit(
+                onSubmit
+              )}
+            >
+
+              {/* USERNAME + PHONE */}
 
               <div
                 className="
                   grid
-                  gap-5
+                  gap-4
+                  sm:grid-cols-2
                 "
               >
 
-                <Feature
-                  icon={Trophy}
-                  title="Premium Tournaments"
-                  body="Participate in daily cash prize battle royale competitions."
-                />
+                <div>
 
-                <Feature
-                  icon={Wallet}
-                  title="Integrated Wallet"
-                  body="Secure deposits, withdrawals, winnings, and bonus systems."
-                />
+                  <label
+                    className="
+                      mb-2
+                      block
+                      text-sm
+                      font-semibold
+                      text-muted
+                    "
+                  >
+                    Username
+                  </label>
 
-                <Feature
-                  icon={Users}
-                  title="Team Ecosystem"
-                  body="Create squads, invite teammates, and dominate leaderboards."
-                />
-              </div>
-            </div>
-          </div>
+                  <Input
+                    placeholder="neonstriker"
+                    {...form.register(
+                      "username"
+                    )}
+                    className="
+                      h-14
+                      rounded-2xl
+                    "
+                  />
+                </div>
 
-          {/* RIGHT */}
+                <div>
 
-          <div
-            className="
-              flex
-              items-center
-              justify-center
-              p-6
-              sm:p-10
-              xl:p-16
-            "
-          >
+                  <label
+                    className="
+                      mb-2
+                      block
+                      text-sm
+                      font-semibold
+                      text-muted
+                    "
+                  >
+                    Phone
+                  </label>
 
-            <div
-              className="
-                w-full
-                max-w-lg
-              "
-            >
-
-              {/* ICON */}
-
-              <div
-                className="
-                  mb-8
-                  flex
-                  h-20
-                  w-20
-                  items-center
-                  justify-center
-                  rounded-[28px]
-                  bg-blue-500/10
-                  text-blue-400
-                  shadow-[0_0_50px_rgba(59,130,246,.25)]
-                "
-              >
-
-                <UserPlus
-                  size={38}
-                />
+                  <Input
+                    placeholder="+91..."
+                    {...form.register(
+                      "phone"
+                    )}
+                    className="
+                      h-14
+                      rounded-2xl
+                    "
+                  />
+                </div>
               </div>
 
-              {/* TITLE */}
+              {/* EMAIL */}
 
               <div>
 
-                <div
+                <label
                   className="
+                    mb-2
+                    block
                     text-sm
                     font-semibold
-                    uppercase
-                    tracking-[0.3em]
-                    text-blue-300
+                    text-muted
                   "
                 >
-                  CREATE ACCOUNT
-                </div>
+                  Email Address
+                </label>
 
-                <h2
+                <Input
+                  type="email"
+                  placeholder="player@ffxesports.com"
+                  {...form.register(
+                    "email"
+                  )}
                   className="
-                    mt-3
-                    text-4xl
-                    font-black
-                    text-white
+                    h-14
+                    rounded-2xl
+                  "
+                />
+              </div>
+
+              {/* PASSWORD */}
+
+              <div>
+
+                <label
+                  className="
+                    mb-2
+                    block
+                    text-sm
+                    font-semibold
+                    text-muted
                   "
                 >
-                  Start Your Journey
-                </h2>
+                  Password
+                </label>
+
+                <Input
+                  type="password"
+                  placeholder="Minimum 8 characters"
+                  {...form.register(
+                    "password"
+                  )}
+                  className="
+                    h-14
+                    rounded-2xl
+                  "
+                />
 
                 <p
                   className="
-                    mt-4
-                    text-base
-                    leading-7
-                    text-slate-400
+                    mt-2
+                    text-xs
+                    text-muted
                   "
                 >
-                  Register securely and unlock
-                  tournaments,
-                  wallets,
-                  squads,
-                  rankings,
-                  and realtime esports systems.
+                  Must include uppercase,
+                  lowercase,
+                  and number.
                 </p>
               </div>
 
-              {/* FORM */}
+              {/* REFERRAL */}
 
-              <form
-                className="
-                  mt-10
-                  space-y-5
-                "
-                onSubmit={form.handleSubmit(
-                  onSubmit
-                )}
-              >
+              <div>
 
-                {/* USERNAME + PHONE */}
-
-                <div
+                <label
                   className="
-                    grid
-                    gap-4
-                    sm:grid-cols-2
+                    mb-2
+                    block
+                    text-sm
+                    font-semibold
+                    text-muted
                   "
                 >
+                  Referral Code
+                </label>
 
-                  <div>
-
-                    <label
-                      className="
-                        mb-2
-                        block
-                        text-sm
-                        font-semibold
-                        text-slate-300
-                      "
-                    >
-                      Username
-                    </label>
-
-                    <Input
-                      placeholder="neonstriker"
-                      {...form.register(
-                        "username"
-                      )}
-                      className="
-                        h-14
-                        rounded-2xl
-                        border-white/10
-                        bg-[#111827]
-                        text-white
-                      "
-                    />
-                  </div>
-
-                  <div>
-
-                    <label
-                      className="
-                        mb-2
-                        block
-                        text-sm
-                        font-semibold
-                        text-slate-300
-                      "
-                    >
-                      Phone
-                    </label>
-
-                    <Input
-                      placeholder="+91..."
-                      {...form.register(
-                        "phone"
-                      )}
-                      className="
-                        h-14
-                        rounded-2xl
-                        border-white/10
-                        bg-[#111827]
-                        text-white
-                      "
-                    />
-                  </div>
-                </div>
-
-                {/* EMAIL */}
-
-                <div>
-
-                  <label
-                    className="
-                      mb-2
-                      block
-                      text-sm
-                      font-semibold
-                      text-slate-300
-                    "
-                  >
-                    Email Address
-                  </label>
-
-                  <Input
-                    type="email"
-                    placeholder="player@ffxesports.com"
-                    {...form.register(
-                      "email"
-                    )}
-                    className="
-                      h-14
-                      rounded-2xl
-                      border-white/10
-                      bg-[#111827]
-                      text-white
-                    "
-                  />
-                </div>
-
-                {/* PASSWORD */}
-
-                <div>
-
-                  <label
-                    className="
-                      mb-2
-                      block
-                      text-sm
-                      font-semibold
-                      text-slate-300
-                    "
-                  >
-                    Password
-                  </label>
-
-                  <Input
-                    type="password"
-                    placeholder="Minimum 8 characters"
-                    {...form.register(
-                      "password"
-                    )}
-                    className="
-                      h-14
-                      rounded-2xl
-                      border-white/10
-                      bg-[#111827]
-                      text-white
-                    "
-                  />
-
-                  <p
-                    className="
-                      mt-1
-                      text-xs
-                      text-slate-500
-                    "
-                  >
-                    Must include uppercase,
-                    lowercase,
-                    and number.
-                  </p>
-                </div>
-
-                {/* REFERRAL */}
-
-                <div>
-
-                  <label
-                    className="
-                      mb-2
-                      block
-                      text-sm
-                      font-semibold
-                      text-slate-300
-                    "
-                  >
-                    Referral Code
-                  </label>
-
-                  <Input
-                    placeholder="Optional"
-                    {...form.register(
-                      "referrerCode"
-                    )}
-                    className="
-                      h-14
-                      rounded-2xl
-                      border-white/10
-                      bg-[#111827]
-                      text-white
-                    "
-                  />
-                </div>
-
-                {/* BUTTON */}
-
-                <Button
-                  type="submit"
-                  disabled={
-                    form.formState
-                      .isSubmitting
-                  }
+                <Input
+                  placeholder="Optional"
+                  {...form.register(
+                    "referrerCode"
+                  )}
                   className="
                     h-14
-                    w-full
                     rounded-2xl
-                    bg-blue-600
-                    text-base
-                    font-bold
-                    hover:bg-blue-700
                   "
-                >
+                />
+              </div>
 
-                  <ArrowRight
-                    size={20}
-                  />
+              {/* BUTTON */}
 
-                  {form.formState
+              <Button
+                type="submit"
+                disabled={
+                  form.formState
                     .isSubmitting
-                    ? "Creating..."
-                    : "Create Account"}
-                </Button>
-              </form>
-
-              {/* LOGIN */}
-
-              <p
+                }
                 className="
-                  mt-8
-                  text-center
-                  text-sm
-                  text-slate-400
+                  h-14
+                  w-full
+                  rounded-2xl
+                  text-base
+                  font-semibold
                 "
               >
 
-                Already registered?{" "}
-
-                <Link
-                  href="/login"
-                  className="
-                    font-bold
-                    text-blue-300
-                    transition
-                    hover:text-white
-                  "
-                >
-                  Login
-                </Link>
-              </p>
-
-              {/* SECURITY */}
-
-              <div
-                className="
-                  mt-4
-                  flex
-                  items-center
-                  justify-center
-                  gap-2
-                  text-xs
-                  text-slate-500
-                "
-              >
-
-                <ShieldCheck
-                  size={15}
+                <ArrowRight
+                  size={20}
                 />
 
-                Secure esports authentication system
-              </div>
+                {form.formState
+                  .isSubmitting
+                  ? "Creating..."
+                  : "Create Account"}
+              </Button>
+            </form>
+
+            {/* LOGIN */}
+
+            <p
+              className="
+                mt-8
+                text-center
+                text-sm
+                text-muted
+              "
+            >
+
+              Already registered?{" "}
+
+              <Link
+                href="/login"
+                className="
+                  font-semibold
+                  text-primary
+                  transition
+                  hover:opacity-80
+                "
+              >
+                Login
+              </Link>
+            </p>
+
+            {/* SECURITY */}
+
+            <div
+              className="
+                mt-5
+                flex
+                items-center
+                justify-center
+                gap-2
+                text-xs
+                text-muted
+              "
+            >
+
+              <ShieldCheck
+                size={15}
+              />
+
+              Secure esports authentication system
             </div>
           </div>
         </div>
@@ -751,10 +610,9 @@ function Feature({
         gap-4
         rounded-3xl
         border
-        border-white/10
-        bg-white/[0.03]
-        p-4
-        backdrop-blur-xl
+        border-border
+        bg-card
+        p-5
       "
     >
 
@@ -766,8 +624,8 @@ function Feature({
           items-center
           justify-center
           rounded-2xl
-          bg-blue-500/10
-          text-blue-400
+          bg-primary/10
+          text-primary
         "
       >
 
@@ -781,7 +639,7 @@ function Feature({
         <h3
           className="
             text-lg
-            font-bold
+            font-semibold
             text-white
           "
         >
@@ -793,7 +651,7 @@ function Feature({
             mt-1
             text-sm
             leading-6
-            text-slate-400
+            text-muted
           "
         >
           {body}
@@ -802,3 +660,4 @@ function Feature({
     </div>
   );
 }
+

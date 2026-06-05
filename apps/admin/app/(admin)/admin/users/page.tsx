@@ -437,7 +437,7 @@ export default function AdminUsersPage() {
 
                     transition-all
 
-                    hover:border-cyan-400/20
+                    hover:border-white/5
                   "
 
                     value={user.status}

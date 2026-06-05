@@ -1,3 +1,5 @@
+import React from "react";
+
 export function PageHeader({
   eyebrow,
   title,
@@ -15,81 +17,81 @@ export function PageHeader({
         relative
         mb-8
         overflow-hidden
-        rounded-[28px]
+
+        rounded-[32px]
+
         border
-        border-white/10
-        bg-[#081120]/80
-        px-6
-        py-6
-        backdrop-blur-2xl
+        border-white/5
+
+        bg-[#0B1120]
+
+        px-8
+        py-7
+
+        shadow-[0_10px_40px_rgba(0,0,0,.35)]
       "
     >
 
-      {/* GRID */}
+      {/* SUBTLE GRID */}
 
       <div
-        className="
-          absolute
-          inset-0
-          opacity-[0.03]
-        "
+        className="absolute inset-0 opacity-[0.02]"
         style={{
-          backgroundImage:
-            `
-            linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px)
+          backgroundImage: `
+            linear-gradient(rgba(255,255,255,.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,255,255,.05) 1px, transparent 1px)
           `,
-          backgroundSize:
-            "36px 36px"
+          backgroundSize: "40px 40px"
         }}
       />
 
-      {/* GLOW */}
+      {/* SOFT RIGHT GLOW */}
 
       <div
         className="
           absolute
-          right-[-100px]
-          top-[-100px]
-          h-72
-          w-64
-          rounded-full
-          bg-cyan-500/[0.06]
-          blur-[120px]
+          right-0
+          top-0
+          h-full
+          w-[35%]
+
+          bg-[radial-gradient(circle_at_center,rgba(37,99,235,.12),transparent_70%)]
+
+          opacity-80
         "
       />
 
-      {/* TOP LINE */}
+      {/* TOP LIGHT LINE */}
 
       <div
         className="
           absolute
           inset-x-0
           top-0
-          h-[2px]
+
+          h-px
+
           bg-gradient-to-r
           from-transparent
-          via-cyan-400/70
+          via-white/10
           to-transparent
         "
       />
-
-      {/* CONTENT */}
 
       <div
         className="
           relative
           z-10
+
           flex
           flex-col
           gap-5
+
           md:flex-row
           md:items-end
           md:justify-between
         "
       >
-
-        {/* LEFT */}
 
         <div>
 
@@ -100,17 +102,23 @@ export function PageHeader({
               inline-flex
               items-center
               gap-2
+
               rounded-full
+
               border
-              border-cyan-400/20
-              bg-cyan-400/[0.08]
+              border-white/5
+
+              bg-white/[0.03]
+
               px-4
               py-1.5
+
               text-[11px]
               font-bold
               uppercase
               tracking-[0.35em]
-              text-cyan-300
+
+              text-zinc-300
             "
           >
 
@@ -119,8 +127,8 @@ export function PageHeader({
                 h-2
                 w-2
                 rounded-full
-                bg-cyan-400
-                shadow-[0_0_10px_rgba(34,211,238,1)]
+
+                bg-primary
               "
             />
 
@@ -131,35 +139,39 @@ export function PageHeader({
 
           <h1
             className="
-              mt-4
+              mt-5
+
               text-4xl
               font-black
-              leading-tight
               tracking-tight
+
               text-white
+
               sm:text-5xl
             "
           >
             {title}
           </h1>
 
-          {/* BOTTOM ACCENT */}
+          {/* ACCENT LINE */}
 
           <div
             className="
               mt-4
+
               h-[3px]
-              w-24
+              w-28
+
               rounded-full
+
               bg-gradient-to-r
-              from-cyan-400
-              via-blue-500
-              to-purple-500
+              from-primary
+              to-blue-400/40
             "
           />
         </div>
 
-        {/* RIGHT ACTIONS */}
+        {/* RIGHT CONTENT */}
 
         {children && (
 
@@ -178,3 +190,4 @@ export function PageHeader({
     </div>
   );
 }
+
